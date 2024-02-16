@@ -19,8 +19,7 @@ public class Fungsi {
     }
 
     // 2.
-    public static void printDataAndMati(String[] labelBaris, String[] labelKolom, long[][] data, long[] dataMati,
-            int index) {
+    public static void printDataAndMati(String[] labelBaris, String[] labelKolom, long[][] data, long[] dataMati, int index) {
         System.out.println("====== Stock Asli pada " + labelBaris[index] + " ======");
         printTabel(new String[] { labelBaris[index] }, labelKolom, new long[][] { data[index] });
 
