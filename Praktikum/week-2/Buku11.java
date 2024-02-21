@@ -1,8 +1,19 @@
-
 public class Buku11 {
     String judul, pengarang;
     int halaman, stok, harga;
     
+    public Buku11(){
+
+    }
+
+    public Buku11(String jud, String pg, int hal, int stok, int har){
+        judul = jud;
+        pengarang = pg;
+        halaman = hal;
+        this.stok = stok;
+        harga = har;
+    }
+
     void tampilInformasi(){
         System.out.println("Judul: " + judul);
         System.out.println("Pengarang: " + pengarang);
