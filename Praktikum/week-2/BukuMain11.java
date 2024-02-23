@@ -22,5 +22,7 @@ public class BukuMain11 {
                 152, 1000, 267000);
         bukuHidayatWidiSaputra.terjual(999);
         bukuHidayatWidiSaputra.tampilInformasi();
+        System.out.println("Mendapat diskon: "+ bukuHidayatWidiSaputra.hitungDiskon());
+        System.out.println("Harga bayar: " + bukuHidayatWidiSaputra.hitungHargaBayar());
     }
 }

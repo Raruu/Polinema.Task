@@ -49,9 +49,9 @@ public class Buku11 {
     int hitungDiskon() {
         int x = hitungHargaTotal();
         if (x > 150000) {
-            x *= 12 / 100;
+            x = (int) (x * 0.12);
         } else if (x >= 75000 && x <= 150000) {
-            x *= 5 / 100;
+            x = (int) (x * 0.05);
         } else {
             return 0;
         }
