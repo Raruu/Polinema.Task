@@ -3,7 +3,8 @@ import java.util.Scanner;
 public class ArrayObjects {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        PersegiPanjang[] ppArray = new PersegiPanjang[3];
+        System.out.print("Masukkan length Array: ");
+        PersegiPanjang[] ppArray = new PersegiPanjang[sc.nextInt()];
 
         for (int i = 0; i < ppArray.length; i++) {
             ppArray[i] = new PersegiPanjang();
@@ -18,7 +19,7 @@ public class ArrayObjects {
             System.out.println("Persegi Panjang ke-" + i);
             System.out.println("Panjang: " + ppArray[i].panjang + ", Lebar: " + ppArray[i].lebar);
         }
-        
+
         sc.close();
     }
 }
