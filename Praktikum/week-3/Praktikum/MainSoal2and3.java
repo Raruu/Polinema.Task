@@ -2,7 +2,7 @@ package Praktikum;
 
 import java.util.Scanner;
 
-public class MainSoal2 {
+public class MainSoal2and3 {
     public static void printRataIPK(Mahasiswa[] arr){
         double rataIpk = 0;
         for (int i = 0; i < arr.length; i++) {
