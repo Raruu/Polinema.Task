@@ -18,5 +18,13 @@ public class Main {
         System.out.println("Data mahasiswa setelah sorting desc berdasarakan ipk");
         list.bubleSort();
         list.tampil();
+
+        // System.out.println("Data mahasiswa setelah sorting asc berdasarakan ipk");
+        // list.selectionSort();
+        // list.tampil();
+
+        System.out.println("Data mahasiswa setelah sorting insertionSort");
+        list.insertionSort();
+        list.tampil();
     }
 }
