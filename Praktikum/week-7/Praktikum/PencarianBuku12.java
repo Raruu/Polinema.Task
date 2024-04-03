@@ -108,27 +108,29 @@ public class PencarianBuku12 {
     private int kodeBukuFindBinarySearch(Buku12[] arr, String cari, int left, int right) {
         if (right >= left) {
             int mid = left + (right - left) / 2;
-            int compare = cari.compareToIgnoreCase(arr[mid].kodeBuku);
+            // int compare = cari.toLowerCase().compareTo(arr[mid].kodeBuku.toLowerCase());
 
-            if (compare == 0) {
+            if (arr[mid].kodeBuku.equals(cari)) {
                 return mid;
-            } else if (compare > 0) {
+            } else if (arr[mid].kodeBuku.toLowerCase().compareTo(cari.toLowerCase()) > 0) {
                 return kodeBukuFindBinarySearch(arr, cari, left, mid - 1);
             } else {
                 return kodeBukuFindBinarySearch(arr, cari, mid + 1, right);
             }
         }
+
+
         return -1;
     }
 
     private int judulBukuFindBinarySearch(Buku12[] arr, String cari, int left, int right) {
         if (right >= left) {
             int mid = left + (right - left) / 2;
-            int compare = cari.compareToIgnoreCase(arr[mid].judulBuku);
 
-            if (compare == 0) {
+
+            if (arr[mid].judulBuku.equals(cari)) {
                 return mid;
-            } else if (compare > 0) {
+            } else if (arr[mid].judulBuku.toLowerCase().compareTo(cari.toLowerCase()) > 0) {
                 return judulBukuFindBinarySearch(arr, cari, left, mid - 1);
             } else {
                 return judulBukuFindBinarySearch(arr, cari, mid + 1, right);
@@ -152,10 +154,10 @@ public class PencarianBuku12 {
         return data;
     }
 
-    public int duplicateCheck(String cari){
+    public int duplicateCheck(String cari) {
         int foundDuplicate = -1;
         for (int i = 0; i < listBk.length; i++) {
-            if(listBk[i].judulBuku.equalsIgnoreCase(cari)){
+            if (listBk[i].judulBuku.equalsIgnoreCase(cari)) {
                 foundDuplicate++;
             }
         }

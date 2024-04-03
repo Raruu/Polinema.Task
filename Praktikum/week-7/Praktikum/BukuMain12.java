@@ -6,10 +6,14 @@ public class BukuMain12 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         PencarianBuku12 data = new PencarianBuku12();
-        data.tambah(new Buku12("333", "Buku Atashi Dezz", 2021, "Pengarang A", 10));
-        data.tambah(new Buku12("444", "Buku OniichanBaka", 2021, "Pengarang B", 10));
-        data.tambah(new Buku12("234", "Buku Enggatau", 2021, "Pengarang E", 10));
-        data.tambah(new Buku12("999", "Buku Enggatau desu", 2021, "Pengarang F", 10));
+        data.tambah(new Buku12("A", "BUKU A", 2021, "Pengarang A", 10));
+        data.tambah(new Buku12("B", "BUKU A", 2021, "Pengarang B", 10));
+        data.tambah(new Buku12("C", "BUKU B", 2021, "Pengarang E", 10));
+        data.tambah(new Buku12("D", "BUKU C", 2021, "Pengarang F", 10));
+        data.tambah(new Buku12("E", "BUKU D", 2021, "Pengarang F", 10));
+        data.tambah(new Buku12("f", "BUKU E", 2021, "Pengarang F", 10));
+        data.tambah(new Buku12("G", "BUKU F", 2021, "Pengarang F", 10));
+        data.tambah(new Buku12("h", "BUKU G", 2021, "Pengarang F", 10));
         String line = "--------------------------------------------------";
 
         int menu = -1;
