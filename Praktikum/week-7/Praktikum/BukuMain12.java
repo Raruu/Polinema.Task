@@ -6,10 +6,8 @@ public class BukuMain12 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         PencarianBuku12 data = new PencarianBuku12();
-        data.tambah(new Buku12("UwU", "Buku Atashi Dezz", 2021, "Pengarang A", 10));
-        data.tambah(new Buku12("OwO", "Buku OniichanBaka", 2021, "Pengarang B", 10));
-        data.tambah(new Buku12("666", "Buku Comel Terlarang", 2021, "Pengarang C", 10));
-        data.tambah(new Buku12("111", "Buku Durian Runtuh", 2021, "Pengarang D", 10));
+        data.tambah(new Buku12("333", "Buku Atashi Dezz", 2021, "Pengarang A", 10));
+        data.tambah(new Buku12("444", "Buku OniichanBaka", 2021, "Pengarang B", 10));
         data.tambah(new Buku12("234", "Buku Enggatau", 2021, "Pengarang E", 10));
         data.tambah(new Buku12("999", "Buku Enggatau desu", 2021, "Pengarang F", 10));
         String line = "--------------------------------------------------";
@@ -36,7 +34,6 @@ public class BukuMain12 {
                 case 2 -> searchBuku(scanner, data, "judul");
                 case 3 -> addBuku(scanner, data);
                 case 4 -> printSorted(scanner, data, "judul");
-                default -> System.out.println("Menu Tidak Tersedia");
             }
 
             System.out.println(line);
@@ -56,11 +53,18 @@ public class BukuMain12 {
         data.TampilPosisi(cari, posisi);
         data.TampilData(posisi);
         System.out.println(separator);
-        System.out.println("Menggunakan binary search [Array Tersort Secara descending][Coba lihat di menu 4]");
+        System.out.println("Menggunakan binary search [Array Disort Secara descending][Coba lihat di menu 4]");
+        
         Buku12[] sortedArr = data.descendingSort(data.listBk);
         posisi = data.FindBinarySearch(sortedArr, cari, mode);
         data.TampilPosisi(cari, posisi);
         data.TampilData(sortedArr, posisi);
+
+        int duplicateCheck = data.duplicateCheck(cari);
+        if(mode.equalsIgnoreCase("judul" ) && duplicateCheck > 0){
+            System.out.println();
+            System.out.println("DUPLICATE " + cari + " Found: " + duplicateCheck);
+        }
         
         System.out.println("\nTekan Enter untuk lanjut...");
         scanner.nextLine();

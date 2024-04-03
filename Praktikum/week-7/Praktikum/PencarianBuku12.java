@@ -138,17 +138,27 @@ public class PencarianBuku12 {
     }
 
     public Buku12[] descendingSort(Buku12[] arr) {
-        arr = Arrays.copyOf(arr, arr.length);
-        int n = arr.length;
+        Buku12[] data = Arrays.copyOf(arr, arr.length);
+        int n = data.length;
         for (int i = 1; i < n; ++i) {
-            Buku12 key = arr[i];
+            Buku12 key = data[i];
             int j = i - 1;
-            while (j >= 0 && arr[j].judulBuku.length() < key.judulBuku.length()) {
-                arr[j + 1] = arr[j];
+            while (j >= 0 && data[j].judulBuku.length() < key.judulBuku.length()) {
+                data[j + 1] = data[j];
                 j = j - 1;
             }
-            arr[j + 1] = key;
+            data[j + 1] = key;
         }
-        return arr;
+        return data;
+    }
+
+    public int duplicateCheck(String cari){
+        int foundDuplicate = -1;
+        for (int i = 0; i < listBk.length; i++) {
+            if(listBk[i].judulBuku.equalsIgnoreCase(cari)){
+                foundDuplicate++;
+            }
+        }
+        return foundDuplicate;
     }
 }
