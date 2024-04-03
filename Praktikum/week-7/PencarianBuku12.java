@@ -36,8 +36,8 @@ public class PencarianBuku12 {
         }
     }
 
-    public void TampilData(int x, int pos){
-        if(pos != -1){
+    public void TampilData(int x, int pos) {
+        if (pos != -1) {
             System.out.println("Kode Buku\t : " + x);
             System.out.println("Judul\t\t : " + listBk[pos].judulBuku);
             System.out.println("Tahun Terbit\t : " + listBk[pos].tahunTerbit);
@@ -48,12 +48,26 @@ public class PencarianBuku12 {
         }
     }
 
-    public Buku12 FindBuku(int kodeBuku){
+    public Buku12 FindBuku(int kodeBuku) {
         for (int i = 0; i < listBk.length; i++) {
             if (listBk[i].kodeBuku == kodeBuku) {
                 return listBk[i];
             }
         }
         return null;
+    }
+
+    public int FindBinarySearch(int cari, int left, int right) {
+        if (right >= left) {
+            int mid = left + (right - left) / 2;
+            if (listBk[mid].kodeBuku == cari) {
+                return mid;
+            } else if (listBk[mid].kodeBuku > cari) {
+                return FindBinarySearch(cari, left, mid - 1);
+            } else {
+                return FindBinarySearch(cari, mid + 1, right);
+            }
+        }
+        return -1;
     }
 }

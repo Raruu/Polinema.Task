@@ -43,9 +43,16 @@ public class BukuMain12 {
         data.TampilPosisi(cari, posisi);
         data.TampilData(cari, posisi);
 
-        Buku12 dataBuku12 = data.FindBuku(cari);
-        dataBuku12.tampilDataBuku();
+        // 6.2.3. Pertanyaan no 3
+        // Buku12 dataBuku12 = data.FindBuku(cari);
+        // dataBuku12.tampilDataBuku();
 
+        System.out.println("==================================");
+        System.out.println("Menggunakan binary search");
+        posisi = data.FindBinarySearch(cari, 0, data.listBk.length - 1);
+        data.TampilPosisi(cari, posisi);
+        data.TampilData(cari, posisi);
+        
         scanner.close();
     }
 }
