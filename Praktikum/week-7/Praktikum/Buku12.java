@@ -1,3 +1,5 @@
+package Praktikum;
+
 public class Buku12 {
     String kodeBuku;
     String judulBuku;
