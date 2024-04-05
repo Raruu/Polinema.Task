@@ -10,10 +10,10 @@ public class BukuMain12 {
         data.tambah(new Buku12("B", "BUKU A", 2021, "Pengarang B", 10));
         data.tambah(new Buku12("C", "BUKU B", 2021, "Pengarang E", 10));
         data.tambah(new Buku12("D", "BUKU C", 2021, "Pengarang F", 10));
-        data.tambah(new Buku12("E", "BUKU D", 2021, "Pengarang F", 10));
-        data.tambah(new Buku12("f", "BUKU E", 2021, "Pengarang F", 10));
-        data.tambah(new Buku12("G", "BUKU F", 2021, "Pengarang F", 10));
-        data.tambah(new Buku12("h", "BUKU G", 2021, "Pengarang F", 10));
+        // data.tambah(new Buku12("E", "BUKU D", 2021, "Pengarang F", 10));
+        // data.tambah(new Buku12("f", "BUKU E", 2021, "Pengarang F", 10));
+        // data.tambah(new Buku12("G", "BUKU F", 2021, "Pengarang F", 10));
+        // data.tambah(new Buku12("h", "BUKU G", 2021, "Pengarang F", 10));
         String line = "--------------------------------------------------";
 
         int menu = -1;
