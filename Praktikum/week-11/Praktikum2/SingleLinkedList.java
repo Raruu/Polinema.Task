@@ -86,7 +86,7 @@ public class SingleLinkedList {
         for (int i = 0; i < index; i++) {
             tmp = tmp.next;
         }
-        return tmp.next.data;
+        return tmp.data;
     }
 
     int indexOf(int key) {
