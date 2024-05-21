@@ -38,11 +38,11 @@ public class DoubleLinkedLists {
         }
     }
 
-    public void add(int item, int index) {
+    public void add(int data, int index)  {
         if (isEmpty()) {
-            addFirst(item);
+            addFirst(data);
         } else if (index < 0 || index > size) {
-            // throw new Exception("Nilai indeks di luar batas");
+            // throw new Exception("Nilai index di luar batas");
         } else {
             Node current = head;
             int i = 0;
@@ -51,14 +51,14 @@ public class DoubleLinkedLists {
                 i++;
             }
             if (current.prev == null) {
-                Node newNode = new Node(null, item, current);
+                Node newNode = new Node(null, data, current);
                 current.prev = newNode;
                 head = newNode;
             } else {
-                Node newNode = new Node(current.prev, item, current);
-                current.prev = current.prev;
+                Node newNode = new Node(current.prev, data, current);
+                newNode.prev = current.prev;
                 newNode.next = current;
-                current.prev.next = newNode;
+                newNode.prev.next = newNode;
                 current.prev = newNode;
             }
         }
