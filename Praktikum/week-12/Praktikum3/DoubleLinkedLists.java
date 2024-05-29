@@ -56,10 +56,12 @@ public class DoubleLinkedLists {
                 head = newNode;
             } else {
                 Node newNode = new Node(current.prev, data, current);
+                System.out.println(current.prev.data+"a");
                 newNode.prev = current.prev;
                 newNode.next = current;
                 newNode.prev.next = newNode;
                 current.prev = newNode;
+                System.out.println(current.prev.prev.data+"b");
             }
         }
         size++;
