@@ -1,5 +1,7 @@
 package Percobaan1;
 
+import java.util.Scanner;
+
 public class GraphMain12 {
     public static void main(String[] args) {
         Graph12 gedung = new Graph12(6);
@@ -12,5 +14,24 @@ public class GraphMain12 {
         gedung.degree(0);
         gedung.removeEdge(1, 3);
         gedung.printGraph();
+
+        Scanner iwak = new Scanner(System.in);
+        System.out.println("\n[Masukkan -1 pada asal untuk keluar]\n");
+
+        while (true) {
+            System.out.print("Masukkan gedung asal: ");
+            int gedungAsal = Integer.parseInt(iwak.nextLine());
+            if (gedungAsal < 0)
+                break;
+            System.out.print("Masukkan gedung tujuan: ");
+            int gedungTujuan = Integer.parseInt(iwak.nextLine());
+            if (gedungTujuan < 0)
+                break;
+
+            gedung.checkPath(gedungAsal, gedungTujuan);
+            System.out.println();
+        }
+
+        iwak.close();
     }
 }

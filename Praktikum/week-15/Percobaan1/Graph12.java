@@ -70,4 +70,21 @@ public class Graph12 {
         }
         System.out.println();
     }
+
+    public boolean checkInConnection(int asal, int tujuan) {
+        for (int i = 0; i < list[asal].size(); i++) {
+            if(list[asal].get(i) == tujuan) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void checkPath(int asal, int tujuan) {
+        if (checkInConnection(asal, tujuan)) {
+            System.out.println("Gedung " + (char) ('A' + asal) + " dan " + (char) ('A' + tujuan) + " bertetangga");
+        } else {
+            System.out.println("Gedung " + (char) ('A' + asal) + " dan " + (char) ('A' + tujuan) + " tidak bertetangga");
+        }
+    }
 }
