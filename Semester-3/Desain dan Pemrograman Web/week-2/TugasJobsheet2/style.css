@@ -1,0 +1,72 @@
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #3e3e42;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  transition: 200ms;
+}
+
+.disini {
+  color: blue;
+}
+
+.disini:hover {
+  color: red;
+}
+
+a:hover {
+  color: red;
+}
+
+.page_1 {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+  height: 100vh;
+  padding-top: 25vh;
+}
+
+.round-card {
+  width: fit-content;
+  position: relative;
+  border-radius: 30px;
+  padding: 10px 30px;
+  box-shadow: 10px black;
+  background-color: white;
+  margin: 1px;
+  transition-duration: 200ms;
+}
+
+.round-card:hover {
+  background-color: #e7e9ff;
+}
+
+.page_anime_makan {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.page_anime_makan img {
+  width: 100%;
+  height: 100%;
+}
+
+.page_2 {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+  max-width: 75%;
+  /* height: 50vh; */
+  padding-top: 10vh;
+}
+
+.page_2_page_1_btn {
+  position: fixed;
+  padding: 0px 30px;
+}
