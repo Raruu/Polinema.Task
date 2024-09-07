@@ -1,0 +1,13 @@
+@startuml
+class Peminjam {
+~ int id
+~ String memberName
+~ String gameName
+~ int harga
++ <<Create>> Peminjam(int,String,String,int)
++ int cekHarusBayar(int)
++ void cetakInfo(int)
+}
+
+
+@enduml
