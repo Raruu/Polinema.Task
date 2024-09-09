@@ -1,0 +1,62 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  flex: 1;
+  width: 100%;
+  background-color: azure;  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+header h1{
+  padding: 0px 50px;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #ddd;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 100vw;
+  height: 100vh;
+}
+
+footer {
+  flex: 2;
+  background-color: aliceblue;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.container-satu {
+  flex: 3;
+  width: 50%;
+  margin: 50px auto;
+  background-color: #fff;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  line-height: 1.65;
+}
+
+.sidebar-satu {
+  flex: 1;
+}
+
+.sidebar-dua {
+  flex: 1;
+}
+
+.kolom-utama {
+  flex: 2;
+}
