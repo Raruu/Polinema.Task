@@ -1,0 +1,13 @@
+@startuml
+class Restoran {
+===- String menu
+===- double harga
+===- boolean special
+===+ void setMenu(String,double,boolean)
+===+ String getMenu()
+===+ double getHarga()
+===+ boolean isSpecial()
+}
+
+
+@enduml
