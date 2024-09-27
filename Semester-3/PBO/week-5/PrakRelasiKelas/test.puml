@@ -1,0 +1,53 @@
+@startuml
+class Pelanggan {
+    ====- nama: String
+    ====- riwayatPembelian: List<Pesanan>
+    ====+ lakukanPembelian(KeranjangBelanja): void
+    ====+ printIdentitas(): void
+    ====+ printRiwayat(): void
+}
+
+class KeranjangBelanja {
+    ====- pembelians: List<Pembelian>
+    ====+ tambahBarang(Pembelian): void
+    ====+ printPembelian(): void
+}
+
+class Pesanan {
+    ====- id: String
+    ====- keranjangBelanja: KeranjangBelanja
+    ====+ getStatusPesanan(): String
+    ====+ setStatusPesanan(String): void
+    ====+ getId(): String
+    ====+ getKeranjangBelanja(): KeranjangBelanja
+}
+
+class Pembelian {
+    ====- produk: Produk
+    ====- jumlah: int
+    ====- jumlahHarga: double
+    ====+ getProduk(): Produk
+    ====+ getJumlah(): int
+    ====+ getJumlahHarga(): double
+}
+
+class Produk {
+    ====- nama: String
+    ====- stok: int
+    ====- harga: double
+    ====+ kurangiStok(int): void
+    ====+ getNama(): String
+    ====+ setNama(String): void
+    ====+ getKategori(): String
+    ====+ setKategori(String): void
+    ====+ getHarga(): double
+    ====+ setHarga(double): void
+    ====+ hitungHarga(int): double
+}
+
+Produk --o Pembelian
+Pembelian --o  KeranjangBelanja
+KeranjangBelanja --o Pesanan
+Pesanan --o Pelanggan
+
+@enduml
