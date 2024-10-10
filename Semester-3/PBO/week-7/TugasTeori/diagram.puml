@@ -1,0 +1,40 @@
+@startuml
+class Kendaraan {
+    - merek: String
+    - jumlahRoda: int
+    + Kendaraan(String,int)
+    + getMerek(): String
+    + getJumlahRoda(): int
+    + printInfo(): void
+    + bergerak(): void
+    + bergerak(int): void
+}
+
+class Mobil {
+    - tipe: String
+    + Mobil(String,int,String)
+    + bergerak(): void
+    + bergerak(int): void
+}
+
+class Motor {
+    - matic: boolean
+    + Motor(String,int,boolean)
+    + bergerak(): void
+    + bergerak(int): void
+}
+
+class Bus {
+    - kapasitas: int
+    + Bus(String,int,int)
+    + bergerak(): void
+    + bergerak(int): void
+}
+
+
+
+
+Kendaraan <|-- Mobil
+Kendaraan <|-- Motor
+Kendaraan <|-- Bus
+@enduml
