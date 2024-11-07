@@ -1,0 +1,50 @@
+@startuml
+skinparam linetype ortho
+skinparam classAttributeIconSize 0
+'!theme mono
+
+abstract class Kendaraan {
+    - jumlahRoda: int
+    - jenisBahanBakar: String
+    + Kendaraan(int, int, String): void
+    + bergerak(): void
+    + berhenti(): void
+    + belok(): void
+    + info(): void
+}
+
+class SepedaMotor extends Kendaraan {
+    + jumlahGigi: int
+    + jenisMotor: String
+    - isStandarDown: boolean
+    + SepedaMotor(int, int, String, int, String): void
+    + toggleStandar(): void
+    + bergerak(): void
+    + berhenti(): void
+    + belok(): void
+    + info(): void
+}
+
+class Kapal extends Kendaraan {
+    + jenisKapal: String
+    + Kapal(int, int, String, String): void
+    + turunkanJangkar(): void
+    + naikkanJangkar(): void
+    + bergerak(): void
+    + berhenti(): void
+    + belok(): void
+    + info(): void
+}
+
+class Mobil extends Kendaraan {
+    + jumlahPintu: int
+    + jenisMobil: String
+    - isWiperOn: boolean
+    + Mobil(int, int, String, int, int, String): void
+    + toggleWiper(): void
+    + bergerak(): void
+    + berhenti(): void
+    + belok(): void
+    + info(): void
+}
+@enduml

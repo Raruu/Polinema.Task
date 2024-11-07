@@ -1,0 +1,64 @@
+@startuml
+'skinparam linetype ortho
+skinparam classAttributeIconSize 0
+class Kapal{
+  String jenisKapal
+  + Kapal(int, int, String, String): void
+  + turunkanJangkar(): void
+  + naikkanJangkar(): void
+  + bergerak(): void
+  + berhenti(): void
+  + belok(): void
+  + info(): void
+  + isiBahanBakar(double): double
+}
+
+abstract class Kendaraan{
+  # int jumlahRoda
+  # String jenisBahanBakar
+  + Kendaraan(int, int, String): void
+  + bergerak(): void
+  + berhenti(): void
+  + belok(): void
+  + info(): void
+}
+
+class SepedaMotor{
+  + int jumlahGigi
+  + String jenisMotor
+  - boolean isStandarDown
+  + SepedaMotor(int, int, String, int, String): void
+  + toggleStandar(): void
+  + bergerak(): void
+  + berhenti(): void
+  + belok(): void
+  + info(): void
+  + isiBahanBakar(double): double
+}
+
+class Mobil{
+  + int jumlahPintu
+  + String jenisMobil
+  - boolean isWiperOn
+  + Mobil(int, int, String, int, int, String): void
+  + toggleWiper(): void
+  + bergerak(): void
+  + berhenti(): void
+  + belok(): void
+  + info(): void
+  + isiBahanBakar(double): double
+}
+
+interface RefillFuel{
+  + isiBahanBakar(double): double
+}
+
+
+
+.RefillFuel <|.. .Kapal
+.Kendaraan <|-- .Kapal
+.RefillFuel <|.. .SepedaMotor
+.Kendaraan <|-- .SepedaMotor
+.RefillFuel <|.. .Mobil
+.Kendaraan <|-- .Mobil
+@enduml
