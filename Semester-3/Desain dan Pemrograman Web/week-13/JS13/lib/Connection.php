@@ -1,8 +1,8 @@
 <?php 
-    $use_driver = 'mysql'; // mysql atau sqlsrv
+    $use_driver = 'sqlsrv'; // mysql atau sqlsrv
 
     $host     = "localhost"; //'localhost';
-    $username = 'root'; //'sa';
+    $username = ''; //'sa';
     $password = '';
     $database = 'dasar_web';
     $db;
