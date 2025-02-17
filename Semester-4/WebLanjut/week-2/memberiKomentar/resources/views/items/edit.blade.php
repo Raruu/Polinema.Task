@@ -28,7 +28,7 @@
         <button type="submit">Update Item</button>
     </form>
     
-    <!-- Link untuk kembali ke halaman daftar item -->
+    <!-- Link untuk kembali ke halaman list -->
     <a href="{{ route('items.index') }}">Back to List</a>
 </body>
 
