@@ -1,0 +1,1 @@
+https://github.com/ColorlibHQ/AdminLTE/archive/refs/tags/v3.2.0.zip
