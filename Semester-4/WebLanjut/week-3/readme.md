@@ -1,5 +1,5 @@
 # Jobsheet 3
-Project: [PWL_POS](./week-3/PWL_POS)
+Project: [PWL_POS](./PWL_POS)
 # [Commits](https://github.com/Raruu/Polinema.Task/commits/main/Semester-4/WebLanjut/week-3/PWL_POS)
 - [Praktikum 1 / init](https://github.com/Raruu/Polinema.Task/commit/724b10d6ccea4719edfaf9cf62c351d5eff6e38b)
 - [Praktikum 2.1](https://github.com/Raruu/Polinema.Task/commit/25f3bb00c53860b89a98f2df937efe3ece7683f9)
