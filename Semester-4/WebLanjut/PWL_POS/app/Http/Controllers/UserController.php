@@ -45,7 +45,11 @@ class UserController extends Controller
         // });
 
         // JS4: Praktikum 2.2
-        $user = UserModel::where('username', 'manager9')->firstOrFail();
+        // $user = UserModel::where('username', 'manager9')->firstOrFail();
+
+        // JS4: Praktimum 2.3
+        $user = UserModel::where('level_id', 2)->count();
+        // dd($user);
         return view('user', ['data' => $user]);
     }
 }
