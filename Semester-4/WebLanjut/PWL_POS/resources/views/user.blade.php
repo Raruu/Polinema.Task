@@ -8,12 +8,12 @@
 <body>
     <h1>Data User</h1>
     <table border="1" cellpadding="2" cellspacing="0">
-        {{-- <tr>
+        <tr>
             <th>ID</th>
             <th>Username</th>
             <th>Nama</th>
             <th>ID Level Pengguna</th>
-        </tr> --}}
+        </tr>
 
         <!-- JS3 -->
         {{--@foreach ($data as $d)
@@ -27,20 +27,20 @@
         {{-- END JS3 --}}
 
         <!-- JS4: Praktikum 2.1 -->
-        {{-- <tr>
+        <tr>
             <td>{{ $data->user_id }}</td>
             <td>{{ $data->username }}</td>
             <td>{{ $data->nama }}</td>
             <td>{{ $data->level_id }}</td>
-        </tr> --}}
+        </tr>
 
         {{-- JS4: Praktikum 2.3 --}}
-        <tr>
+        {{-- <tr>
             <th>Jumlah Pengguna</th>
         </tr>
         <tr>
             <td>{{ $data }}</td>
-        </tr>
+        </tr> --}}
     </table>
 </body>
 
