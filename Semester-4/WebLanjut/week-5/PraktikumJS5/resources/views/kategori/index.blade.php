@@ -2,11 +2,14 @@
 {{-- Customize layout sections --}}
 @section('subtitle', 'Kategori')
 @section('content_header_title', 'Home')
-@section('content_header_subtitle', 'Kagegori')
+@section('content_header_subtitle', 'Kategori')
 @section('content')
     <div class="container">
         <div class="card">
             <div class="card-header">Manage Kategori</div>
+            <div class="d-flex justify-content-between" style="padding: 10px;">
+                <a href="/kategori/create" class="btn btn-primary">Add</a>
+            </div>
             <div class="card-body">
                 {{ $dataTable->table() }}
             </div>

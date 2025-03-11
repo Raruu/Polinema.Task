@@ -310,11 +310,18 @@ return [
             'topnav_right' => true,
         ],
 
-        // Sidebar items:
+        // Sidebar items:       
         [
             'type' => 'sidebar-menu-search',
             'text' => 'search',
         ],
+        ['header' => 'TUGAS PRAKTIKUM '],
+        [
+            'text' => 'Manage Kategori',
+            'url' => 'kategori',
+            'icon' => 'fas fa-fw fa-list',
+        ],
+        ['header' => '---------------------'],
         [
             'text' => 'blog',
             'url' => 'admin/blog',

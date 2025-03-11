@@ -25,5 +25,28 @@ class KategoriController extends Controller
             'kategori_nama' => $request->namaKategori,
         ]);
         return redirect('/kategori');
+    }    
+
+    public function edit($id)
+    {
+        $row = KategoriModel::findOrFail($id);
+        return view('kategori.edit', ['data' => $row]);
+    }
+
+    public function update(Request $request)
+    {
+        $row = KategoriModel::findOrFail($request->kategori_id);
+        $row->kategori_kode = $request->kodeKategori;
+        $row->kategori_nama = $request->namaKategori;
+        $row->save();
+        return redirect('/kategori');
+    }
+
+    
+    public function delete($id)
+    {
+        $row = KategoriModel::findOrFail($id);
+        $row->delete();
+        return redirect('/kategori');
     }
 }
