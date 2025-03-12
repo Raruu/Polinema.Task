@@ -20,12 +20,13 @@ class KategoriController extends Controller
 
     public function store(Request $request)
     {
-        KategoriModel::create([
-            'kategori_kode' => $request->kodeKategori,
-            'kategori_nama' => $request->namaKategori,
+        $validated = $request->validate([
+            'kategori_kode' => 'required|bail',
+            'kategori_nama' => 'required',
         ]);
+        // The post is valid...
         return redirect('/kategori');
-    }    
+    }
 
     public function edit($id)
     {
@@ -42,7 +43,7 @@ class KategoriController extends Controller
         return redirect('/kategori');
     }
 
-    
+
     public function delete($id)
     {
         $row = KategoriModel::findOrFail($id);
