@@ -8,7 +8,10 @@
     <div class="container">
         <div class="card card-primary">
             <div class="card-header">
-                <h3 class="card-title">Buat kategori baru</h3>
+                <h3 class="card-title">Edit kategori</h3>
+            </div>
+            <div class="d-flex justify-content-between" style="padding: 10px;">
+                <a href="/kategori" class="btn btn-sm btn-secondary mt-2">Kembali</a>
             </div>
             <form method="post" action="../edit">
                 @csrf <!-- {{ csrf_field() }} -->

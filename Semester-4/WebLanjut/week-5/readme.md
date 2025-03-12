@@ -17,6 +17,7 @@ Commits: [Jobsheet-5](https://github.com/search?q=repo%3ARaruu%2FPolinema.Task+w
 ></div>
 #### 3. Tambahkan action edit di datatables dan buat halaman edit serta controllernya
 ><div>
+>  <img  src="img/Soal3-editpage.png"/>
 >  <img  src="img/Soal3.png"/>
 ></div>
 #### 4. Tambahkan action delete di datatables serta controllernya
