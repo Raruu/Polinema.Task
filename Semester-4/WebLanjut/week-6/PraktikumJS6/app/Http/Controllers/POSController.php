@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserPostRequest;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
 
@@ -28,14 +29,10 @@ class POSController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserPostRequest $request)
     {
         //melakukan validasi data 
-        $request->validate([
-            'user_id' => 'max 20',
-            'username' => 'required',
-            'nama' => 'required',
-        ]);
+        $validated = $request->validated();
 
         //fungsi eloquent untuk menambah data
         UserModel::create($request->all());

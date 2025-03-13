@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LevelPostRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -20,5 +21,13 @@ class LevelController extends Controller
 
         $data = DB::select('select * from m_level');
         return view('level', ['data' => $data]);
+    }
+
+    public function store(LevelPostRequest $request)
+    {
+        // Validasi data
+        $validated = $request->validated();
+
+        return redirect('/level');
     }
 }
