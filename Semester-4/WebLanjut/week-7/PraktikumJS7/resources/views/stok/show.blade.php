@@ -1,4 +1,5 @@
 @extends('layouts.template')
+
 @section('content')
     <div class="card card-outline card-primary">
         <div class="card-header">
@@ -6,40 +7,47 @@
             <div class="card-tools"></div>
         </div>
         <div class="card-body">
-            @empty($user)
+            @empty($stok)
                 <div class="alert alert-danger alert-dismissible">
                     <h5><i class="icon fas fa-ban"></i> Kesalahan!</h5>
                     Data yang Anda cari tidak ditemukan.
                 </div>
             @else
-                <table class="table table-bordered table-striped table-hover tablesm">
+                <table class="table table-bordered table-striped table-hover table-sm">
                     <tr>
-                        <th>ID</th>
-                        <td>{{ $user->user_id }}</td>
+                        <th>ID Stok</th>
+                        <td>{{ $stok->stok_id }}</td>
                     </tr>
                     <tr>
-                        <th>Level</th>
-                        <td>{{ $user->level->level_nama }}</td>
+                        <th>ID Barang</th>
+                        <td>{{ $stok->barang_id }}</td>
                     </tr>
                     <tr>
-                        <th>Username</th>
-                        <td>{{ $user->username }}</td>
+                        <th>Nama Barang</th>
+                        <td>{{ $stok->barang->barang_nama }}</td>
                     </tr>
                     <tr>
-                        <th>Nama</th>
-                        <td>{{ $user->nama }}</td>
+                        <th>ID User</th>
+                        <td>{{ $stok->user_id }}</td>
                     </tr>
                     <tr>
-                        <th>Password</th>
-                        <td>********</td>
+                        <th>Stok Tanggal</th>
+                        <td>{{ $stok->stok_tanggal }}</td>
+                    </tr>
+                    <tr>
+                        <th>Stok Jumlah</th>
+                        <td>{{ $stok->stok_jumlah }}</td>
                     </tr>
                 </table>
             @endempty
-            <a href="{{ url('user') }}" class="btn btn-sm btn-default mt-2">Kembali</a>
+            <a href="{{ url('stok') }}" class="btn btn-sm btn-default mt-2">Kembali</a>
         </div>
     </div>
 @endsection
+
 @push('css')
 @endpush
+
 @push('js')
 @endpush
+
