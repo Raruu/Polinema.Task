@@ -315,13 +315,23 @@ return [
             'type' => 'sidebar-menu-search',
             'text' => 'search',
         ],
-        // ['header' => 'TUGAS PRAKTIKUM '],
-        // [
-        //     'text' => 'Manage Kategori',
-        //     'url' => 'kategori',
-        //     'icon' => 'fas fa-fw fa-list',
-        // ],
-        // ['header' => '---------------------'],
+        ['header' => 'PWL'],
+        [
+            'text' => 'Form m_user',
+            'url' => 'form/m_user',
+            'icon' => 'fas fa-fw fa-list',
+        ],
+        [
+            'text' => 'Form m_level',
+            'url' => 'form/m_level',
+            'icon' => 'fas fa-fw fa-list',
+        ],
+        [
+            'text' => 'Manage Kategori',
+            'url' => 'kategori',
+            'icon' => 'fas fa-fw fa-list',
+        ],
+        ['header' => '---------------------'],
         [
             'text' => 'blog',
             'url' => 'admin/blog',
