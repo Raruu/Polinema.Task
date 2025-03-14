@@ -13,10 +13,10 @@
             <div class="d-flex justify-content-between" style="padding: 10px;">
                 <a href="/kategori" class="btn btn-sm btn-secondary mt-2">Kembali</a>
             </div>
-            <form method="post" action="../edit">
+            <form method="post" action="../edit/{{ $data->kategori_id }}">
                 @csrf <!-- {{ csrf_field() }} -->
+                @method('PUT')
                 <div class="card-body">
-                    <input type="hidden" name="kategori_id" value="{{ $data->kategori_id }}">
                     <div class="form-group">
                         <label for="kodeKategori">Kode Kategori</label>
                         <input type="text" class="form-control" id="kodeKategori" name="kodeKategori"

@@ -24,7 +24,7 @@ Route::get('/kategori', [KategoriController::class, 'index']);
 Route::get('/kategori/create', [KategoriController::class, 'create']); 
 Route::post('/kategori', [KategoriController::class, 'store']);
 Route::get('/kategori/edit/{id}', [KategoriController::class, 'edit']);
-Route::post('/kategori/edit', [KategoriController::class, 'update']);
+Route::put('/kategori/edit/{id}', [KategoriController::class, 'update']);
 Route::get('/kategori/hapus/{id}', [KategoriController::class, 'delete']);
 
 // JS4: Praktikum 2.6

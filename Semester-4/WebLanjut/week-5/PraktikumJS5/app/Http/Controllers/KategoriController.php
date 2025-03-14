@@ -33,9 +33,9 @@ class KategoriController extends Controller
         return view('kategori.edit', ['data' => $row]);
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        $row = KategoriModel::findOrFail($request->kategori_id);
+        $row = KategoriModel::findOrFail($id);
         $row->kategori_kode = $request->kodeKategori;
         $row->kategori_nama = $request->namaKategori;
         $row->save();
