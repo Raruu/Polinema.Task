@@ -13,6 +13,8 @@ class LevelModel extends Model
     protected $table = 'm_level';
     protected $primaryKey = 'level_id';
 
+    protected $fillable = ['level_kode', 'level_nama'];
+
     public function user(): BelongsTo
     {
         // JS4: Praktikum 2.7 / One to One
