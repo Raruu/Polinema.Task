@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\PenjualanDataTable;
+use App\Models\PenjualanDetailModel;
 use App\Models\PenjualanModel;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
@@ -79,6 +80,7 @@ class PenjualanController extends Controller
     public function show(string $id)
     {
         $penjualan = PenjualanModel::with('user')->find($id);
+        $detail = PenjualanDetailModel::with('barang')->where('penjualan_id', $id)->get();
 
         $breadcrumb = (object) [
             'title' => 'Detail penjualan',
@@ -95,6 +97,7 @@ class PenjualanController extends Controller
             'breadcrumb' => $breadcrumb,
             'page' => $page,
             'penjualan' => $penjualan,
+            'detail' => $detail,
             'activeMenu' => $activeMenu
         ]);
     }
