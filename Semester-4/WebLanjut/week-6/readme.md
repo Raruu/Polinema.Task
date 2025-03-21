@@ -5,6 +5,7 @@ Commits: [Jobsheet-6](https://github.com/search?q=repo%3ARaruu%2FPolinema.Task+J
 ### Laporan JS6 ada di [sini](https://1drv.ms/f/c/60e6043c8101a60a/EqL_CGeINmZNj3vWWNmJvoMB4nby17qHOW8uTixmDTTCDQ?e=WwXetD)
 
 # Tugas Jobsheet
+[Commit Tugas](https://github.com/Raruu/Polinema.Task/commit/f61124d1ae6ee8aaddd5634b40e6772eaeb34c73)\
 Implementasikan koding untuk Ajax Form dan Client Validation dengan jQuery Validation pada pada menu berikut ini 
 ><details>
 ><summary>Tabel m_level</summary>
