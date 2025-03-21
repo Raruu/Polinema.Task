@@ -6,6 +6,7 @@ use App\DataTables\PenjualanDataTable;
 use App\Models\BarangModel;
 use App\Models\PenjualanDetailModel;
 use App\Models\PenjualanModel;
+use App\Models\StokModel;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
 
@@ -83,6 +84,12 @@ class PenjualanController extends Controller
         foreach ($request->barang_nama as $key => $barang_nama) {
             $barang_id = BarangModel::where('barang_nama', $barang_nama)->first()->barang_id;
             $harga = BarangModel::where('barang_id', $barang_id)->first()->harga_jual;
+
+            $stok = StokModel::where('barang_id', $barang_id)->first();
+            $stok->update([
+                'stok_jumlah' => $stok->stok_jumlah - $request->jumlah[$key]
+            ]);
+            
             PenjualanDetailModel::create([
                 'penjualan_id' => $penjualan->penjualan_id,
                 'barang_id' => $barang_id,
@@ -208,12 +215,15 @@ class PenjualanController extends Controller
     // Menghapus data penjualan
     public function destroy(string $id)
     {
-        $check = PenjualanModel::find($id); // untuk mengecek apakah data penjualan dengan id yang dimaksud ada atau tidak
-        if (!$check) {
+        $checkPenjualan = PenjualanModel::find($id);
+        $checkPenjualanDetail = PenjualanDetailModel::where('penjualan_id', $id)->first(); 
+
+        if (!$checkPenjualan || !$checkPenjualanDetail) {
             return redirect('/penjualan')->with('error', 'Data penjualan tidak ditemukan');
         }
 
         try {
+            PenjualanDetailModel::where('penjualan_id', $id)->delete();
             PenjualanModel::destroy($id); // Hapus data penjualan
             return redirect('/penjualan')->with('success', 'Data penjualan berhasil dihapus');
         } catch (\Illuminate\Database\QueryException $e) {
