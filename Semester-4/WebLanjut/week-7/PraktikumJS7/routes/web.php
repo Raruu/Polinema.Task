@@ -6,6 +6,7 @@ use App\Http\Controllers\LevelController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\StokController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 
@@ -87,4 +88,15 @@ Route::group(['prefix' => 'penjualan'], function () {
     Route::get('/{id}/edit', [PenjualanController::class, 'edit']);
     Route::put('/{id}', [PenjualanController::class, 'update']);
     Route::delete('/{id}', [PenjualanController::class, 'destroy']);
+});
+
+Route::group(['prefix' => 'supplier'], function () {
+    Route::get('/', [SupplierController::class, 'index']);
+    Route::post('/list', [SupplierController::class, 'list']);
+    Route::get('/create', [SupplierController::class, 'create']);
+    Route::post('/', [SupplierController::class, 'store']);
+    Route::get('/{id}', [SupplierController::class, 'show']);
+    Route::get('/{id}/edit', [SupplierController::class, 'edit']);
+    Route::put('/{id}', [SupplierController::class, 'update']);    
+    Route::delete('/{id}', [SupplierController::class, 'destroy']);
 });

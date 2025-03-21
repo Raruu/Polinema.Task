@@ -17,9 +17,14 @@ class PenjualanDetailSeeder extends Seeder
         $barangs = DB::table('m_barang')->get();
 
         foreach ($penjualans as $penjualan) {
-            $barangId = rand(0, $barangs->count() - 1);
+            $selectedBarangs = [];
             for ($i = 0; $i < 3; $i++) {
-                $barang = $barangs[$barangId];
+                do {
+                    $barangRand = rand(0, $barangs->count() - 1);
+                } while (in_array($barangRand, $selectedBarangs));
+                
+                $selectedBarangs[] = $barangRand;
+                $barang = $barangs[$barangRand];
                 DB::table('t_penjualan_detail')->insert([
                     'penjualan_id' => $penjualan->penjualan_id,
                     'barang_id' => $barang->barang_id,
