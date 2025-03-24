@@ -1,4 +1,6 @@
-# Jobsheet 5 - Blade View, Web Templating(AdminLTE), Datatables
+# Jobsheet 5 Blade View, Web Templating(AdminLTE), Datatables (VERSI REVISI)
+[Bawa Aku Kesana](../week-7/)
+# Jobsheet 5 - Blade View, Web Templating(AdminLTE), Datatables (VERSI LAMA!!!)
 Commits: [Jobsheet-5](https://github.com/search?q=repo%3ARaruu%2FPolinema.Task+weblnjt%2FJS5&type=commits)
 
 ### Laporan JS5 ada di [sini](https://1drv.ms/f/c/60e6043c8101a60a/EqL_CGeINmZNj3vWWNmJvoMB4nby17qHOW8uTixmDTTCDQ?e=WwXetD)
