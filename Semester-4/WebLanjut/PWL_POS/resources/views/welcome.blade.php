@@ -39,7 +39,7 @@
                     <h3 class="card-title">TOP 5 Produk terbeli paling banyak</h3>
                 </div>
                 <div class="card-body table-responsive p-0">
-                    <table class="table table-striped table-valign-middle">
+                    <table class="table table-striped table-hover table-valign-middle">
                         <thead>
                             <tr>
                                 <th>Nama Barang</th>
@@ -50,7 +50,7 @@
                         </thead>
                         <tbody>
                             @foreach ($penjualanRanking as $item)
-                                <tr>
+                                <tr onclick="window.location.href = '{{ url('barang/' . $item->barang_id) }}'">
                                     <td>{{ $item->barang_nama }}</td>
                                     <td>Rp. {{ number_format($item->harga_beli, 0, ',', '.') }}</td>
                                     <td>Rp. {{ number_format($item->harga_jual, 0, ',', '.') }}</td>
