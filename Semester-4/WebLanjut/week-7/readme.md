@@ -1,9 +1,11 @@
-# Jobsheet 7 - PWL – LARAVEL STARTER CODE 
-Commits: [Jobsheet-7](https://github.com/search?q=repo%3ARaruu%2FPolinema.Task+JS7&type=commits)
+# Jobsheet 5 Blade View, Web Templating(AdminLTE), Datatables
+Jobsheet 7 - PWL – LARAVEL STARTER CODE (Nama Jobsheet yang lama)\
+kedua Jobsheet memiliki isi yang sama\
+[Commits](https://github.com/search?q=repo%3ARaruu%2FPolinema.Task+JS7&type=commits)
 
-### Laporan JS7 ada di [sini](https://1drv.ms/f/c/60e6043c8101a60a/EqL_CGeINmZNj3vWWNmJvoMB4nby17qHOW8uTixmDTTCDQ?e=WwXetD)
+### Laporan JS5 ada di [sini](https://1drv.ms/f/c/60e6043c8101a60a/EqL_CGeINmZNj3vWWNmJvoMB4nby17qHOW8uTixmDTTCDQ?e=WwXetD)
 
-# Pertanyaan JS7
+# Pertanyaan JS5 (JS7 PWL – LARAVEL STARTER CODE)
 #### 1.	Apa perbedaan frontend template dengan backend template? 
 > - Frontend: Saat membuka halaman web, frontend template akan menampilkan layout, tombol, dan form.
 > - Backend: Saat mengirim form, backend template akan memproses data tersebut, menyimpannya ke database, dan mengirim respons kembali ke frontend.
@@ -26,7 +28,7 @@ Commits: [Jobsheet-7](https://github.com/search?q=repo%3ARaruu%2FPolinema.Task+J
 >variable $activeMenu berfungsi untuk memberi tahu view mana menu yang active/sedang digunakan
 
 
-# Tugas Praktikum
+# Tugas Praktikum JS5
 Implementasikan menu yang belum ada di laravel starter code ini sesuai dengan Studi Kasus Point of Sales Sederhana. Silahkan terapkan kode di laravel starter code untuk menu-menu yang sesuai dengan menu.\
 \
 [Commit-1](https://github.com/Raruu/Polinema.Task/commit/a1a52e56c14939d984089757febc73ba8d0bbc17)\
