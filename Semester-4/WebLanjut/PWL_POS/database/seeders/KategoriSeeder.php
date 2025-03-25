@@ -25,6 +25,8 @@ class KategoriSeeder extends Seeder
             DB::table('m_kategori')->insert([
                 'kategori_nama' => $item[0],
                 'kategori_kode' => $item[1],
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
         }
     }

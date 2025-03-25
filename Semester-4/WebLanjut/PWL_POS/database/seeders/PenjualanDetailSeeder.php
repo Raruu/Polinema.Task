@@ -30,6 +30,8 @@ class PenjualanDetailSeeder extends Seeder
                     'barang_id' => $barang->barang_id,
                     'harga' => $barang->harga_jual,
                     'jumlah' => rand(1, 15),
+                    'created_at' => now(),
+                    'updated_at' => now(),
                 ]);
             }
         }

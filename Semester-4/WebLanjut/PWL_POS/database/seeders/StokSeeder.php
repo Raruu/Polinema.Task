@@ -22,6 +22,8 @@ class StokSeeder extends Seeder
                 'user_id' => rand(1, 3),
                 'stok_tanggal' => now(),
                 'stok_jumlah' => rand(0, 256),
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
         }
     }
