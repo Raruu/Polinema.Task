@@ -24,6 +24,15 @@
                     <th>Alamat Supplier</th>
                     <td>{{ $supplier->supplier_alamat }}</td>
                 </tr>
+                <tr>
+                    <th>Telepon Supplier</th>
+                    <td>{{ $supplier->supplier_telepon }}</td>
+                </tr>
+                <tr>
+                    <th>Email Supplier</th>
+                    <td>{{ $supplier->supplier_email }}</td>
+                </tr>
             </table>
+        </div>
     </div>
 </div>

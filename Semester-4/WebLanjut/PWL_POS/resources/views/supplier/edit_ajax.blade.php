@@ -44,6 +44,16 @@
                         <input value="{{ $supplier->supplier_alamat }}" type="text" name="supplier_alamat" id="supplier_alamat" class="form-control" required>
                         <small id="error-supplier-alamat" class="error-text form-text text-danger"></small>
                     </div>
+                    <div class="form-group">
+                        <label>Supplier Telepon</label>
+                        <input value="{{ $supplier->supplier_telepon }}" type="text" name="supplier_telepon" id="supplier_telepon" class="form-control" required>
+                        <small id="error-supplier-telepon" class="error-text form-text text-danger"></small>
+                    </div>
+                    <div class="form-group">
+                        <label>Supplier Email</label>
+                        <input value="{{ $supplier->supplier_email }}" type="text" name="supplier_email" id="supplier_email" class="form-control" required>
+                        <small id="error-supplier-email" class="error-text form-text text-danger"></small>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" data-dismiss="modal" class="btn btn-warning">Batal</button>
@@ -58,7 +68,9 @@
                 rules: {
                     supplier_kode: { required: true, minlength: 7, maxlength: 10 },
                     supplier_nama: { required: true, maxlength: 100 },
-                    supplier_alamat: { required: true }
+                    supplier_alamat: { required: true },
+                    supplier_telepon: { required: true, minlength: 10, maxlength: 15 },
+                    supplier_email: { required: true, email: true }
                 },
                 submitHandler: function(form) {
                     $.ajax({
@@ -104,3 +116,4 @@
         });
     </script>
 @endempty
+

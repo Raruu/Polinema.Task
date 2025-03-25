@@ -16,7 +16,7 @@ class SupplierModel extends Model
         'supplier_kode',
         'supplier_nama',
         'supplier_alamat',
-        'telepon',
-        'email'
+        'supplier_telepon',
+        'supplier_email'
     ];
 }
