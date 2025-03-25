@@ -22,6 +22,8 @@
                     <th>No</th>
                     <th>Kode Supplier</th>
                     <th>Nama Supplier</th>
+                    <th>Email Supplier</th>
+                    <th>Telepon Supplier</th>                    
                     <th>Alamat Supplier</th>
                     <th>Aksi</th>
                 </tr>
@@ -69,6 +71,18 @@
                     data: "supplier_nama",
                     className: "",
                     orderable: true,
+                    searchable: true
+                },
+                {
+                    data: "supplier_email",
+                    className: "",
+                    orderable: false,
+                    searchable: true
+                },
+                {
+                    data: "supplier_telepon",
+                    className: "",
+                    orderable: false,
                     searchable: true
                 },
                 {
