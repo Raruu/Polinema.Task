@@ -1,4 +1,4 @@
-<form action="{{ url('/user/ajax') }}" method="POST" id="form-tambah">
+<form action="{{ url('/user/ajax') }}" method="POST" id="form-tambah" enctype="multipart/form-data">
     @csrf
     <div id="modal-master" class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -11,8 +11,8 @@
                 <div class="form-group text-center">
                     <label for="profile_picture" class="position-relative"
                         style="width: 150px; height: 150px; clip-path: circle(50% at 50% 50%);">
-                        <img src="{{ asset('profile_placeholder.jpg') }}"
-                            alt="Profile Picture" class="rounded-circle w-100">
+                        <img src="{{ asset('profile_placeholder.jpg') }}" alt="Profile Picture"
+                            class="rounded-circle w-100">
                         <div class="overlay rounded-circle"
                             style="opacity: 0; transition: opacity 0.15s; cursor: pointer;"
                             onmouseover="this.style.opacity = 1;" onmouseout="this.style.opacity = 0;">
@@ -47,19 +47,17 @@
                 </div>
                 <div class="form-group">
                     <label>Email</label>
-                    <input value="" type="email" name="email" id="email"
-                        class="form-control">
+                    <input value="" type="email" name="email" id="email" class="form-control">
                     <small id="error-email" class="error-text form-text text-danger"></small>
                 </div>
                 <div class="form-group">
                     <label>Nomor Telp</label>
-                    <input value="" type="number" name="no_telepon" id="no_telepon"
-                        class="form-control">
+                    <input value="" type="number" name="no_telepon" id="no_telepon" class="form-control">
                     <small id="error-no_telepon" class="error-text form-text text-danger"></small>
                 </div>
                 <div class="form-group">
                     <label>Password</label>
-                    <input type="password" name="password" id="password" class="form-control" required> 
+                    <input type="password" name="password" id="password" class="form-control" required>
                     <small id="error-password" class="error-text form-text text-danger"></small>
                 </div>
             </div>
