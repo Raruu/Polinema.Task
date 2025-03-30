@@ -8,6 +8,23 @@
                         aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
+                <div class="form-group text-center">
+                    <label for="profile_picture" class="position-relative"
+                        style="width: 150px; height: 150px; clip-path: circle(50% at 50% 50%);">
+                        <img src="{{ asset('profile_placeholder.jpg') }}"
+                            alt="Profile Picture" class="rounded-circle w-100">
+                        <div class="overlay rounded-circle"
+                            style="opacity: 0; transition: opacity 0.15s; cursor: pointer;"
+                            onmouseover="this.style.opacity = 1;" onmouseout="this.style.opacity = 0;">
+                            <i class="fas fa-upload position-absolute text-white"
+                                style="top: 50%; left: 50%; transform: translate(-50%, -50%);"></i>
+                        </div>
+                    </label>
+                    <input type="file" name="profile_picture" id="profile_picture" class="d-none"
+                        accept="image/jpeg, image/jpg, image/png"
+                        onchange="this.parentNode.querySelector('label').querySelector('img').src = window.URL.createObjectURL(this.files[0]);">
+                    <small id="error-profile_picture" class="error-text form-text text-danger"></small>
+                </div>
                 <div class="form-group">
                     <label>Level Pengguna</label>
                     <select name="level_id" id="level_id" class="form-control" required>
@@ -29,8 +46,20 @@
                     <small id="error-nama" class="error-text form-text text-danger"></small>
                 </div>
                 <div class="form-group">
+                    <label>Email</label>
+                    <input value="" type="email" name="email" id="email"
+                        class="form-control">
+                    <small id="error-email" class="error-text form-text text-danger"></small>
+                </div>
+                <div class="form-group">
+                    <label>Nomor Telp</label>
+                    <input value="" type="number" name="no_telepon" id="no_telepon"
+                        class="form-control">
+                    <small id="error-no_telepon" class="error-text form-text text-danger"></small>
+                </div>
+                <div class="form-group">
                     <label>Password</label>
-                    <input value="" type="password" name="password" id="password" class="formcontrol" required>
+                    <input type="password" name="password" id="password" class="form-control" required> 
                     <small id="error-password" class="error-text form-text text-danger"></small>
                 </div>
             </div>
@@ -61,15 +90,22 @@
                 },
                 password: {
                     required: true,
-                    minlength: 6,
+                    minlength: 5,
                     maxlength: 20
+                },
+                profile_picture: {
+                    required: false,
+                    accept: 'image/jpeg, image/jpg, image/png',
+                    filesize: 2048
                 }
             },
             submitHandler: function(form) {
                 $.ajax({
                     url: form.action,
                     type: form.method,
-                    data: $(form).serialize(),
+                    data: new FormData(form),
+                    processData: false,
+                    contentType: false,
                     success: function(response) {
                         if (response.status) {
                             $('#myModal').modal('hide');
