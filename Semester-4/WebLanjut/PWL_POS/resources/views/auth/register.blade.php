@@ -23,10 +23,10 @@
     <div class="register-box">
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="{{ url('/register') }}" class="h1"><b>Admin</b>LTE</a>
+                <a href="{{ url('/register') }}" class="h1"><b>PWL</b>POS</a>
             </div>
             <div class="card-body">
-                <p class="login-box-msg">Register a new account</p>
+                <p class="login-box-msg">Register user baru</p>
                 <form action="{{ url('register') }}" method="POST" id="form-register">
                     @csrf
                     <div class="input-group mb-3">
@@ -37,7 +37,7 @@
                                 <span class="fas fa-user"></span>
                             </div>
                         </div>
-                        {{-- <small id="error-nama" class="error-text text-danger"></small> --}}
+                        <small id="error-nama" class="error-text text-danger"></small>
                     </div>
                     <div class="input-group mb-3">
                         <input type="text" id="username" name="username" class="form-control" placeholder="Username"
@@ -47,7 +47,7 @@
                                 <span class="fas fa-user"></span>
                             </div>
                         </div>
-                        {{-- <small id="error-username" class="error-text text-danger"></small> --}}
+                        <small id="error-username" class="error-text text-danger"></small>
                     </div>
                     <div class="input-group mb-3">
                         <input type="password" id="password" name="password" class="form-control"
@@ -67,16 +67,7 @@
                                 <span class="fas fa-lock"></span>
                             </div>
                         </div>
-                        {{-- <small id="error-password_confirmation" class="error-text text-danger"></small> --}}
-                    </div>
-                    <div class="input-group mb-3">
-                        <select name="level_id" id="level_id" class="form-control text-secondary" required>
-                            <option value="">- Pilih Level -</option>
-                            @foreach ($level as $l)
-                                <option value="{{ $l->level_id }}">{{ $l->level_nama }}</option>
-                            @endforeach
-                        </select>
-                        {{-- <small id="error-level_id" class="error-text form-text text-danger"></small> --}}
+                        <small id="error-password_confirmation" class="error-text text-danger"></small>
                     </div>
                     <div class="row">
                         <div class="col-4 offset-8">
@@ -103,24 +94,7 @@
     <!-- AdminLTE App -->
     <script src="{{ asset('adminlte/dist/js/adminlte.min.js') }}"></script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const dropdown = document.getElementById('level_id');
-            if (!dropdown.value) {
-                dropdown.classList.add('text-secondary');
-            }
-
-            dropdown.addEventListener('change', function() {
-                if (dropdown.value) {
-                    dropdown.classList.remove('text-secondary');
-                    dropdown.style.color = 'black';
-                } else {
-                    dropdown.classList.add('text-secondary');
-                    dropdown.style.color = '';
-                }
-            });
-        });
-
+    <script>  
         $(document).ready(function() {
             $("#form-register").validate({
                 rules: {

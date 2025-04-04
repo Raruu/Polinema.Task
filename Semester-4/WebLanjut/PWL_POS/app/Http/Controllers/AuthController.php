@@ -58,7 +58,7 @@ class AuthController extends Controller
     {
         if ($request->ajax() || $request->wantsJson()) {
             $rules = [
-                'level_id' => 'required|integer',
+                // 'level_id' => 'required|integer',
                 'username' => 'required|string|min:3|unique:m_user,username',
                 'nama' => 'required|string|max:100',
                 'password' => 'required|min:5'
@@ -74,7 +74,10 @@ class AuthController extends Controller
                 ]);
             }
 
-            UserModel::create($request->all());
+            $data = $request->all();
+            $data['level_id'] = 3; // STF | Staff
+
+            UserModel::create($data);
 
             return response()->json([
                 'status' => true,

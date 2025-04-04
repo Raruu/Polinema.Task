@@ -50,7 +50,7 @@
                         </thead>
                         <tbody>
                             @foreach ($penjualanRanking as $item)
-                                <tr onclick="window.location.href = '{{ url('barang/' . $item->barang_id) }}'">
+                                <tr style="cursor: pointer" onclick="window.location.href = '{{ url('barang/' . $item->barang_id) }}'">
                                     <td>{{ $item->barang_nama }}</td>
                                     <td>Rp. {{ number_format($item->harga_beli, 0, ',', '.') }}</td>
                                     <td>Rp. {{ number_format($item->harga_jual, 0, ',', '.') }}</td>

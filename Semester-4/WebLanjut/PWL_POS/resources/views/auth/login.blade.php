@@ -22,9 +22,9 @@
     <div class="login-box">
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
-            <div class="card-header text-center"><a href="{{ url('/') }}" class="h1"><b>Admin</b>LTE</a></div>
+            <div class="card-header text-center"><a href="{{ url('/') }}" class="h1"><b>PWL</b>POS</a></div>
             <div class="card-body">
-                <p class="login-box-msg">Sign in to start your session</p>
+                <p class="login-box-msg">Sign in untuk memulai session</p>
                 <form action="{{ url('login') }}" method="POST" id="form-login">
                     @csrf
                     <div class="input-group mb-3">
@@ -50,7 +50,7 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="icheck-primary">
-                                <input type="checkbox" id="remember"><label for="remember">Remember Me</label>
+                                <input type="checkbox" id="remember"><label for="remember">Remember 私</label>
                             </div>
                         </div>
                         <!-- /.col -->
@@ -107,13 +107,7 @@
                         data: $(form).serialize(),
                         success: function(response) {
                             if (response.status) { // jika sukses
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: 'Berhasil',
-                                    text: response.message,
-                                }).then(function() {
-                                    window.location = response.redirect;
-                                });
+                                window.location = response.redirect;
                             } else { // jika error
                                 $('.error-text').text('');
                                 $.each(response.msgField, function(prefix, val) {
