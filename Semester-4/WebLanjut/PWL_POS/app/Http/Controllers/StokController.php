@@ -27,13 +27,11 @@ class StokController extends Controller
         return view('stok.index', ['breadcrumb' => $breadcrumb, 'page' => $page, 'activeMenu' => $activeMenu]);
     }
 
-    // Ambil data stok dalam bentuk json untuk datatables
     public function list(StokDataTable $dataTable)
     {
         return $dataTable->render();
     }
 
-    // Menampilkan halaman form tambah stok
     public function create()
     {
         $breadcrumb = (object) [
@@ -47,7 +45,7 @@ class StokController extends Controller
 
         $barang = BarangModel::all();
         $user = UserModel::all();
-        $activeMenu = 'stok'; // set menu yang sedang aktif
+        $activeMenu = 'stok';
 
         return view('stok.create', [
             'breadcrumb' => $breadcrumb,
@@ -69,7 +67,6 @@ class StokController extends Controller
         ]);
     }
 
-    // Menyimpan data stok baru
     public function store(Request $request)
     {
         $request->validate([
@@ -91,7 +88,6 @@ class StokController extends Controller
 
     public function store_ajax(Request $request)
     {
-        // cek apakah request dari ajax
         if ($request->ajax() || $request->wantsJson()) {
             $rules = [
                 'barang_id' => 'required|integer',
@@ -104,9 +100,9 @@ class StokController extends Controller
 
             if ($validator->fails()) {
                 return response()->json([
-                    'status' => false, // respon json, true: berhasil, false: gagal
+                    'status' => false,
                     'message' => 'Validasi gagal.',
-                    'msgField' => $validator->errors() // menunjukkan field mana yang error
+                    'msgField' => $validator->errors()
                 ]);
             }
 
@@ -127,7 +123,6 @@ class StokController extends Controller
         return redirect('/');
     }
 
-    // Menampilkan detail stok
     public function show(string $id)
     {
         $stok = StokModel::with('barang')->with('user')->find($id);
@@ -141,7 +136,7 @@ class StokController extends Controller
             'title' => 'Detail stok'
         ];
 
-        $activeMenu = 'stok'; // set menu yang sedang aktif
+        $activeMenu = 'stok';
 
         return view('stok.show', [
             'breadcrumb' => $breadcrumb,
@@ -158,8 +153,6 @@ class StokController extends Controller
         return view('stok.show_ajax', ['stok' => $stok]);
     }
 
-
-    // Menampilkan halaman form edit stok
     public function edit(string $id)
     {
         $stok = StokModel::with('barang')->with('user')->find($id);
@@ -175,7 +168,7 @@ class StokController extends Controller
             'title' => 'Edit stok'
         ];
 
-        $activeMenu = 'stok'; // set menu yang sedang aktif
+        $activeMenu = 'stok';
 
         return view('stok.edit', [
             'breadcrumb' => $breadcrumb,
@@ -200,7 +193,6 @@ class StokController extends Controller
         ]);
     }
 
-    // Menyimpan perubahan data stok
     public function update(Request $request, string $id)
     {
         $request->validate([
@@ -220,11 +212,8 @@ class StokController extends Controller
         return redirect('/stok')->with('success', 'Data stok berhasil diubah');
     }
 
-
-    // Menyimpan perubahan data stok Ajax
     public function update_ajax(Request $request, $id)
     {
-        // cek apakah request dari ajax
         if ($request->ajax() || $request->wantsJson()) {
             $rules = [
                 'barang_id' => 'required|integer',
@@ -237,9 +226,9 @@ class StokController extends Controller
 
             if ($validator->fails()) {
                 return response()->json([
-                    'status' => false, // respon json, true: berhasil, false: gagal
+                    'status' => false,
                     'message' => 'Validasi gagal.',
-                    'msgField' => $validator->errors() // menunjukkan field mana yang error
+                    'msgField' => $validator->errors()
                 ]);
             }
 
@@ -251,28 +240,26 @@ class StokController extends Controller
                 ]);
             } catch (\Illuminate\Database\QueryException $e) {
                 return response()->json([
-                    'status' => false, // respon json, true: berhasil, false: gagal
+                    'status' => false,
                     'message' => 'Validasi gagal.',
-                    'msgField' => $validator->errors() // menunjukkan field mana yang error
+                    'msgField' => $validator->errors()
                 ]);
             }
         }
         return redirect('/');
     }
 
-    // Menghapus data stok
     public function destroy(string $id)
     {
-        $check = StokModel::find($id); // untuk mengecek apakah data stok dengan id yang dimaksud ada atau tidak
+        $check = StokModel::find($id);
         if (!$check) {
             return redirect('/stok')->with('error', 'Data stok tidak ditemukan');
         }
 
         try {
-            StokModel::destroy($id); // Hapus data stok
+            StokModel::destroy($id);
             return redirect('/stok')->with('success', 'Data stok berhasil dihapus');
         } catch (\Illuminate\Database\QueryException $e) {
-            // Jika terjadi error ketika menghapus data, redirect kembali ke halaman dengan membawa pesan error
             return redirect('/stok')->with('error', 'Data stok gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
         }
     }
@@ -284,10 +271,9 @@ class StokController extends Controller
         return view('stok.confirm_ajax', ['stok' => $stok]);
     }
 
-    
     public function delete_ajax(string $id)
     {
-        $check = StokModel::find($id); // untuk mengecek apakah data stok dengan id yang dimaksud ada atau tidak
+        $check = StokModel::find($id);
         if (!$check) {
             return response()->json([
                 'status' => false,
@@ -296,13 +282,12 @@ class StokController extends Controller
         }
 
         try {
-            StokModel::destroy($id); // Hapus data stok
+            StokModel::destroy($id);
             return response()->json([
                 'status' => true,
                 'message' => 'Data stok berhasil dihapus'
             ]);
         } catch (\Illuminate\Database\QueryException $e) {
-            // Jika terjadi error ketika menghapus data, redirect kembali ke halaman dengan membawa pesan error
             return response()->json([
                 'status' => false,
                 'message' => 'Data stok gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini'

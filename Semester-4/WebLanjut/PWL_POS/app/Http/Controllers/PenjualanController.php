@@ -28,13 +28,11 @@ class PenjualanController extends Controller
         return view('penjualan.index', ['breadcrumb' => $breadcrumb, 'page' => $page, 'activeMenu' => $activeMenu]);
     }
 
-    // Ambil data penjualan dalam bentuk json untuk datatables
     public function list(PenjualanDataTable $dataTable)
     {
         return $dataTable->render();
     }
 
-    // Menampilkan halaman form tambah penjualan
     public function create()
     {
         $breadcrumb = (object) [
@@ -46,7 +44,7 @@ class PenjualanController extends Controller
             'title' => 'Tambah penjualan baru'
         ];
 
-        $activeMenu = 'penjualan'; // set menu yang sedang aktif
+        $activeMenu = 'penjualan';
         $user = UserModel::all();
         $barang = BarangModel::all();
 
@@ -59,10 +57,8 @@ class PenjualanController extends Controller
         ]);
     }
 
-    // Menyimpan data penjualan baru
     public function store(Request $request)
     {
-        // dd($request);
         $request->validate([
             'user_id' => 'required|integer',
             'penjualan_kode' => 'required|string|max:20|unique:t_penjualan,penjualan_kode',
@@ -89,7 +85,7 @@ class PenjualanController extends Controller
             $stok->update([
                 'stok_jumlah' => $stok->stok_jumlah - $request->jumlah[$key]
             ]);
-            
+
             PenjualanDetailModel::create([
                 'penjualan_id' => $penjualan->penjualan_id,
                 'barang_id' => $barang_id,
@@ -101,7 +97,6 @@ class PenjualanController extends Controller
         return redirect('/penjualan')->with('success', 'Data penjualan berhasil disimpan');
     }
 
-    // Menampilkan detail penjualan
     public function show(string $id)
     {
         $penjualan = PenjualanModel::with('user')->find($id);
@@ -116,7 +111,7 @@ class PenjualanController extends Controller
             'title' => 'Detail penjualan'
         ];
 
-        $activeMenu = 'penjualan'; // set menu yang sedang aktif
+        $activeMenu = 'penjualan';
 
         return view('penjualan.show', [
             'breadcrumb' => $breadcrumb,
@@ -127,7 +122,6 @@ class PenjualanController extends Controller
         ]);
     }
 
-    // Menampilkan halaman form edit penjualan
     public function edit(string $id)
     {
         $penjualan = PenjualanModel::with('user')->find($id);
@@ -144,7 +138,7 @@ class PenjualanController extends Controller
             'title' => 'Edit penjualan'
         ];
 
-        $activeMenu = 'penjualan'; // set menu yang sedang aktif
+        $activeMenu = 'penjualan';
 
         return view('penjualan.edit', [
             'breadcrumb' => $breadcrumb,
@@ -157,7 +151,6 @@ class PenjualanController extends Controller
         ]);
     }
 
-    // Menyimpan perubahan data penjualan
     public function update(Request $request, string $id)
     {
         $request->validate([
@@ -212,11 +205,10 @@ class PenjualanController extends Controller
         return redirect('/penjualan')->with('success', 'Data penjualan berhasil diubah');
     }
 
-    // Menghapus data penjualan
     public function destroy(string $id)
     {
         $checkPenjualan = PenjualanModel::find($id);
-        $checkPenjualanDetail = PenjualanDetailModel::where('penjualan_id', $id)->first(); 
+        $checkPenjualanDetail = PenjualanDetailModel::where('penjualan_id', $id)->first();
 
         if (!$checkPenjualan || !$checkPenjualanDetail) {
             return redirect('/penjualan')->with('error', 'Data penjualan tidak ditemukan');
@@ -224,10 +216,9 @@ class PenjualanController extends Controller
 
         try {
             PenjualanDetailModel::where('penjualan_id', $id)->delete();
-            PenjualanModel::destroy($id); // Hapus data penjualan
+            PenjualanModel::destroy($id);
             return redirect('/penjualan')->with('success', 'Data penjualan berhasil dihapus');
         } catch (\Illuminate\Database\QueryException $e) {
-            // Jika terjadi error ketika menghapus data, redirect kembali ke halaman dengan membawa pesan error
             return redirect('/penjualan')->with('error', 'Data penjualan gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
         }
     }

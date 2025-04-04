@@ -26,18 +26,16 @@ class BarangController extends Controller
 
         $activeMenu = 'barang';
 
-        $kategori = KategoriModel::all(); // ambil data kategori untuk filter kategori
+        $kategori = KategoriModel::all();
 
         return view('barang.index', ['breadcrumb' => $breadcrumb, 'page' => $page, 'kategori' => $kategori, 'activeMenu' => $activeMenu]);
     }
 
-    // Ambil data barang dalam bentuk json untuk datatables
     public function list(BarangDataTable $dataTable)
     {
         return $dataTable->render();
     }
 
-    // Menampilkan halaman form tambah barang
     public function create()
     {
         $breadcrumb = (object) [
@@ -49,8 +47,8 @@ class BarangController extends Controller
             'title' => 'Tambah barang baru'
         ];
 
-        $kategori = KategoriModel::all(); // ambil data kategori untuk ditampilkan di form
-        $activeMenu = 'barang'; // set menu yang sedang aktif
+        $kategori = KategoriModel::all();
+        $activeMenu = 'barang';
 
         return view('barang.create', [
             'breadcrumb' => $breadcrumb,
@@ -68,7 +66,6 @@ class BarangController extends Controller
             ->with('kategori', $kategori);
     }
 
-    // Menyimpan data barang baru
     public function store(Request $request)
     {
         $request->validate([
@@ -92,7 +89,6 @@ class BarangController extends Controller
 
     public function store_ajax(Request $request)
     {
-        // cek apakah request berupa ajax
         if ($request->ajax() || $request->wantsJson()) {
             $rules = [
                 'kategori_id' => ['required', 'integer', 'exists:m_kategori,kategori_id'],
@@ -108,14 +104,13 @@ class BarangController extends Controller
                 'harga_jual' => ['required', 'numeric'],
             ];
 
-            // use Illuminate\Support\Facades\Validator;
             $validator = Validator::make($request->all(), $rules);
 
             if ($validator->fails()) {
                 return response()->json([
-                    'status' => false, // response status, false: error/gagal, true: berhasil
+                    'status' => false,
                     'message' => 'Validasi Gagal',
-                    'msgField' => $validator->errors() // pesan error validasi
+                    'msgField' => $validator->errors()
                 ]);
             }
 
@@ -129,7 +124,6 @@ class BarangController extends Controller
         return redirect('/');
     }
 
-    // Menampilkan detail barang
     public function show(string $id)
     {
         $barang = BarangModel::with('kategori')->find($id);
@@ -143,7 +137,7 @@ class BarangController extends Controller
             'title' => 'Detail barang'
         ];
 
-        $activeMenu = 'barang'; // set menu yang sedang aktif
+        $activeMenu = 'barang';
 
         return view('barang.show', [
             'breadcrumb' => $breadcrumb,
@@ -160,7 +154,6 @@ class BarangController extends Controller
         return view('barang.show_ajax', ['barang' => $barang]);
     }
 
-    // Menampilkan halaman form edit barang
     public function edit(string $id)
     {
         $barang = BarangModel::find($id);
@@ -175,7 +168,7 @@ class BarangController extends Controller
             'title' => 'Edit barang'
         ];
 
-        $activeMenu = 'barang'; // set menu yang sedang aktif
+        $activeMenu = 'barang';
 
         return view('barang.edit', [
             'breadcrumb' => $breadcrumb,
@@ -194,7 +187,6 @@ class BarangController extends Controller
         return view('barang.edit_ajax', ['barang' => $barang, 'kategori' => $kategori]);
     }
 
-    // Menyimpan perubahan data barang
     public function update(Request $request, string $id)
     {
         $request->validate([
@@ -234,14 +226,13 @@ class BarangController extends Controller
                 'harga_jual' => ['required', 'numeric'],
             ];
 
-            // use Illuminate\Support\Facades\Validator;
             $validator = Validator::make($request->all(), $rules);
 
             if ($validator->fails()) {
                 return response()->json([
-                    'status' => false, // respon json, true: berhasil, false: gagal
+                    'status' => false,
                     'message' => 'Validasi gagal.',
-                    'msgField' => $validator->errors() // menunjukkan field mana yang error
+                    'msgField' => $validator->errors()
                 ]);
             }
 
@@ -253,28 +244,26 @@ class BarangController extends Controller
                 ]);
             } catch (\Illuminate\Database\QueryException $e) {
                 return response()->json([
-                    'status' => false, // respon json, true: berhasil, false: gagal
+                    'status' => false,
                     'message' => 'Validasi gagal.',
-                    'msgField' => $validator->errors() // menunjukkan field mana yang error
+                    'msgField' => $validator->errors()
                 ]);
             }
         }
         return redirect('/');
     }
 
-    // Menghapus data barang
     public function destroy(string $id)
     {
-        $check = BarangModel::find($id); // untuk mengecek apakah data barang dengan id yang dimaksud ada atau tidak
+        $check = BarangModel::find($id);
         if (!$check) {
             return redirect('/barang')->with('error', 'Data barang tidak ditemukan');
         }
 
         try {
-            BarangModel::destroy($id); // Hapus data barang
+            BarangModel::destroy($id);
             return redirect('/barang')->with('success', 'Data barang berhasil dihapus');
         } catch (\Illuminate\Database\QueryException $e) {
-            // Jika terjadi error ketika menghapus data, redirect kembali ke halaman dengan membawa pesan error
             return redirect('/barang')->with('error', 'Data barang gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
         }
     }
@@ -430,7 +419,7 @@ class BarangController extends Controller
             ->orderBy('barang_kode')
             ->with('kategori')
             ->get();
-        // use Barryvdh\DomPDF\Facade\Pdf; 
+
         $pdf = Pdf::loadView('barang.export_pdf', ['barang' => $barang]);
         $pdf->setPaper('a4', 'portrait'); // set ukuran kertas dan orientasi 
         $pdf->setOption("isRemoteEnabled", true); // set true jika ada gambar dari url 

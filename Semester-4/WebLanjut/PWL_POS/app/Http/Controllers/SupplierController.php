@@ -25,13 +25,11 @@ class SupplierController extends Controller
         return view('supplier.index', ['breadcrumb' => $breadcrumb, 'page' => $page, 'activeMenu' => $activeMenu]);
     }
 
-    // Ambil data supplier dalam bentuk json untuk datatables
     public function list(SupplierDataTable $dataTable)
     {
         return $dataTable->render();
     }
 
-    // Menampilkan halaman form tambah supplier
     public function create()
     {
         $breadcrumb = (object) [
@@ -43,7 +41,7 @@ class SupplierController extends Controller
             'title' => 'Tambah supplier baru'
         ];
 
-        $activeMenu = 'supplier'; // set menu yang sedang aktif
+        $activeMenu = 'supplier';
 
         return view('supplier.create', [
             'breadcrumb' => $breadcrumb,
@@ -57,7 +55,6 @@ class SupplierController extends Controller
         return view('supplier.create_ajax');
     }
 
-    // Menyimpan data supplier baru
     public function store(Request $request)
     {
         $request->validate([
@@ -77,7 +74,6 @@ class SupplierController extends Controller
 
     public function store_ajax(Request $request)
     {
-        // cek apakah request berupa ajax
         if ($request->ajax() || $request->wantsJson()) {
             $rules = [
                 'supplier_kode' => 'required|string|min:7|max:10|unique:m_supplier,supplier_kode',
@@ -85,14 +81,13 @@ class SupplierController extends Controller
                 'supplier_alamat' => 'required|string'
             ];
 
-            // use Illuminate\Support\Facades\Validator;
             $validator = Validator::make($request->all(), $rules);
 
             if ($validator->fails()) {
                 return response()->json([
-                    'status' => false, // response status, false: error/gagal, true: berhasil
+                    'status' => false,
                     'message' => 'Validasi Gagal',
-                    'msgField' => $validator->errors() // pesan error validasi
+                    'msgField' => $validator->errors()
                 ]);
             }
 
@@ -106,7 +101,6 @@ class SupplierController extends Controller
         return redirect('/');
     }
 
-    // Menampilkan detail supplier
     public function show(string $id)
     {
         $supplier = SupplierModel::find($id);
@@ -120,7 +114,7 @@ class SupplierController extends Controller
             'title' => 'Detail supplier'
         ];
 
-        $activeMenu = 'supplier'; // set menu yang sedang aktif
+        $activeMenu = 'supplier';
 
         return view('supplier.show', [
             'breadcrumb' => $breadcrumb,
@@ -137,7 +131,6 @@ class SupplierController extends Controller
         return view('supplier.show_ajax', ['supplier' => $supplier]);
     }
 
-    // Menampilkan halaman form edit supplier
     public function edit(string $id)
     {
         $supplier = SupplierModel::find($id);
@@ -151,7 +144,7 @@ class SupplierController extends Controller
             'title' => 'Edit Supplier'
         ];
 
-        $activeMenu = 'supplier'; // set menu yang sedang aktif
+        $activeMenu = 'supplier';
 
         return view('supplier.edit', [
             'breadcrumb' => $breadcrumb,
@@ -161,7 +154,6 @@ class SupplierController extends Controller
         ]);
     }
 
-    // Menampilkan halaman form edit supplier ajax
     public function edit_ajax(string $id)
     {
         $supplier = SupplierModel::find($id);
@@ -169,7 +161,6 @@ class SupplierController extends Controller
         return view('supplier.edit_ajax', ['supplier' => $supplier]);
     }
 
-    // Menyimpan perubahan data supplier
     public function update(Request $request, string $id)
     {
         $request->validate([
@@ -189,7 +180,6 @@ class SupplierController extends Controller
 
     public function update_ajax(Request $request, $id)
     {
-        // cek apakah request dari ajax
         if ($request->ajax() || $request->wantsJson()) {
             $rules = [
                 'supplier_kode' => 'required|string|min:7|max:10|unique:m_supplier,supplier_kode,' . $id . ',supplier_id',
@@ -197,14 +187,13 @@ class SupplierController extends Controller
                 'supplier_alamat' => 'required|string'
             ];
 
-            // use Illuminate\Support\Facades\Validator;
             $validator = Validator::make($request->all(), $rules);
 
             if ($validator->fails()) {
                 return response()->json([
-                    'status' => false, // respon json, true: berhasil, false: gagal
+                    'status' => false,
                     'message' => 'Validasi gagal.',
-                    'msgField' => $validator->errors() // menunjukkan field mana yang error
+                    'msgField' => $validator->errors()
                 ]);
             }
 
@@ -216,28 +205,26 @@ class SupplierController extends Controller
                 ]);
             } catch (\Illuminate\Database\QueryException $e) {
                 return response()->json([
-                    'status' => false, // respon json, true: berhasil, false: gagal
+                    'status' => false,
                     'message' => 'Validasi gagal.',
-                    'msgField' => $validator->errors() // menunjukkan field mana yang error
+                    'msgField' => $validator->errors()
                 ]);
             }
         }
         return redirect('/');
     }
 
-    // Menghapus data supplier
     public function destroy(string $id)
     {
-        $check = SupplierModel::find($id); // untuk mengecek apakah data supplier dengan id yang dimaksud ada atau tidak
+        $check = SupplierModel::find($id);
         if (!$check) {
             return redirect('/supplier')->with('error', 'Data supplier tidak ditemukan');
         }
 
         try {
-            SupplierModel::destroy($id); // Hapus data supplier
+            SupplierModel::destroy($id);
             return redirect('/supplier')->with('success', 'Data supplier berhasil dihapus');
         } catch (\Illuminate\Database\QueryException $e) {
-            // Jika terjadi error ketika menghapus data, redirect kembali ke halaman dengan membawa pesan error
             return redirect('/supplier')->with('error', 'Data supplier gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
         }
     }
@@ -251,7 +238,6 @@ class SupplierController extends Controller
 
     public function delete_ajax(Request $request, $id)
     {
-        // cek apakah request dari ajax
         if ($request->ajax() || $request->wantsJson()) {
             $supplier = SupplierModel::find($id);
             if ($supplier) {

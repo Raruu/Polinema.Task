@@ -19,12 +19,11 @@ class UserController extends Controller
         $page = (object) [
             'title' => 'Daftar user yang terdaftar dalam sistem'
         ];
-        $activeMenu = 'user'; // set menu yang sedang aktif 
+        $activeMenu = 'user';
         $level = LevelModel::all();
         return view('user.index', ['breadcrumb' => $breadcrumb, 'page' => $page, 'level' => $level, 'activeMenu' => $activeMenu]);
     }
 
-    // Ambil data user dalam bentuk json untuk datatables
     public function list(UserDataTable $dataTable)
     {
         return $dataTable->render();
@@ -39,8 +38,8 @@ class UserController extends Controller
         $page = (object) [
             'title' => 'Tambah user baru'
         ];
-        $level = LevelModel::all(); // ambil data level untuk ditampilkan di form 
-        $activeMenu = 'user'; // set menu yang sedang aktif 
+        $level = LevelModel::all();
+        $activeMenu = 'user';
         return view('user.create', ['breadcrumb' => $breadcrumb, 'page' => $page, 'level' => $level, 'activeMenu' => $activeMenu]);
     }
 
@@ -64,7 +63,7 @@ class UserController extends Controller
         UserModel::create([
             'username' => $request->username,
             'nama' => $request->nama,
-            'password' => bcrypt($request->password), // password dienkripsi sebelum disimpan 
+            'password' => bcrypt($request->password),
             'level_id' => $request->level_id
         ]);
         return redirect('/user')->with('success', 'Data user berhasil disimpan');
@@ -72,7 +71,6 @@ class UserController extends Controller
 
     public function store_ajax(Request $request)
     {
-        // cek apakah request berupa ajax
         if ($request->ajax() || $request->wantsJson()) {
             $rules = [
                 'level_id' => ['required', 'integer'],
@@ -88,14 +86,13 @@ class UserController extends Controller
                 'password' => ['required', 'min:5', 'max:20']
             ];
 
-            // use Illuminate\Support\Facades\Validator;
             $validator = Validator::make($request->all(), $rules);
 
             if ($validator->fails()) {
                 return response()->json([
-                    'status' => false, // response status, false: error/gagal, true: berhasil
+                    'status' => false,
                     'message' => 'Validasi Gagal',
-                    'msgField' => $validator->errors() // pesan error validasi
+                    'msgField' => $validator->errors()
                 ]);
             }
 
@@ -119,7 +116,6 @@ class UserController extends Controller
         return redirect('/');
     }
 
-    // Menampilkan detail user 
     public function show(string $id)
     {
         $user = UserModel::with('level')->find($id);
@@ -130,7 +126,7 @@ class UserController extends Controller
         $page = (object) [
             'title' => 'Detail user'
         ];
-        $activeMenu = 'user'; // set menu yang sedang aktif 
+        $activeMenu = 'user';
         return view('user.show', ['breadcrumb' => $breadcrumb, 'page' => $page, 'user' => $user, 'activeMenu' => $activeMenu]);
     }
 
@@ -141,7 +137,6 @@ class UserController extends Controller
         return view('user.show_ajax', ['user' => $user]);
     }
 
-    // Menampilkan halaman form edit user 
     public function edit(string $id)
     {
         $user =  UserModel::find($id);
@@ -153,11 +148,10 @@ class UserController extends Controller
         $page = (object) [
             'title' => 'Edit user'
         ];
-        $activeMenu = 'user'; // set menu yang sedang aktif 
+        $activeMenu = 'user';
         return view('user.edit', ['breadcrumb' => $breadcrumb, 'page' => $page, 'user' => $user, 'level' => $level, 'activeMenu' => $activeMenu]);
     }
 
-    // Menampilkan halaman form edit user ajax
     public function edit_ajax(string $id)
     {
         $user = UserModel::find($id);
@@ -185,7 +179,6 @@ class UserController extends Controller
 
     public function update_ajax(Request $request, $id)
     {
-        // cek apakah request dari ajax
         if ($request->ajax() || $request->wantsJson()) {
             $rules = [
                 'level_id' => ['required', 'integer'],
@@ -201,20 +194,19 @@ class UserController extends Controller
                 'password' => ['nullable', 'min:5', 'max:20']
             ];
 
-            // use Illuminate\Support\Facades\Validator;
             $validator = Validator::make($request->all(), $rules);
 
             if ($validator->fails()) {
                 return response()->json([
-                    'status' => false, // respon json, true: berhasil, false: gagal
+                    'status' => false,
                     'message' => 'Validasi gagal.',
-                    'msgField' => $validator->errors() // menunjukkan field mana yang error
+                    'msgField' => $validator->errors()
                 ]);
             }
 
             $check = UserModel::find($id);
             if ($check) {
-                if (!$request->filled('password')) { // jika password tidak diisi, maka hapus dari request
+                if (!$request->filled('password')) {
                     $request->request->remove('password');
                 }
 
@@ -242,18 +234,16 @@ class UserController extends Controller
         return redirect('/');
     }
 
-    // Menghapus data user 
     public function destroy(string $id)
     {
         $check = UserModel::find($id);
-        if (!$check) { // untuk mengecek apakah data user dengan id yang dimaksud ada atau tidak 
+        if (!$check) {
             return redirect('/user')->with('error', 'Data user tidak ditemukan');
         }
         try {
-            UserModel::destroy($id); // Hapus data level 
+            UserModel::destroy($id);
             return redirect('/user')->with('success', 'Data user berhasil dihapus');
         } catch (\Illuminate\Database\QueryException $e) {
-            // Jika terjadi error ketika menghapus data, redirect kembali ke halaman dengan membawa pesan error 
             return redirect('/user')->with('error', 'Data user gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
         }
     }
@@ -267,7 +257,6 @@ class UserController extends Controller
 
     public function delete_ajax(Request $request, $id)
     {
-        // cek apakah request dari ajax
         if ($request->ajax() || $request->wantsJson()) {
             $user = UserModel::find($id);
             if ($user) {
