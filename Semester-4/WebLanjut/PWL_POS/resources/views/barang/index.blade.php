@@ -9,7 +9,8 @@
                 <button onclick="modalAction('{{ url('barang/create_ajax') }}')" class="btn btn-sm btn-success">
                     Tambah Ajax
                 </button>
-                <button onclick="modalAction('{{ url('/barang/import') }}')" class="btn btn-sm btn-info">Import Barang</button>
+                <button onclick="modalAction('{{ url('/barang/import') }}')" class="btn btn-sm btn-info">Import
+                    Barang</button>
                 <a href="{{ url('/barang/export_excel') }}" class="btn btn-sm btn-primary">
                     <i class="fa fa-file-excel"></i>
                     Export Barang
@@ -123,11 +124,13 @@
                     },
                     {
                         data: "aksi",
-                        className: "",
+                        className: "text-center",
+                        width: "195px",
                         orderable: false,
                         searchable: false
                     }
-                ]
+                ],
+                autoWidth: false
             });
 
             $('#kategori_id').on('change', function() {

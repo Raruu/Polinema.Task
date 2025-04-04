@@ -77,11 +77,13 @@
                     },
                     {
                         data: "aksi",
-                        className: "",
+                        className: "text-center",
+                        width: "195px",
                         orderable: false,
                         searchable: false
                     }
-                ]
+                ],
+                autoWidth: false,
             });
         });
     </script>

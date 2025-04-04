@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css') }}">
+    <!-- Custom style -->
+    @vite(['resources/css/app.css'])
 </head>
 
 <body class="hold-transition login-page">
@@ -61,7 +63,7 @@
                     </div>
                 </form>
                 <p class="mb-0 mt-4">
-                    Pengguna baru? <a href="{{ url('register') }}" class="text-center">Register disini</a>
+                    Pengguna baru? <a href="{{ url('register') }}" class="text-center link-primary">Register disini</a>
                 </p>
             </div>
             <!-- /.card-body -->

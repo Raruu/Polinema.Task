@@ -1,6 +1,6 @@
 @empty($stok)
-    <div id="modal-master" class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
+    <div id="modal-master" class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content flex-fill">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Kesalahan</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -12,15 +12,16 @@
                     <h5><i class="icon fas fa-ban"></i> Kesalahan!!!</h5>
                     Data yang anda cari tidak ditemukan
                 </div>
-                <a href="{{ url('/stok') }}" class="btn btn-warning">Kembali</a>
+                <a href="{{ url('/stok') }}" class="btn btn-default">Kembali</a>
             </div>
         </div>
     </div>
 @else
-    <form action="{{ url('/stok/' . $stok->stok_id . '/delete_ajax') }}" method="POST" id="form-delete">
+    <form action="{{ url('/stok/' . $stok->stok_id . '/delete_ajax') }}" method="POST" id="form-delete"
+        class="modal-dialog-centered">
         @csrf
         @method('DELETE')
-        <div id="modal-master" class="modal-dialog modal-lg" role="document">
+        <div id="modal-master" class="modal-dialog modal-lg flex-fill" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Hapus Data Stok</h5>
@@ -61,7 +62,7 @@
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" data-dismiss="modal" class="btn btn-warning">Batal</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Batal</button>
                     <button type="submit" class="btn btn-primary">Ya, Hapus</button>
                 </div>
             </div>

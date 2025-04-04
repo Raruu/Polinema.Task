@@ -23,6 +23,9 @@
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css') }}">
+    <!-- Custom style -->
+    @vite(['resources/css/app.css'])
+
 
     @stack('css') <!-- Digunakan untuk memanggil custom css dari perintah push('css') pada masing-masing view -->
 </head>
@@ -35,12 +38,13 @@
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <aside class="main-sidebar">
             <!-- Brand Logo -->
-            <a href="{{ url('/') }}" class="brand-link">
+            <a href="{{ url('/') }}" class="brand-link" style="opacity: 0.5; transition: opacity 0.15s; color: black;"
+                onmouseover="this.style.opacity=0.6" onmouseout="this.style.opacity=0.5">
                 <img src="{{ asset('adminlte/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">PWL POS</span>
+                <span class="brand-text font-weight-bold">PWL POS</span>
             </a>
 
             <!-- Sidebar -->

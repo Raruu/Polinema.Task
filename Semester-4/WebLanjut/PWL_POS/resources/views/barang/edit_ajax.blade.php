@@ -1,6 +1,6 @@
 @empty($barang)
-    <div id="modal-master" class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
+    <div id="modal-master" class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content flex-fill">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Kesalahan</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -12,15 +12,16 @@
                     <h5><i class="icon fas fa-ban"></i> Kesalahan!!!</h5>
                     Data yang anda cari tidak ditemukan
                 </div>
-                <a href="{{ url('/barang') }}" class="btn btn-warning">Kembali</a>
+                <a href="{{ url('/barang') }}" class="btn btn-default">Kembali</a>
             </div>
         </div>
     </div>
 @else
-    <form action="{{ url('/barang/' . $barang->barang_id . '/update_ajax') }}" method="POST" id="form-edit">
+    <form action="{{ url('/barang/' . $barang->barang_id . '/update_ajax') }}" method="POST" id="form-edit"
+        class="modal-dialog-centered">
         @csrf
         @method('PUT')
-        <div id="modal-master" class="modal-dialog modal-lg" role="document">
+        <div id="modal-master" class="modal-dialog modal-lg flex-fill" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Edit Data Barang</h5>
@@ -34,34 +35,40 @@
                         <select name="kategori_id" id="kategori_id" class="form-control" required>
                             <option value="">- Pilih Kategori -</option>
                             @foreach ($kategori as $k)
-                            <option value="{{ $k->kategori_id }}" {{ ($k->kategori_id == $barang->kategori_id) ? 'selected' : '' }}>{{ $k->kategori_nama }}</option>
+                                <option value="{{ $k->kategori_id }}"
+                                    {{ $k->kategori_id == $barang->kategori_id ? 'selected' : '' }}>
+                                    {{ $k->kategori_nama }}</option>
                             @endforeach
                         </select>
                         <small id="error-kategori-id" class="error-text form-text text-danger"></small>
                     </div>
                     <div class="form-group">
                         <label>Kode Barang</label>
-                        <input value="{{ $barang->barang_kode }}" type="text" name="barang_kode" id="barang_kode" class="form-control" required>
+                        <input value="{{ $barang->barang_kode }}" type="text" name="barang_kode" id="barang_kode"
+                            class="form-control" required>
                         <small id="error-barang-kode" class="error-text form-text text-danger"></small>
                     </div>
                     <div class="form-group">
                         <label>Nama Barang</label>
-                        <input value="{{ $barang->barang_nama }}" type="text" name="barang_nama" id="barang_nama" class="form-control" required>
+                        <input value="{{ $barang->barang_nama }}" type="text" name="barang_nama" id="barang_nama"
+                            class="form-control" required>
                         <small id="error-barang-nama" class="error-text form-text text-danger"></small>
                     </div>
                     <div class="form-group">
                         <label>Harga Beli</label>
-                        <input value="{{ $barang->harga_beli }}" type="number" name="harga_beli" id="harga_beli" class="form-control" required>
+                        <input value="{{ $barang->harga_beli }}" type="number" name="harga_beli" id="harga_beli"
+                            class="form-control" required>
                         <small id="error-barang-beli" class="error-text form-text text-danger"></small>
                     </div>
                     <div class="form-group">
                         <label>Harga Jual</label>
-                        <input value="{{ $barang->harga_jual }}" type="number" name="harga_jual" id="harga_jual" class="form-control" required>
+                        <input value="{{ $barang->harga_jual }}" type="number" name="harga_jual" id="harga_jual"
+                            class="form-control" required>
                         <small id="error-harga-jual" class="error-text form-text text-danger"></small>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" data-dismiss="modal" class="btn btn-warning">Batal</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Batal</button>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </div>
@@ -71,11 +78,24 @@
         $(document).ready(function() {
             $("#form-edit").validate({
                 rules: {
-                    barang_kode: { required: true, minlength: 7, maxlength: 10 },
-                    barang_nama: { required: true, maxlength: 100 },
-                    harga_beli: { required: true },
-                    harga_jual: { required: true },
-                    kategori_id: { required: true }
+                    barang_kode: {
+                        required: true,
+                        minlength: 7,
+                        maxlength: 10
+                    },
+                    barang_nama: {
+                        required: true,
+                        maxlength: 100
+                    },
+                    harga_beli: {
+                        required: true
+                    },
+                    harga_jual: {
+                        required: true
+                    },
+                    kategori_id: {
+                        required: true
+                    }
                 },
                 submitHandler: function(form) {
                     $.ajax({
@@ -91,7 +111,7 @@
                                     text: response.message
                                 }).then((result) => {
                                     location.reload();
-                                });                                                          
+                                });
                             } else {
                                 $('.error-text').text('');
                                 $.each(response.msgField, function(prefix, val) {
@@ -101,7 +121,7 @@
                                     icon: 'error',
                                     title: 'Terjadi Kesalahan',
                                     text: response.message
-                                });                                
+                                });
                             }
                         }
                     });

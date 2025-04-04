@@ -73,7 +73,7 @@
                 },
                 columns: [{
                     data: "DT_RowIndex", // nomor urut dari laravel datatable addIndexColumn()
-                    className: "text-center",
+                    className: "text-center",                 
                     orderable: false,
                     searchable: false
                 }, {
@@ -93,10 +93,12 @@
                     searchable: false // searchable: true, jika ingin kolom ini bisa dicari
                 }, {
                     data: "aksi",
-                    className: "",
+                    className: "text-center",
+                    width: "195px",
                     orderable: false, // orderable: true, jika ingin kolom ini bisa diurutkan
                     searchable: false // searchable: true, jika ingin kolom ini bisa dicari
-                }]
+                }],
+                autoWidth: false,            
             });
 
             $('#level_id').on('change', function() {

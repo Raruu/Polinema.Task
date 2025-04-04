@@ -1,6 +1,6 @@
 @empty($supplier)
-    <div id="modal-master" class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
+    <div id="modal-master" class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content flex-fill">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Kesalahan</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -12,15 +12,16 @@
                     <h5><i class="icon fas fa-ban"></i> Kesalahan!!!</h5>
                     Data yang anda cari tidak ditemukan
                 </div>
-                <a href="{{ url('/supplier') }}" class="btn btn-warning">Kembali</a>
+                <a href="{{ url('/supplier') }}" class="btn btn-default">Kembali</a>
             </div>
         </div>
     </div>
 @else
-    <form action="{{ url('/supplier/' . $supplier->supplier_id . '/update_ajax') }}" method="POST" id="form-edit">
+    <form action="{{ url('/supplier/' . $supplier->supplier_id . '/update_ajax') }}" method="POST" id="form-edit"
+        class="modal-dialog-centered">
         @csrf
         @method('PUT')
-        <div id="modal-master" class="modal-dialog modal-lg" role="document">
+        <div id="modal-master" class="modal-dialog modal-lg flex-fill" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Edit Data Supplier</h5>
@@ -31,32 +32,37 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Supplier Kode</label>
-                        <input value="{{ $supplier->supplier_kode }}" type="text" name="supplier_kode" id="supplier_kode" class="form-control" required>
+                        <input value="{{ $supplier->supplier_kode }}" type="text" name="supplier_kode" id="supplier_kode"
+                            class="form-control" required>
                         <small id="error-supplier-kode" class="error-text form-text text-danger"></small>
                     </div>
                     <div class="form-group">
                         <label>Supplier Nama</label>
-                        <input value="{{ $supplier->supplier_nama }}" type="text" name="supplier_nama" id="supplier_nama" class="form-control" required>
+                        <input value="{{ $supplier->supplier_nama }}" type="text" name="supplier_nama" id="supplier_nama"
+                            class="form-control" required>
                         <small id="error-supplier-nama" class="error-text form-text text-danger"></small>
                     </div>
                     <div class="form-group">
                         <label>Supplier Alamat</label>
-                        <input value="{{ $supplier->supplier_alamat }}" type="text" name="supplier_alamat" id="supplier_alamat" class="form-control" required>
+                        <input value="{{ $supplier->supplier_alamat }}" type="text" name="supplier_alamat"
+                            id="supplier_alamat" class="form-control" required>
                         <small id="error-supplier-alamat" class="error-text form-text text-danger"></small>
                     </div>
                     <div class="form-group">
                         <label>Supplier Telepon</label>
-                        <input value="{{ $supplier->supplier_telepon }}" type="text" name="supplier_telepon" id="supplier_telepon" class="form-control" required>
+                        <input value="{{ $supplier->supplier_telepon }}" type="text" name="supplier_telepon"
+                            id="supplier_telepon" class="form-control" required>
                         <small id="error-supplier-telepon" class="error-text form-text text-danger"></small>
                     </div>
                     <div class="form-group">
                         <label>Supplier Email</label>
-                        <input value="{{ $supplier->supplier_email }}" type="text" name="supplier_email" id="supplier_email" class="form-control" required>
+                        <input value="{{ $supplier->supplier_email }}" type="text" name="supplier_email"
+                            id="supplier_email" class="form-control" required>
                         <small id="error-supplier-email" class="error-text form-text text-danger"></small>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" data-dismiss="modal" class="btn btn-warning">Batal</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Batal</button>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </div>
@@ -66,11 +72,27 @@
         $(document).ready(function() {
             $("#form-edit").validate({
                 rules: {
-                    supplier_kode: { required: true, minlength: 7, maxlength: 10 },
-                    supplier_nama: { required: true, maxlength: 100 },
-                    supplier_alamat: { required: true },
-                    supplier_telepon: { required: true, minlength: 10, maxlength: 15 },
-                    supplier_email: { required: true, email: true }
+                    supplier_kode: {
+                        required: true,
+                        minlength: 7,
+                        maxlength: 10
+                    },
+                    supplier_nama: {
+                        required: true,
+                        maxlength: 100
+                    },
+                    supplier_alamat: {
+                        required: true
+                    },
+                    supplier_telepon: {
+                        required: true,
+                        minlength: 10,
+                        maxlength: 15
+                    },
+                    supplier_email: {
+                        required: true,
+                        email: true
+                    }
                 },
                 submitHandler: function(form) {
                     $.ajax({
@@ -116,4 +138,3 @@
         });
     </script>
 @endempty
-
