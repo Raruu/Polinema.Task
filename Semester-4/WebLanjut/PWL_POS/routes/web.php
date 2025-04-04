@@ -131,10 +131,17 @@ Route::middleware(['auth'])->group(function () { // artinya semua route di dalam
         Route::get('/stok/', [StokController::class, 'index']);
         Route::post('/stok/list', [StokController::class, 'list']);
         Route::get('/stok/create', [StokController::class, 'create']);
+        Route::get('/stok/create_ajax', [StokController::class, 'create_ajax']);
         Route::post('/stok/', [StokController::class, 'store']);
+        Route::post('/stok/ajax', [StokController::class, 'store_ajax']);
         Route::get('/stok/{id}', [StokController::class, 'show']);
+        Route::get('/stok/{id}/show_ajax', [StokController::class, 'show_ajax']);
         Route::get('/stok/{id}/edit', [StokController::class, 'edit']);
         Route::put('/stok/{id}', [StokController::class, 'update']);
+        Route::get('/stok/{id}/edit_ajax', [StokController::class, 'edit_ajax']);
+        Route::put('/stok/{id}/update_ajax', [StokController::class, 'update_ajax']);
+        Route::get('/stok/{id}/delete_ajax', [StokController::class, 'confirm_ajax']);
+        Route::delete('/stok/{id}/delete_ajax', [StokController::class, 'delete_ajax']);
         Route::delete('/stok/{id}', [StokController::class, 'destroy']);
     });
 
