@@ -1,6 +1,7 @@
 :root {
     --foreground-color: #1c2024;
     --foreground-color-half: #575b65;
+    --btn-text-light: #575b65;
     --primary-color: #3e63dd;
     --hover-primary-color: #3358d4;
     --secondary-color: #f0f0f3;
@@ -15,9 +16,93 @@
     --hover-danger-color: #dc3e42;
     --background-color: #f8f9fa;
     --hover-background-color: #e8e7e3;
+    --background-color-2: #fff;
     --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     --blue: var(--primary-color);
     --primary: var(--primary-color);
+}
+
+:root.dark {
+    --foreground-color: #f8f9fa;
+    --foreground-color-half: #e9ecef;
+    --background-color: #212529;
+    --hover-background-color: #343a40;
+    --background-color-2: rgb(40, 40, 40);
+}
+
+/* start login */
+.login-page,
+.register-page {
+    background-color: var(--background-color);
+}
+
+.login-page .input-group-text,
+.register-page .input-group-text {
+    background-color: var(--background-color);
+    color: var(--foreground-color);
+    border: 1px solid var(--hover-background-color);
+}
+
+.card-mode {
+    background-color: transparent !important;
+}
+
+.card-mode button {
+    width: 32px;
+    height: 32px;
+    background-color: var(--foreground-color);
+    color: var(--background-color);
+}
+
+.card-mode,
+.card-mode button {
+    border-radius: 0.75rem;
+    border: none !important;
+    transition: all 0.25s linear !important;
+}
+
+.card-mode:hover {
+    border-radius: 10rem !important;
+}
+
+.card-mode:hover button {
+    border-radius: 10rem !important;
+    width: 64px;
+    height: 64px;
+}
+
+/* end login */
+
+body {
+    background-color: var(--background-color);
+    color: var(--foreground-color);
+    transition: color 0.5s var(--default-transition-timing-function) !important;
+}
+
+.table th {
+    border-bottom: 2px solid var(--hover-background-color) !important;
+}
+
+.table td {
+    border-bottom: 1px solid var(--hover-background-color) !important;
+}
+
+.table-bordered,
+.table-bordered td,
+.table-bordered th {
+    border: 1px solid var(--hover-background-color) !important;
+}
+
+.table-bordered th {
+    background-color: var(--background-color) !important;
+    color: var(--foreground-color) !important;
+}
+
+.table-bordered tr:hover,
+.table-hover tbody tr:hover {
+    cursor: pointer;
+    background-color: var(--hover-background-color) !important;
+    color: var(--foreground-color-half) !important;
 }
 
 .main-header {
@@ -29,14 +114,45 @@
     color: var(--foreground-color-half);
 }
 
+.brand-text {
+    color: var(--foreground-color);
+}
+
+.breadcrumb-item.active {
+    color: var(--foreground-color-half);
+}
+
 .link-primary {
     color: var(--primary-color);
+}
+
+.card {
+    background-color: var(--background-color-2);
+    border: 1px solid var(--hover-background-color);
+}
+
+.card-primary.card-outline {
+    border-top: 3px solid var(--primary-color);
+}
+
+.card-primary.card-outline:hover {
+    border-top: 3px solid var(--info-color);
 }
 
 .main-sidebar,
 .content-wrapper,
 .main-footer {
     background-color: var(--background-color);
+}
+
+.main-header,
+.main-sidebar,
+.content-wrapper,
+.main-footer,
+.card,
+.form-control,
+.page-link {
+    transition: background-color 0.5s var(--default-transition-timing-function) !important;
 }
 
 .btn {
@@ -56,8 +172,33 @@
     border-radius: 0.5rem;
 }
 
+.form-control {
+    background-color: var(--background-color-2);
+    color: var(--foreground-color);
+    border: 1px solid var(--hover-background-color);
+}
+.form-control:focus {
+    background-color: var(--background-color-2);
+    color: var(--foreground-color);
+    border: 1px solid var(--primary-color);
+    box-shadow: 0 0 0.2rem rgba(62, 99, 221, 0.25);
+}
+
+.modal-header {
+    border-bottom: 1px solid var(--hover-background-color);
+}
+
+.modal-header .close{
+    color: var(--foreground-color);
+}
+
+.modal-footer {
+    border-top: 1px solid var(--hover-background-color);
+}
+
 .modal-content {
     border-radius: 0.75rem;
+    background-color: var(--background-color-2);
 }
 
 .form-control.form-control-sidebar {
@@ -65,11 +206,18 @@
     border-bottom-right-radius: 0.5rem !important;
 }
 
+.page-item:not(.active) .page-link {
+    background-color: var(--background-color-2) !important;
+    color: var(--foreground-color) !important;
+    border: 1px solid var(--hover-background-color) !important;
+}
+
 .btn-primary,
 .nav-link.active,
 .page-item.active .page-link,
 .icheck-primary input[type="checkbox"]:checked + label:before {
     background-color: var(--primary-color) !important;
+    border: 1px solid var(--hover-background-color);
 }
 
 .btn-primary:hover,
@@ -95,7 +243,7 @@
 
 .btn-info {
     background-color: var(--info-color) !important;
-    color: var(--foreground-color-half) !important;
+    color: var(--btn-text-light) !important;
 }
 
 .btn-info:hover {
@@ -105,7 +253,7 @@
 .btn-warning,
 .alert-warning {
     background-color: var(--warning-color) !important;
-    color: var(--foreground-color-half) !important;
+    color: var(--btn-text-light) !important;
 }
 
 .btn-warning:hover {
@@ -129,4 +277,8 @@
 .list-group-item .search-title,
 .list-group-item .search-title .text-light {
     color: var(--foreground-color) !important;
+}
+
+.text-muted {
+    color: var(--foreground-color-half) !important;
 }

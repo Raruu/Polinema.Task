@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" style="height: auto;">
+<html lang="en">
+
+@include('layouts.script-darkmode')
 
 <head>
     <meta charset="utf-8">
@@ -27,7 +29,8 @@
     @vite(['resources/css/app.css'])
 
 
-    @stack('css') <!-- Digunakan untuk memanggil custom css dari perintah push('css') pada masing-masing view -->
+    @stack('css')
+    <!-- Digunakan untuk memanggil custom css dari perintah push('css') pada masing-masing view -->
 </head>
 
 <body class="sidebar-mini" style="height: auto;">
@@ -40,8 +43,9 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar">
             <!-- Brand Logo -->
-            <a href="{{ url('/') }}" class="brand-link" style="opacity: 0.5; transition: opacity 0.15s; color: black;"
-                onmouseover="this.style.opacity=0.6" onmouseout="this.style.opacity=0.5">
+            <a href="{{ url('/') }}" class="brand-link"
+                style="opacity: 0.5; transition: opacity 0.15s; color: black;" onmouseover="this.style.opacity=0.6"
+                onmouseout="this.style.opacity=0.5">
                 <img src="{{ asset('adminlte/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-bold">PWL POS</span>

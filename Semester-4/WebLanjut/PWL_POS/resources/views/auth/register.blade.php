@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
+@include('layouts.script-darkmode')
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -83,6 +85,8 @@
             </div>
         </div>
     </div>
+
+    @include('auth.toggle-darkmode')
 
     <!-- jQuery -->
     <script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script>

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
+@include('layouts.script-darkmode')
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,6 +20,7 @@
     <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css') }}">
     <!-- Custom style -->
     @vite(['resources/css/app.css'])
+
 </head>
 
 <body class="hold-transition login-page">
@@ -70,6 +73,8 @@
         </div>
         <!-- /.card -->
     </div>
+
+    @include('auth.toggle-darkmode')
     <!-- /.login-box -->
     <!-- jQuery -->
     <script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script>

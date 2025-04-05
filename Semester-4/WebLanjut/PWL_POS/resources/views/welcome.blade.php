@@ -50,7 +50,8 @@
                         </thead>
                         <tbody>
                             @foreach ($penjualanRanking as $item)
-                                <tr style="cursor: pointer" onclick="window.location.href = '{{ url('barang/' . $item->barang_id) }}'">
+                                <tr style="cursor: pointer"
+                                    onclick="window.location.href = '{{ url('barang/' . $item->barang_id) }}'">
                                     <td>{{ $item->barang_nama }}</td>
                                     <td>Rp. {{ number_format($item->harga_beli, 0, ',', '.') }}</td>
                                     <td>Rp. {{ number_format($item->harga_jual, 0, ',', '.') }}</td>
@@ -71,67 +72,76 @@
     <script>
         $(function() {
             'use strict'
-            const ticksStyle = {
-                fontColor: '#495057',
-                fontStyle: 'bold'
-            }
-            const mode = 'index';
-            const intersect = false;
-            const $visitorsChart = $('#visitors-chart')
-            // eslint-disable-next-line no-unused-vars
-
-            const penjualanTrend = <?php echo json_encode($penjualanTrend); ?>;
-            const penjualanTrendValues = Object.values(penjualanTrend).map(item => item.jumlah)
-            var visitorsChart = new Chart($visitorsChart, {
-                data: {
-                    labels: Object.keys(penjualanTrend),
-                    datasets: [{
-                        type: 'line',
-                        data: penjualanTrendValues,
-                        backgroundColor: 'transparent',
-                        borderColor: '#007bff',
-                        pointBorderColor: '#007bff',
-                        pointBackgroundColor: '#007bff',
-                        fill: false
-                    }, ]
-                },
-                options: {
-                    maintainAspectRatio: false,
-                    tooltips: {
-                        mode: mode,
-                        intersect: intersect
-                    },
-                    hover: {
-                        mode: mode,
-                        intersect: intersect
-                    },
-                    legend: {
-                        display: false
-                    },
-                    scales: {
-                        yAxes: [{
-                            // display: false,
-                            gridLines: {
-                                display: true,
-                                lineWidth: '4px',
-                                color: 'rgba(0, 0, 0, .2)',
-                                zeroLineColor: 'transparent'
-                            },
-                            ticks: $.extend({
-                                beginAtZero: true,
-                                suggestedMax: Math.max(...penjualanTrendValues),
-                            }, ticksStyle)
-                        }],
-                        xAxes: [{
-                            display: true,
-                            gridLines: {
-                                display: false
-                            },
-                            ticks: ticksStyle
-                        }]
-                    }
+            const render = () => {
+                const ticksStyle = {
+                    fontColor: getComputedStyle(document.documentElement).getPropertyValue(
+                        '--foreground-color-half'),
+                    fontStyle: 'bold'
                 }
-            })
+                const mode = 'index';
+                const intersect = false;
+                const $visitorsChart = $('#visitors-chart')
+                // eslint-disable-next-line no-unused-vars
+
+                const penjualanTrend = @json($penjualanTrend);
+                const penjualanTrendValues = Object.values(penjualanTrend).map(item => item.jumlah)
+                var visitorsChart = new Chart($visitorsChart, {
+                    data: {
+                        labels: Object.keys(penjualanTrend),
+                        datasets: [{
+                            type: 'line',
+                            data: penjualanTrendValues,
+                            backgroundColor: 'transparent',
+                            borderColor: '#007bff',
+                            pointBorderColor: '#007bff',
+                            pointBackgroundColor: '#007bff',
+                            fill: false
+                        }, ]
+                    },
+                    options: {
+                        maintainAspectRatio: false,
+                        tooltips: {
+                            mode: mode,
+                            intersect: intersect
+                        },
+                        hover: {
+                            mode: mode,
+                            intersect: intersect
+                        },
+                        legend: {
+                            display: false
+                        },
+                        scales: {
+                            yAxes: [{
+                                // display: false,
+                                gridLines: {
+                                    display: true,
+                                    lineWidth: '4px',
+                                    color: 'rgba(0, 0, 0, .2)',
+                                    zeroLineColor: 'transparent'
+                                },
+                                ticks: $.extend({
+                                    beginAtZero: true,
+                                    suggestedMax: Math.max(...penjualanTrendValues),
+                                }, ticksStyle)
+                            }],
+                            xAxes: [{
+                                display: true,
+                                gridLines: {
+                                    display: false
+                                },
+                                ticks: ticksStyle
+                            }]
+                        }
+                    }
+                })
+            }
+
+            render();
+            const observer = new MutationObserver(render);
+            observer.observe(document.documentElement, {
+                attributes: true,
+            });
         })
     </script>
 @endpush
