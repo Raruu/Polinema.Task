@@ -45,6 +45,7 @@
 
 .card-mode {
     background-color: transparent !important;
+    box-shadow: none !important;
 }
 
 .card-mode button {
@@ -58,7 +59,7 @@
 .card-mode button {
     border-radius: 0.75rem;
     border: none !important;
-    transition: all 0.25s linear !important;
+    transition: all 0.25s var(--default-transition-timing-function) !important;
 }
 
 .card-mode:hover {
@@ -114,7 +115,8 @@ body {
     color: var(--foreground-color-half);
 }
 
-.brand-text {
+.brand-text,
+.fas {
     color: var(--foreground-color);
 }
 
@@ -133,6 +135,7 @@ body {
 
 .card-primary.card-outline {
     border-top: 3px solid var(--primary-color);
+    transition: all 0.25s var(--default-transition-timing-function) !important;
 }
 
 .card-primary.card-outline:hover {
@@ -168,7 +171,8 @@ body {
 
 .btn,
 .nav-pills .nav-link,
-.form-control {
+.form-control,
+.swal2-confirm.swal2-styled {
     border-radius: 0.5rem;
 }
 
@@ -188,7 +192,7 @@ body {
     border-bottom: 1px solid var(--hover-background-color);
 }
 
-.modal-header .close{
+.modal-header .close {
     color: var(--foreground-color);
 }
 
@@ -215,13 +219,15 @@ body {
 .btn-primary,
 .nav-link.active,
 .page-item.active .page-link,
-.icheck-primary input[type="checkbox"]:checked + label:before {
+.icheck-primary input[type="checkbox"]:checked + label:before,
+.swal2-confirm.swal2-styled {
     background-color: var(--primary-color) !important;
     border: 1px solid var(--hover-background-color);
 }
 
 .btn-primary:hover,
-.nav-link.active:hover {
+.nav-link.active:hover,
+.swal2-confirm.swal2-styled:hover {
     background-color: var(--hover-primary-color) !important;
 }
 
@@ -280,5 +286,29 @@ body {
 }
 
 .text-muted {
+    color: var(--foreground-color-half) !important;
+}
+
+.nav-item-group .nav-item a {
+    padding-left: 1.2rem;
+}
+
+.nav-item-group .nav-item a p {
+    padding-left: 0.5rem;
+}
+
+.main-sidebar .brand-link {
+    color: var(--foreground-color) !important;
+}
+
+.swal2-popup {
+    background: var(--background-color-2) !important;
+    color: var(--foreground-color) !important;
+}
+
+.swal2-title {
+    color: var(--foreground-color) !important;
+}
+.swal2-html-container {
     color: var(--foreground-color-half) !important;
 }

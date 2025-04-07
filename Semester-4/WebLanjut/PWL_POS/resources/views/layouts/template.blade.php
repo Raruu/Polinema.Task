@@ -43,11 +43,15 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar">
             <!-- Brand Logo -->
-            <a href="{{ url('/') }}" class="brand-link"
-                style="opacity: 0.5; transition: opacity 0.15s; color: black;" onmouseover="this.style.opacity=0.6"
-                onmouseout="this.style.opacity=0.5">
-                <img src="{{ asset('adminlte/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
-                    class="brand-image img-circle elevation-3" style="opacity: .8">
+            <a href="https://github.com/Raruu/Polinema.Task/tree/main/Semester-4/WebLanjut/PWL_POS" target="_blank"
+                class="brand-link d-flex align-items-center"
+                style="opacity: 0.5; 
+                padding-left: 1.2rem;
+                transition: opacity 0.15s; 
+                color: black;
+                gap: 10px;"
+                onmouseover="this.style.opacity=0.6" onmouseout="this.style.opacity=0.5">
+                <i class="fab fa-github fa-2x"></i>
                 <span class="brand-text font-weight-bold">PWL POS</span>
             </a>
 

@@ -73,8 +73,8 @@
                         </div>
                         <small id="error-password_confirmation" class="error-text text-danger"></small>
                     </div>
-                    <div class="row">
-                        <div class="col-4 offset-8">
+                    <div class="d-flex">
+                        <div class="flex-fill">
                             <button type="submit" class="btn btn-primary btn-block">Register</button>
                         </div>
                     </div>

@@ -30,12 +30,12 @@ class AuthController extends Controller
             }
             return response()->json([
                 'status' => false,
-                'message' => 'Login Gagal'
+                'message' => 'Login Gagal, cek username dan password',
             ]);
         }
         return redirect('login');
     }
-    
+
     public function logout(Request $request)
     {
         Auth::logout();

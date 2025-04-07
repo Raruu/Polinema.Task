@@ -52,14 +52,8 @@
                         </div>
                         <small id="error-password" class="error-text text-danger"></small>
                     </div>
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="icheck-primary">
-                                <input type="checkbox" id="remember"><label for="remember">Remember 私</label>
-                            </div>
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-4">
+                    <div class="d-flex">                    
+                        <div class="flex-fill">
                             <button type="submit" class="btn btn-primary btn-block">Sign In</button>
                         </div>
                         <!-- /.col -->

@@ -5,9 +5,10 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="https://github.com/Raruu/Polinema.Task/tree/main/Semester-4/WebLanjut/PWL_POS" class="nav-link"
-                target="_blank">
-                <i class="fab fa-github"></i> PWL_POS
+            <a href="{{ url('/') }}" class="nav-link">
+                <i class="fas fa-user"></i>
+                <span class="text-muted">Level/Username:</span>
+                <b>{{ Auth::user()->getRole() }}/{{ Auth::user()->username }}</b>
             </a>
         </li>
     </ul>
@@ -32,7 +33,7 @@
                         } else {
                             modeIcon.classList.add('fa-sun');
                         }
-                    }                   
+                    }
                     changeMode(localStorage.getItem('dark_mode') === 'true');
                     window.addEventListener('localStorageSetItem', (event) => {
                         if (event.detail.key == 'dark_mode') {
