@@ -101,7 +101,6 @@ body {
 
 .table-bordered tr:hover,
 .table-hover tbody tr:hover {
-    cursor: pointer;
     background-color: var(--hover-background-color) !important;
     color: var(--foreground-color-half) !important;
 }
