@@ -11,12 +11,12 @@
                 @csrf
 
                 <div class="form-group row">
-                    <label class="col-1 control-label col-form-label">Id User</label>
+                    <label class="col-1 control-label col-form-label">Pembeli</label>
                     <div class="col-11">
                         <select class="form-control" id="user_id" name="user_id" required>
-                            <option value="">Id User</option>
+                            <option value="">Pembeli</option>
                             @foreach ($user as $item)
-                                <option value="{{ $item->user_id }}">{{ $item->user_id }}</option>
+                                <option value="{{ $item->user_id }}">{{ $item->nama }}</option>
                             @endforeach
                         </select>
                         @error('user_id')
@@ -50,7 +50,7 @@
                 <div class="form-group row" style="flex-wrap: nowrap">
                     <label class="col-1 control-label col-form-label">Item Barang</label>
                     <div id="barang_list" class="w-100">
-                        <div class="row">                          
+                        <div class="row">
                             <div class="col-5">
                                 <label class="control-label col-form-label">Nama Barang</label>
                                 <select class="form-control" id="barang_nama_0" name="barang_nama[]" required>
@@ -75,6 +75,16 @@
                             </div>
                         </div>
 
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-12">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="kurangi_stok" name="kurangi_stok">
+                            <label class="form-check-label" for="kurangi_stok">Kurangi stok pada barang (jika
+                                mungkin)</label>
+                        </div>
                     </div>
                 </div>
 
@@ -125,4 +135,3 @@
         }
     </script>
 @endpush
-

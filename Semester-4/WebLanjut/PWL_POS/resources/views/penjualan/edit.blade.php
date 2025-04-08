@@ -12,14 +12,14 @@
                 {!! method_field('PUT') !!}
 
                 <div class="form-group row">
-                    <label class="col-1 control-label col-form-label">Id User</label>
+                    <label class="col-1 control-label col-form-label">Pembeli</label>
                     <div class="col-11">
                         <select class="form-control" id="user_id" name="user_id" required>
-                            <option value="">Id User</option>
+                            <option value="">Pembeli</option>
                             @foreach ($user as $item)
                                 <option value="{{ $item->user_id }}"
                                     {{ $item->user_id == $penjualan->user_id ? 'selected' : '' }}>
-                                    {{ $item->user_id }}
+                                    {{ $item->nama }}
                                 </option>
                             @endforeach
                         </select>

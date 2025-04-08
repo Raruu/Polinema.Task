@@ -115,7 +115,7 @@ body {
 }
 
 .brand-text,
-.fas {
+.btn-sidebar .fas {
     color: var(--foreground-color);
 }
 
