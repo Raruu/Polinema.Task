@@ -8,6 +8,8 @@ use App\Models\StokModel;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
 class StokController extends Controller
 {
@@ -293,5 +295,55 @@ class StokController extends Controller
                 'message' => 'Data stok gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini'
             ]);
         }
+    }
+
+    public function export_excel()
+    {
+        // ambil data barang yang akan di export 
+        $stok = StokModel::select('stok_id', 'barang_id', 'user_id', 'stok_tanggal', 'stok_jumlah')
+            ->orderBy('stok_id')
+            ->get();
+
+        // load library excel 
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();        // ambil sheet yang aktif 
+        $sheet->setCellValue('A1', 'No');
+        $sheet->setCellValue('B1', 'ID Stok');
+        $sheet->setCellValue('C1', 'ID Barang');
+        $sheet->setCellValue('D1', 'ID User');
+        $sheet->setCellValue('E1', 'Tanggal Stok');
+        $sheet->setCellValue('F1', 'Jumlah Stok');
+        $sheet->getStyle('A1:F1')->getFont()->setBold(true);        // bold header
+
+        $no = 1;        // nomor data dimulai dari 1 
+        $baris = 2;        // baris data dimulai dari baris ke 2 
+        foreach ($stok as $key => $value) {
+            $sheet->setCellValue('A' . $baris, $no);
+            $sheet->setCellValue('B' . $baris, $value->stok_id);
+            $sheet->setCellValue('C' . $baris, $value->barang_id);
+            $sheet->setCellValue('D' . $baris, $value->user_id);
+            $sheet->setCellValue('E' . $baris, $value->stok_tanggal);
+            $sheet->setCellValue('F' . $baris, $value->stok_jumlah);
+            $baris++;
+            $no++;
+        }
+
+        foreach (range('A', 'F') as $columnID) {
+            $sheet->getColumnDimension($columnID)->setAutoSize(true); // set auto size untuk kolom 
+        }
+
+        $sheet->setTitle('Data Stok'); // set title sheet 
+        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+        $filename = 'Data Stok ' . date('Y-m-d H:i:s') . '.xlsx';
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="' . $filename . '"');
+        header('Cache-Control: max-age=0');
+        header('Cache-Control: max-age=1');
+        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+        header('Last-Modified: ' . gmdate('D, dMY H:i:s') . 'GMT');
+        header('Cache-Control: cache, must-revalidate');
+        header('Pragma: public');
+        $writer->save('php://output');
+        exit;
     }
 }

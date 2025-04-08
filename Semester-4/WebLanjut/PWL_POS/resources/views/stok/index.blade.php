@@ -5,10 +5,14 @@
         <div class="card-header">
             <h3 class="card-title">{{ $page->title }}</h3>
             <div class="card-tools">
-                <a class="btn btn-sm btn-primary mt-1" href="{{ url('stok/create') }}">Tambah</a>
-                <button onclick="modalAction('{{ url('stok/create_ajax') }}')" class="btn btn-sm btn-success mt-1">
+                <a class="btn btn-sm btn-primary" href="{{ url('stok/create') }}">Tambah</a>
+                <button onclick="modalAction('{{ url('stok/create_ajax') }}')" class="btn btn-sm btn-success">
                     Tambah Ajax
                 </button>
+                <a href="{{ url('stok/export_excel') }}" class="btn btn-sm btn-primary">
+                    <i class="fa fa-file-excel"></i>
+                    Export Excel
+                </a>
             </div>
         </div>
         <div class="card-body">

@@ -89,6 +89,7 @@ Route::middleware(['auth'])->group(function () { // artinya semua route di dalam
         Route::get('/user/{id}/delete_ajax', [UserController::class, 'confirm_ajax']);
         Route::delete('/user/{id}/delete_ajax', [UserController::class, 'delete_ajax']);
         Route::delete('/user/{id}', [UserController::class, 'destroy']);
+        Route::get('/user/export_excel', [UserController::class, 'export_excel']);
     });
 
     Route::middleware(['authorize:ADM,MNG'])->group(function () {
@@ -107,6 +108,7 @@ Route::middleware(['auth'])->group(function () { // artinya semua route di dalam
         Route::get('/kategori/{id}/delete_ajax', [KategoriController::class, 'confirm_ajax']);
         Route::delete('/kategori/{id}/delete_ajax', [KategoriController::class, 'delete_ajax']);
         Route::delete('/kategori/{id}', [KategoriController::class, 'destroy']);
+        Route::get('/kategori/export_excel', [KategoriController::class, 'export_excel']);
     });
 
     Route::middleware(['authorize:ADM,MNG'])->group(function () {
@@ -125,6 +127,7 @@ Route::middleware(['auth'])->group(function () { // artinya semua route di dalam
         Route::get('/supplier/{id}/delete_ajax', [SupplierController::class, 'confirm_ajax']);
         Route::delete('/supplier/{id}/delete_ajax', [SupplierController::class, 'delete_ajax']);
         Route::delete('/supplier/{id}', [SupplierController::class, 'destroy']);
+        Route::get('/supplier/export_excel', [SupplierController::class, 'export_excel']);
     });
 
     Route::middleware(['authorize:ADM,MNG,STF'])->group(function () {
@@ -161,5 +164,7 @@ Route::middleware(['auth'])->group(function () { // artinya semua route di dalam
         Route::get('/penjualan/{id}/delete_ajax', [PenjualanController::class, 'confirm_ajax']);
         Route::delete('/penjualan/{id}/delete_ajax', [PenjualanController::class, 'delete_ajax']);
         Route::delete('/penjualan/{id}', [PenjualanController::class, 'destroy']);
+        Route::get('/penjualan/export_excel', [PenjualanController::class, 'export_excel']);
+        Route::get('/penjualan/export_pdf', [PenjualanController::class, 'export_pdf']);
     });
 });

@@ -8,8 +8,11 @@ use App\Models\PenjualanDetailModel;
 use App\Models\PenjualanModel;
 use App\Models\StokModel;
 use App\Models\UserModel;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
 class PenjualanController extends Controller
 {
@@ -436,5 +439,83 @@ class PenjualanController extends Controller
             }
         }
         return redirect('/');
+    }
+
+    public function export_excel()
+    {
+        // ambil data penjualan yang akan di export 
+        $penjualan = PenjualanModel::all();
+
+        // load library excel 
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();        // ambil sheet yang aktif 
+        $sheet->setCellValue('A1', 'No');
+        $sheet->setCellValue('B1', 'Kode Penjualan');
+        $sheet->setCellValue('C1', 'Tanggal Penjualan');
+        $sheet->setCellValue('D1', 'Pembeli');
+        $sheet->setCellValue('E1', 'Barang');
+        $sheet->setCellValue('F1', 'Jumlah');
+        $sheet->setCellValue('G1', 'Harga');
+        $sheet->getStyle('A1:G1')->getFont()->setBold(true);        // bold header
+
+        $no = 1;        // nomor data dimulai dari 1 
+        $baris = 2;        // baris data dimulai dari baris ke 2 
+        foreach ($penjualan as $item) {
+            $details = PenjualanDetailModel::where('penjualan_id', $item->penjualan_id)->get();
+            foreach ($details as $detail) {
+                $sheet->setCellValue('A' . $baris, $no);
+                $sheet->setCellValue('B' . $baris, $item->penjualan_kode);
+                $sheet->setCellValue('C' . $baris, $item->penjualan_tanggal);
+                $sheet->setCellValue('D' . $baris, $item->pembeli);
+                $sheet->setCellValue('E' . $baris, $detail->barang->barang_nama);
+                $sheet->setCellValue('F' . $baris, $detail->jumlah);
+                $sheet->setCellValue('G' . $baris, $detail->harga);
+                $baris++;
+                $no++;
+            }
+        }
+
+        foreach (range('A', 'G') as $columnID) {
+            $sheet->getColumnDimension($columnID)->setAutoSize(true); // set auto size untuk kolom 
+        }
+
+        $sheet->setTitle('Data Penjualan'); // set title sheet 
+        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+        $filename = 'Data Penjualan ' . date('Y-m-d H:i:s') . '.xlsx';
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="' . $filename . '"');
+        header('Cache-Control: max-age=0');
+        header('Cache-Control: max-age=1');
+        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+        header('Last-Modified: ' . gmdate('D, dMY H:i:s') . 'GMT');
+        header('Cache-Control: cache, must-revalidate');
+        header('Pragma: public');
+        $writer->save('php://output');
+        exit;
+    }
+
+    public function export_pdf()
+    {
+        $penjualanModel = PenjualanModel::all();
+        $penjualan =  [];
+        foreach ($penjualanModel as $item) {
+            $details = PenjualanDetailModel::where('penjualan_id', $item->penjualan_id)->get();
+            foreach ($details as $detail) {
+                $penjualan[] = (object) [
+                    'penjualan_kode' => $item->penjualan_kode,
+                    'penjualan_tanggal' => $item->penjualan_tanggal,
+                    'pembeli' => $item->pembeli,
+                    'barang_nama' => $detail->barang->barang_nama,
+                    'jumlah' => $detail->jumlah,
+                    'harga' => $detail->harga
+                ];
+            }
+        }
+
+        $pdf = Pdf::loadView('penjualan.export_pdf', ['penjualan' => $penjualan]);
+        $pdf->setPaper('a4', 'portrait'); // set ukuran kertas dan orientasi 
+        $pdf->setOption("isRemoteEnabled", true); // set true jika ada gambar dari url 
+        $pdf->render();
+        return $pdf->stream('Data Barang ' . date('Y-m-d H:i:s') . '.pdf');
     }
 }

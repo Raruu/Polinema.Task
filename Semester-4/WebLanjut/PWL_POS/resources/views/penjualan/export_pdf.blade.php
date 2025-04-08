@@ -22,27 +22,29 @@
             </td>
         </tr>
     </table>
-    <h3 class="text-center">LAPORAN DATA BARANG</h4>
+    <h3 class="text-center">LAPORAN DATA PENJUALAN</h4>
         <table class="border-all">
             <thead>
                 <tr>
                     <th class="text-center">No</th>
-                    <th>Kode Barang</th>
+                    <th>Kode Penjualan</th>
+                    <th>Tanggal</th>
+                    <th>Nama Pelanggan</th>
                     <th>Nama Barang</th>
-                    <th class="text-right">Harga Beli</th>
+                    <th class="text-right">Jumlah</th>
                     <th class="text-right">Harga Jual</th>
-                    <th>Kategori</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($barang as $b)
+                @foreach ($penjualan as $item)
                     <tr>
                         <td class="text-center">{{ $loop->iteration }}</td>
-                        <td>{{ $b->barang_kode }}</td>
-                        <td>{{ $b->barang_nama }}</td>
-                        <td class="text-right">{{ number_format($b->harga_beli, 0, ',', '.') }}</td>
-                        <td class="text-right">{{ number_format($b->harga_jual, 0, ',', '.') }}</td>
-                        <td>{{ $b->kategori->kategori_nama }}</td>
+                        <td>{{ $item->penjualan_kode }}</td>
+                        <td>{{ date('d-m-Y', strtotime($item->penjualan_tanggal)) }}</td>
+                        <td>{{ $item->pembeli }}</td>
+                        <td>{{ $item->barang_nama }}</td>
+                        <td class="text-right">{{ $item->jumlah }}</td>
+                        <td class="text-right">{{ number_format($item->harga, 0, ',', '.') }}</td>
                     </tr>
                 @endforeach
             </tbody>
