@@ -265,26 +265,82 @@ class SupplierController extends Controller
         return redirect('/');
     }
 
+    public function import()
+    {
+        return view('supplier.import');
+    }
+
+    public function import_ajax(Request $request)
+    {
+        if ($request->ajax() || $request->wantsJson()) {
+            $rules = [
+                'file_supplier' => ['required', 'mimes:xlsx', 'max:1024']
+            ];
+            $validator = Validator::make($request->all(), $rules);
+            if ($validator->fails()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Validasi Gagal',
+                    'msgField' => $validator->errors()
+                ]);
+            }
+            $file = $request->file('file_supplier');
+            $reader = IOFactory::createReader('Xlsx');
+            $reader->setReadDataOnly(true);
+            $spreadsheet = $reader->load($file->getRealPath());
+            $sheet = $spreadsheet->getActiveSheet();
+            $data = $sheet->toArray(null, false, true, true);
+            $insert = [];
+            if (count($data) > 1) {
+                foreach ($data as $baris => $value) {
+                    if ($baris > 1) {
+                        $insert[] = [
+                            'supplier_kode' => $value['A'],
+                            'supplier_nama' => $value['B'],
+                            'supplier_email' => $value['C'],
+                            'supplier_telepon' => $value['D'],
+                            'supplier_alamat' => $value['E'],
+                            'created_at' => now(),
+                            'updated_at' => now()
+                        ];
+                    }
+                }
+                if (count($insert) > 0) {
+                    SupplierModel::insertOrIgnore($insert);
+                }
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Data berhasil diimport'
+                ]);
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Tidak ada data yang diimport'
+                ]);
+            }
+        }
+        return redirect('/');
+    }
+
     public function export_excel()
     {
-        // ambil data supplier yang akan di export 
         $supplier = SupplierModel::select('supplier_kode', 'supplier_nama', 'supplier_email', 'supplier_telepon', 'supplier_alamat')
             ->orderBy('supplier_kode')
             ->get();
 
-        // load library excel 
+
         $spreadsheet = new Spreadsheet();
-        $sheet = $spreadsheet->getActiveSheet();        // ambil sheet yang aktif 
+        $sheet = $spreadsheet->getActiveSheet();
         $sheet->setCellValue('A1', 'No');
         $sheet->setCellValue('B1', 'Kode Supplier');
         $sheet->setCellValue('C1', 'Nama Supplier');
         $sheet->setCellValue('D1', 'Email Supplier');
         $sheet->setCellValue('E1', 'Telepon Supplier');
         $sheet->setCellValue('F1', 'Alamat Supplier');
-        $sheet->getStyle('A1:F1')->getFont()->setBold(true);        // bold header
+        $sheet->getStyle('A1:F1')->getFont()->setBold(true);
 
-        $no = 1;        // nomor data dimulai dari 1 
-        $baris = 2;        // baris data dimulai dari baris ke 2 
+        $no = 1;
+        $baris = 2;
         foreach ($supplier as $key => $value) {
             $sheet->setCellValue('A' . $baris, $no);
             $sheet->setCellValue('B' . $baris, $value->supplier_kode);
@@ -297,7 +353,7 @@ class SupplierController extends Controller
         }
 
         foreach (range('A', 'F') as $columnID) {
-            $sheet->getColumnDimension($columnID)->setAutoSize(true); // set auto size untuk kolom 
+            $sheet->getColumnDimension($columnID)->setAutoSize(true);
         }
 
         $sheet->setTitle('Data Supplier'); // set title sheet 

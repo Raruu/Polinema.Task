@@ -9,6 +9,9 @@
                 <button onclick="modalAction('{{ url('penjualan/create_ajax') }}')" class="btn btn-sm btn-success">
                     Tambah Ajax
                 </button>
+                <button onclick="modalAction('{{ url('penjualan/import') }}')" class="btn btn-sm btn-info">
+                    Import Data
+                </button>
                 <a href="{{ url('penjualan/export_excel') }}" class="btn btn-sm btn-primary">
                     <i class="fa fa-file-excel"></i>
                     Export Excel

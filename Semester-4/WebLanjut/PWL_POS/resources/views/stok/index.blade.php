@@ -9,6 +9,9 @@
                 <button onclick="modalAction('{{ url('stok/create_ajax') }}')" class="btn btn-sm btn-success">
                     Tambah Ajax
                 </button>
+                <button onclick="modalAction('{{ url('stok/import') }}')" class="btn btn-sm btn-info">
+                    Import Data
+                </button>
                 <a href="{{ url('stok/export_excel') }}" class="btn btn-sm btn-primary">
                     <i class="fa fa-file-excel"></i>
                     Export Excel

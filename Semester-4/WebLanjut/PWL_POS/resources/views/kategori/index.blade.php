@@ -9,6 +9,9 @@
                 <button onclick="modalAction('{{ url('kategori/create_ajax') }}')" class="btn btn-sm btn-success">
                     Tambah Ajax
                 </button>
+                <button onclick="modalAction('{{ url('kategori/import') }}')" class="btn btn-sm btn-info">
+                    Import Data
+                </button>
                 <a href="{{ url('kategori/export_excel') }}" class="btn btn-sm btn-primary">
                     <i class="fa fa-file-excel"></i>
                     Export Excel

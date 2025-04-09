@@ -10,7 +10,7 @@
                     Tambah Ajax
                 </button>
                 <button onclick="modalAction('{{ url('barang/import') }}')" class="btn btn-sm btn-info">
-                    Import Barang
+                    Import Data
                 </button>
                 <a href="{{ url('barang/export_excel') }}" class="btn btn-sm btn-primary">
                     <i class="fa fa-file-excel"></i>

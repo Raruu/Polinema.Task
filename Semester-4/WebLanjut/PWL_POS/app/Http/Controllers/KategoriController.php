@@ -259,23 +259,75 @@ class KategoriController extends Controller
         return redirect('/');
     }
 
+    public function import()
+    {
+        return view('kategori.import');
+    }
+
+    public function import_ajax(Request $request)
+    {
+        if ($request->ajax() || $request->wantsJson()) {
+            $rules = [
+                'file_kategori' => ['required', 'mimes:xlsx', 'max:1024']
+            ];
+            $validator = Validator::make($request->all(), $rules);
+            if ($validator->fails()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Validasi Gagal',
+                    'msgField' => $validator->errors()
+                ]);
+            }
+            $file = $request->file('file_kategori');
+            $reader = IOFactory::createReader('Xlsx');
+            $reader->setReadDataOnly(true);
+            $spreadsheet = $reader->load($file->getRealPath());
+            $sheet = $spreadsheet->getActiveSheet();
+            $data = $sheet->toArray(null, false, true, true);
+            $insert = [];
+            if (count($data) > 1) {
+                foreach ($data as $baris => $value) {
+                    if ($baris > 1) {
+                        $insert[] = [
+                            'kategori_kode' => $value['A'],
+                            'kategori_nama' => $value['B'],
+                            'created_at' => now(),
+                            'updated_at' => now()
+                        ];
+                    }
+                }
+                if (count($insert) > 0) {
+                    KategoriModel::insertOrIgnore($insert);
+                }
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Data berhasil diimport'
+                ]);
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Tidak ada data yang diimport'
+                ]);
+            }
+        }
+        return redirect('/');
+    }
+
     public function export_excel()
     {
-        // ambil data barang yang akan di export 
         $kategori = KategoriModel::select('kategori_kode', 'kategori_nama')
             ->orderBy('kategori_kode')
             ->get();
 
-        // load library excel 
         $spreadsheet = new Spreadsheet();
-        $sheet = $spreadsheet->getActiveSheet();        // ambil sheet yang aktif 
+        $sheet = $spreadsheet->getActiveSheet();
         $sheet->setCellValue('A1', 'No');
         $sheet->setCellValue('B1', 'Kode Kategori');
         $sheet->setCellValue('C1', 'Nama Kategori');
-        $sheet->getStyle('A1:C1')->getFont()->setBold(true);        // bold header
+        $sheet->getStyle('A1:C1')->getFont()->setBold(true);
 
-        $no = 1;        // nomor data dimulai dari 1 
-        $baris = 2;        // baris data dimulai dari baris ke 2 
+        $no = 1;
+        $baris = 2;
         foreach ($kategori as $key => $value) {
             $sheet->setCellValue('A' . $baris, $no);
             $sheet->setCellValue('B' . $baris, $value->kategori_kode);
@@ -285,10 +337,10 @@ class KategoriController extends Controller
         }
 
         foreach (range('A', 'C') as $columnID) {
-            $sheet->getColumnDimension($columnID)->setAutoSize(true); // set auto size untuk kolom 
+            $sheet->getColumnDimension($columnID)->setAutoSize(true);
         }
 
-        $sheet->setTitle('Data Kategori'); // set title sheet 
+        $sheet->setTitle('Data Kategori');
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
         $filename = 'Data Kategori ' . date('Y-m-d H:i:s') . '.xlsx';
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
