@@ -7,8 +7,8 @@
         <li class="nav-item d-none d-sm-inline-block">
             <a href="{{ url('/') }}" class="nav-link">
                 <i class="fas fa-user"></i>
-                <span class="text-muted">Level/Username:</span>
-                <b>{{ Auth::user()->getRole() }}/{{ Auth::user()->username }}</b>
+                <span class="text-muted">Level/Username/Nama:</span>
+                <b>{{ Auth::user()->getRole() }}/{{ Auth::user()->username }}/{{ Auth::user()->nama }}</b>
             </a>
         </li>
     </ul>
