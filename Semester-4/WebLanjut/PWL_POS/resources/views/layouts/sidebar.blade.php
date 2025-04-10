@@ -88,6 +88,13 @@
                         </a>
                     </li>
                 @endif
+                <li class="nav-item">
+                    <a href="{{ url('/penjualan_self') }}"
+                        class="nav-link {{ $activeMenu == 'penjualan_self' ? 'active' : '' }} ">
+                        <i class="nav-icon fas fa-cash-register"></i>
+                        <p>Transaksi Diri Sendiri</p>
+                    </a>
+                </li>
             </div>
         </ul>
     </nav>

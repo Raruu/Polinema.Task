@@ -33,6 +33,27 @@ class PenjualanController extends Controller
         return view('penjualan.index', ['breadcrumb' => $breadcrumb, 'page' => $page, 'activeMenu' => $activeMenu]);
     }
 
+    public function indexSelf()
+    {
+        $breadcrumb = (object)[
+            'title' => 'Daftar Penjualan',
+            'list' => ['Home', 'Penjualan Sendiri']
+        ];
+
+        $page = (object)[
+            'title' => 'Daftar penjualan yang terdaftar dalam sistem'
+        ];
+
+        $activeMenu = 'penjualan_self';
+
+        return view('penjualan.index', [
+            'breadcrumb' => $breadcrumb,
+            'page' => $page,
+            'activeMenu' => $activeMenu,
+            'self' => true
+        ]);
+    }
+
     public function list(PenjualanDataTable $dataTable)
     {
         return $dataTable->render();

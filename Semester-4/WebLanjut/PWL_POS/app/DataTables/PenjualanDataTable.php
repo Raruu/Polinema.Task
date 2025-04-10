@@ -4,6 +4,7 @@ namespace App\DataTables;
 
 use App\Models\PenjualanModel;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
@@ -21,8 +22,11 @@ class PenjualanDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addIndexColumn()
-            ->addColumn('aksi', function ($penjualan) { // menambahkan kolom aksi
+            ->addColumn('aksi', function ($penjualan) {
                 $btn = '<button onclick="modalAction(\'' . url('/penjualan/' . $penjualan->penjualan_id) . '/show_ajax' . '\')" class="btn btn-info btn-sm">Detail</button> ';
+                if ($this->request()->has('self')) {
+                    return $btn;
+                }
                 $btn .= '<button onclick="modalAction(\'' . url('/penjualan/' . $penjualan->penjualan_id . '/edit_ajax') . '\')" class="btn btn-warning btn-sm">Edit</button> ';
                 $btn .= '<button onclick="modalAction(\'' . url('/penjualan/' . $penjualan->penjualan_id . '/delete_ajax') . '\')" class="btn btn-danger btn-sm">Hapus</button>';
                 return $btn;
@@ -36,14 +40,22 @@ class PenjualanDataTable extends DataTable
      */
     public function query(PenjualanModel $model): QueryBuilder
     {
+        if ($this->request()->has('self')) {
+            return $model->select(
+                'penjualan_id',
+                'user_id',
+                'pembeli',
+                'penjualan_kode',
+                'penjualan_tanggal'
+            )->with('user')->where('user_id', Auth::user()->user_id);
+        }
         return $model->select(
             'penjualan_id',
             'user_id',
             'pembeli',
             'penjualan_kode',
             'penjualan_tanggal'
-        )
-            ->with('user');
+        )->with('user');
     }
 
     /**
