@@ -34,20 +34,7 @@
                         <h5><i class="icon fas fa-ban"></i> Konfirmasi !!!</h5>
                         Apakah Anda ingin menghapus data seperti di bawah ini?
                     </div>
-                    <table class="table table-sm table-bordered table-striped">
-                        <tr>
-                            <th class="text-right col-3">Supplier Kode:</th>
-                            <td class="col-9">{{ $supplier->supplier_kode }}</td>
-                        </tr>
-                        <tr>
-                            <th class="text-right col-3">Supplier Nama:</th>
-                            <td class="col-9">{{ $supplier->supplier_nama }}</td>
-                        </tr>
-                        <tr>
-                            <th class="text-right col-3">Supplier Alamat:</th>
-                            <td class="col-9">{{ $supplier->supplier_alamat }}</td>
-                        </tr>
-                    </table>
+                    @include('supplier.show_component')
                 </div>
                 <div class="modal-footer">
                     <button type="button" data-dismiss="modal" class="btn btn-default">Batal</button>

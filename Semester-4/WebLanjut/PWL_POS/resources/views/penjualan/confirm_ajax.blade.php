@@ -34,7 +34,7 @@
                         <h5><i class="icon fas fa-ban"></i> Konfirmasi !!!</h5>
                         Apakah Anda ingin menghapus data seperti di bawah ini?
                     </div>
-                    @include('penjualan.show_template')
+                    @include('penjualan.show_component')
                 </div>
                 <div class="modal-footer">
                     <button type="button" data-dismiss="modal" class="btn btn-default">Batal</button>

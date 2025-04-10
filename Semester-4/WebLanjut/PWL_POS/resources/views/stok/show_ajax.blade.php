@@ -7,7 +7,7 @@
             </button>
         </div>
         <div class="modal-body">
-            @include('stok.show_template')
+            @include('stok.show_component')
         </div>
     </div>
 </div>

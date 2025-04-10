@@ -7,7 +7,7 @@
             </button>
         </div>
         <div class="modal-body">
-           @include('penjualan.show_template')
+           @include('penjualan.show_component')
         </div>
     </div>
 </div>

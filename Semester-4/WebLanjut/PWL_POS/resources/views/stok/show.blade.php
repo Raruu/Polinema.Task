@@ -13,7 +13,7 @@
                     Data yang Anda cari tidak ditemukan.
                 </div>
             @else
-                @include('stok.show_template')
+                @include('stok.show_component')
             @endempty
             <a href="{{ url('stok') }}" class="btn btn-sm btn-default mt-2">Kembali</a>
         </div>

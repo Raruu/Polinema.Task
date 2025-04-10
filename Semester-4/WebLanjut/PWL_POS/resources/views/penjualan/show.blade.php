@@ -13,7 +13,7 @@
                     Data yang Anda cari tidak ditemukan.
                 </div>
             @else
-                @include('penjualan.show_template')
+                @include('penjualan.show_component')
             @endempty
             <a href="{{ url('penjualan') }}" class="btn btn-sm btn-default mt-2">Kembali</a>
         </div>
