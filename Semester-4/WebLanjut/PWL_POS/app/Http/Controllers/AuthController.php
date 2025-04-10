@@ -75,7 +75,7 @@ class AuthController extends Controller
             }
 
             $data = $request->all();
-            $data['level_id'] = 3; // STF | Staff
+            $data['level_id'] = 4; // NEW | Pendatang Baru
 
             UserModel::create($data);
 

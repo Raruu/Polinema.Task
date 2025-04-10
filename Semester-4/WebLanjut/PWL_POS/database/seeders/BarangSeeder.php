@@ -14,11 +14,11 @@ class BarangSeeder extends Seeder
     public function run()
     {
         $kategori = [
-            ['Elektronik', 'eletronik'],
-            ['Pakaian', 'pakaian'],
-            ['Aksesoris', 'aksesoris'],
-            ['Buku', 'buku'],
-            ['Alat Tulis', 'alat_tulis'],
+            ['ROG G-', 'eletronik'],
+            ['Kaos NO-', 'pakaian'],
+            ['Speed Light R-', 'aksesoris'],
+            ['Tensei Shittara Vol.', 'buku'],
+            ['Rotring Rapidograph ', 'alat_tulis'],
         ];
 
         for ($i = 0; $i < 10; $i++) {
@@ -27,7 +27,7 @@ class BarangSeeder extends Seeder
             $hargaBeli = (rand(1, 10) * 10000) + (rand(0, 9) * 5000);
             DB::table('m_barang')->insert([
                 'kategori_id' => $barangId + 1,
-                'barang_nama' => $barang[0] . ' Versi-' . ($i + 1),
+                'barang_nama' => $barang[0] . ($i + 1),
                 'barang_kode' => $barang[1],
                 'harga_beli' => $hargaBeli,
                 'harga_jual' => $hargaBeli * 1.5,

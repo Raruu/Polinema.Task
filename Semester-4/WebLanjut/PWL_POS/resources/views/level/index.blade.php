@@ -4,12 +4,6 @@
     <div class="card card-outline card-primary">
         <div class="card-header">
             <h3 class="card-title">{{ $page->title }}</h3>
-            <div class="card-tools">
-                <a class="btn btn-sm btn-primary mt-1" href="{{ url('level/create') }}">Tambah</a>
-                <button onclick="modalAction('{{ url('level/create_ajax') }}')" class="btn btn-sm btn-success mt-1">
-                    Tambah Ajax
-                </button>
-            </div>
         </div>
         <div class="card-body">
             @if (session('success'))
@@ -75,7 +69,7 @@
                     {
                         data: "aksi",
                         className: "text-center",
-                        width: "195px",
+                        width: "125px",
                         orderable: false,
                         searchable: false
                     }

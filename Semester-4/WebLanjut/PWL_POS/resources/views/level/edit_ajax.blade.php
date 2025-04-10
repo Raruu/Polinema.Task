@@ -33,7 +33,7 @@
                     <div class="form-group">
                         <label>Level Kode</label>
                         <input value="{{ $level->level_kode }}" type="text" name="level_kode" id="level_kode"
-                            class="form-control" required>
+                            class="form-control" required readonly disabled>
                         <small id="error-level-kode" class="error-text form-text text-danger"></small>
                     </div>
                     <div class="form-group">

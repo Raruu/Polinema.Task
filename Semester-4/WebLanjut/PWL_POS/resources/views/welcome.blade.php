@@ -50,8 +50,9 @@
                         </thead>
                         <tbody>
                             @foreach ($penjualanRanking as $item)
-                                <tr style="cursor: pointer"
-                                    onclick="window.location.href = '{{ url('barang/' . $item->barang_id) }}'">
+                                <tr
+                                    @if (in_array(Auth::user()->getRole(), ['ADM', 'MNG', 'STF'])) style="cursor: pointer"
+                                        onclick="window.location.href = '{{ url('barang/' . $item->barang_id) }}'" @endif>
                                     <td>{{ $item->barang_nama }}</td>
                                     <td>Rp. {{ number_format($item->harga_beli, 0, ',', '.') }}</td>
                                     <td>Rp. {{ number_format($item->harga_jual, 0, ',', '.') }}</td>

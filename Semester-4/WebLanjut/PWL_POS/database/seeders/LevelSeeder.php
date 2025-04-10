@@ -35,6 +35,13 @@ class LevelSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now()
             ],
+            [
+                'level_id' => 4,
+                'level_kode' => 'NEW',
+                'level_nama' => 'Pendatang Baru',
+                'created_at' => now(),
+                'updated_at' => now()
+            ]
         ];
         DB::table('m_level')->insert($data);
     }

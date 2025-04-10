@@ -46,8 +46,8 @@ Route::middleware(['auth'])->group(function () { // artinya semua route di dalam
         Route::put('/level/{id}', [LevelController::class, 'update']);
         Route::get('/level/{id}/edit_ajax', [LevelController::class, 'edit_ajax']);
         Route::put('/level/{id}/update_ajax', [LevelController::class, 'update_ajax']);
-        Route::get('/level/{id}/delete_ajax', [LevelController::class, 'confirm_ajax']);
-        Route::delete('/level/{id}/delete_ajax', [LevelController::class, 'delete_ajax']);
+        // Route::get('/level/{id}/delete_ajax', [LevelController::class, 'confirm_ajax']);
+        // Route::delete('/level/{id}/delete_ajax', [LevelController::class, 'delete_ajax']);
         Route::delete('/level/{id}', [LevelController::class, 'destroy']);
     });
 
