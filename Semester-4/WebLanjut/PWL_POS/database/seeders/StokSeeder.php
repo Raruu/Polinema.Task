@@ -19,7 +19,8 @@ class StokSeeder extends Seeder
         foreach ($barangs as $barang) {
             DB::table('t_stok')->insert([
                 'barang_id' => $barang->barang_id,
-                'user_id' => rand(1, 3),
+                // 'user_id' => rand(1, 3),
+                'supplier_id' => rand(1, 3),
                 'stok_tanggal' => now(),
                 'stok_jumlah' => rand(0, 256),
                 'created_at' => now(),

@@ -10,12 +10,12 @@
             <form method="POST" action="{{ url('stok') }}" class="form-horizontal">
                 @csrf
                 <div class="form-group row">
-                    <label class="col-1 control-label col-form-label">Id Barang</label>
+                    <label class="col-1 control-label col-form-label">Barang</label>
                     <div class="col-11">
                         <select class="form-control" id="barang_id" name="barang_id" required>
-                            <option value="">Id Barang</option>
+                            <option value="">Barang</option>
                             @foreach ($barang as $item)
-                                <option value="{{ $item->barang_id }}">{{ $item->barang_id }}</option>
+                                <option value="{{ $item->barang_id }}">{{ $item->barang_nama }}</option>
                             @endforeach
                         </select>
                         @error('barang_id')
@@ -25,15 +25,15 @@
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-1 control-label col-form-label">Id User</label>
+                    <label class="col-1 control-label col-form-label">Supplier</label>
                     <div class="col-11">
-                        <select class="form-control" id="user_id" name="user_id" required>
-                            <option value="">Id User</option>
-                            @foreach ($user as $item)
-                                <option value="{{ $item->user_id }}">{{ $item->user_id }}</option>
+                        <select class="form-control" id="supplier_id" name="supplier_id" required>
+                            <option value="">Supplier</option>
+                            @foreach ($supplier as $item)
+                                <option value="{{ $item->supplier_id }}">{{ $item->supplier_nama }}</option>
                             @endforeach
                         </select>
-                        @error('user_id')
+                        @error('supplier_id')
                             <small class="form-text text-danger">{{ $message }}</small>
                         @enderror
                     </div>

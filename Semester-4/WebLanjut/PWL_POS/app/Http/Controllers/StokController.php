@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\DataTables\StokDataTable;
 use App\Models\BarangModel;
 use App\Models\StokModel;
-use App\Models\UserModel;
+use App\Models\SupplierModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use PhpOffice\PhpSpreadsheet\IOFactory;
@@ -45,27 +45,27 @@ class StokController extends Controller
             'title' => 'Tambah stok baru'
         ];
 
-        $barang = BarangModel::all();
-        $user = UserModel::all();
+        $barang = BarangModel::whereNotIn('barang_id', StokModel::select('barang_id'))->get();
+        $supplier = SupplierModel::all();
         $activeMenu = 'stok';
 
         return view('stok.create', [
             'breadcrumb' => $breadcrumb,
             'page' => $page,
             'barang' => $barang,
-            'user' => $user,
+            'supplier' => $supplier,
             'activeMenu' => $activeMenu
         ]);
     }
 
     public function create_ajax()
     {
-        $barang = BarangModel::all();
-        $user = UserModel::all();
+        $barang = BarangModel::whereNotIn('barang_id', StokModel::select('barang_id'))->get();
+        $supplier = SupplierModel::all();
 
         return view('stok.create_ajax', [
             'barang' => $barang,
-            'user' => $user,
+            'supplier' => $supplier,
         ]);
     }
 
@@ -73,14 +73,15 @@ class StokController extends Controller
     {
         $request->validate([
             'barang_id' => 'required|integer',
-            'user_id' => 'required|integer',
+            'supplier_id' => 'required|integer',
             'stok_tanggal' => 'required|date',
             'stok_jumlah' => 'required|integer'
         ]);
 
+
         StokModel::create([
             'barang_id' => $request->barang_id,
-            'user_id' => $request->user_id,
+            'supplier_id' => $request->supplier_id,
             'stok_tanggal' => $request->stok_tanggal,
             'stok_jumlah' => $request->stok_jumlah
         ]);
@@ -93,7 +94,7 @@ class StokController extends Controller
         if ($request->ajax() || $request->wantsJson()) {
             $rules = [
                 'barang_id' => 'required|integer',
-                'user_id' => 'required|integer',
+                'supplier_id' => 'required|integer',
                 'stok_tanggal' => 'required|date',
                 'stok_jumlah' => 'required|integer'
             ];
@@ -127,7 +128,7 @@ class StokController extends Controller
 
     public function show(string $id)
     {
-        $stok = StokModel::with('barang')->with('user')->find($id);
+        $stok = StokModel::with('barang')->with('supplier')->find($id);
 
         $breadcrumb = (object) [
             'title' => 'Detail stok',
@@ -150,16 +151,16 @@ class StokController extends Controller
 
     public function show_ajax(string $id)
     {
-        $stok = StokModel::with('barang')->with('user')->find($id);
+        $stok = StokModel::with('barang')->with('supplier')->find($id);
 
         return view('stok.show_ajax', ['stok' => $stok]);
     }
 
     public function edit(string $id)
     {
-        $stok = StokModel::with('barang')->with('user')->find($id);
+        $stok = StokModel::with('barang')->with('supplier')->find($id);
         $barang = BarangModel::all();
-        $user = UserModel::all();
+        $supplier = SupplierModel::all();
 
         $breadcrumb = (object) [
             'title' => 'Edit Stok',
@@ -177,21 +178,21 @@ class StokController extends Controller
             'page' => $page,
             'stok' => $stok,
             'barang' => $barang,
-            'user' => $user,
+            'supplier' => $supplier,
             'activeMenu' => $activeMenu
         ]);
     }
 
     public function edit_ajax(string $id)
     {
-        $stok = StokModel::with('barang')->with('user')->find($id);
+        $stok = StokModel::with('barang')->with('supplier')->find($id);
         $barang = BarangModel::all();
-        $user = UserModel::all();
+        $supplier = SupplierModel::all();
 
         return view('stok.edit_ajax', [
             'stok' => $stok,
             'barang' => $barang,
-            'user' => $user
+            'supplier' => $supplier
         ]);
     }
 
@@ -199,14 +200,14 @@ class StokController extends Controller
     {
         $request->validate([
             'barang_id' => 'required|integer',
-            'user_id' => 'required|integer',
+            'supplier_id' => 'required|integer',
             'stok_tanggal' => 'required|date',
             'stok_jumlah' => 'required|integer'
         ]);
 
         StokModel::find($id)->update([
             'barang_id' => $request->barang_id,
-            'user_id' => $request->user_id,
+            'supplier_id' => $request->supplier_id,
             'stok_tanggal' => $request->stok_tanggal,
             'stok_jumlah' => $request->stok_jumlah
         ]);
@@ -219,7 +220,7 @@ class StokController extends Controller
         if ($request->ajax() || $request->wantsJson()) {
             $rules = [
                 'barang_id' => 'required|integer',
-                'user_id' => 'required|integer',
+                'supplier_id' => 'required|integer',
                 'stok_tanggal' => 'required|date',
                 'stok_jumlah' => 'required|integer'
             ];
@@ -328,11 +329,11 @@ class StokController extends Controller
                     if ($baris > 1) {
                         $insert[] = [
                             'barang_id' => $value['A'],
-                            'user_id' => $value['B'],
+                            'supplier_id' => $value['B'],
                             'stok_tanggal' => $value['C'],
                             'stok_jumlah' => $value['D'],
-                            // 'created_at' => now(),
-                            // 'updated_at' => now()
+                            'created_at' => now(),
+                            'updated_at' => now()
                         ];
                     }
                 }
@@ -355,7 +356,7 @@ class StokController extends Controller
 
     public function export_excel()
     {
-        $stok = StokModel::select('barang_id', 'user_id', 'stok_tanggal', 'stok_jumlah')
+        $stok = StokModel::select('barang_id', 'supplier_id', 'stok_tanggal', 'stok_jumlah')
             ->orderBy('stok_id')
             ->get();
 
@@ -363,7 +364,7 @@ class StokController extends Controller
         $sheet = $spreadsheet->getActiveSheet();
         $sheet->setCellValue('A1', 'No');
         $sheet->setCellValue('B1', 'ID Barang');
-        $sheet->setCellValue('C1', 'ID User');
+        $sheet->setCellValue('C1', 'ID Supplier');
         $sheet->setCellValue('D1', 'Tanggal Stok');
         $sheet->setCellValue('E1', 'Jumlah Stok');
         $sheet->getStyle('A1:E1')->getFont()->setBold(true);
@@ -373,7 +374,7 @@ class StokController extends Controller
         foreach ($stok as $key => $value) {
             $sheet->setCellValue('A' . $baris, $no);
             $sheet->setCellValue('B' . $baris, $value->barang_id);
-            $sheet->setCellValue('C' . $baris, $value->user_id);
+            $sheet->setCellValue('C' . $baris, $value->supplier_id);
             $sheet->setCellValue('D' . $baris, $value->stok_tanggal);
             $sheet->setCellValue('E' . $baris, $value->stok_jumlah);
             $baris++;

@@ -36,8 +36,8 @@ class StokDataTable extends DataTable
      */
     public function query(StokModel $model): QueryBuilder
     {
-        return $model->select('stok_id', 'barang_id', 'user_id', 'stok_tanggal', 'stok_jumlah',)
-            ->with('barang')->with('user');
+        return $model->select('stok_id', 'barang_id', 'supplier_id', 'stok_tanggal', 'stok_jumlah',)
+            ->with('barang')->with('supplier');
     }
 
     /**
@@ -70,7 +70,7 @@ class StokDataTable extends DataTable
         return [
             Column::make('stok_id'),
             Column::make('barang_id'),
-            Column::make('user_id'),
+            Column::make('supplier_id'),
             Column::make('stok_tanggal'),
             Column::make('stok_jumlah'),
             Column::make('aksi')->exportable(false)->printable(false)->addClass('text-center')
@@ -85,3 +85,4 @@ class StokDataTable extends DataTable
         return 'Stok_' . date('YmdHis');
     }
 }
+

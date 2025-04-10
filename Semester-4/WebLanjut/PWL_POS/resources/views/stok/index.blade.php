@@ -32,7 +32,7 @@
                         <th>No</th>
                         <th>Id Barang</th>
                         <th>Nama Barang</th>
-                        <th>Id User</th>
+                        <th>Id Supplier</th>
                         <th>Stok Tanggal</th>
                         <th>Stok Jumlah</th>
                         <th>Aksi</th>
@@ -84,7 +84,7 @@
                         searchable: true
                     },
                     {
-                        data: "user_id",
+                        data: "supplier_id",
                         className: "",
                         orderable: true,
                         searchable: true

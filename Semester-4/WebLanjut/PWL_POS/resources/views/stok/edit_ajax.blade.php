@@ -25,19 +25,20 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="{{ url('stok/' . $stok->stok_id . '/update_ajax') }}" class="form-horizontal" id="form-edit">
+            <form method="POST" action="{{ url('stok/' . $stok->stok_id . '/update_ajax') }}" class="form-horizontal"
+                id="form-edit">
                 @csrf
                 {!! method_field('PUT') !!}
                 <div class="modal-body">
                     <div class="form-group row">
-                        <label class="col-1 control-label col-form-label">Id Barang</label>
+                        <label class="col-1 control-label col-form-label">Barang</label>
                         <div class="col-11">
-                            <select class="form-control" id="barang_id" name="barang_id" required>
-                                <option value="">Id Barang</option>
+                            <select class="form-control" id="barang_id" name="barang_id" required readonly disabled>
+                                <option value="">Barang</option>
                                 @foreach ($barang as $item)
                                     <option value="{{ $stok->barang->barang_id }}"
                                         @if ($item->barang_id == $stok->barang->barang_id) selected @endif>
-                                        {{ $stok->barang->barang_id }}</option>
+                                        {{ $item->barang_nama }}</option>
                                 @endforeach
                             </select>
                             @error('barang_id')
@@ -47,17 +48,18 @@
                     </div>
 
                     <div class="form-group row">
-                        <label class="col-1 control-label col-form-label">Id User</label>
+                        <label class="col-1 control-label col-form-label">Supplier</label>
                         <div class="col-11">
-                            <select class="form-control" id="user_id" name="user_id" required>
-                                <option value="">Id User</option>
-                                @foreach ($user as $item)
-                                    <option value="{{ $stok->user->user_id }}"
-                                        @if ($item->user_id == $stok->user->user_id) selected @endif>{{ $stok->user->user_id }}
+                            <select class="form-control" id="supplier_id" name="supplier_id" required>
+                                <option value="">Supplier</option>
+                                @foreach ($supplier as $item)
+                                    <option value="{{ $stok->supplier->supplier_id }}"
+                                        @if ($item->supplier_id == $stok->supplier->supplier_id) selected @endif>
+                                        {{ $item->supplier_nama }}
                                     </option>
                                 @endforeach
                             </select>
-                            @error('user_id')
+                            @error('supplier_id')
                                 <small class="form-text text-danger">{{ $message }}</small>
                             @enderror
                         </div>
@@ -102,7 +104,7 @@
                     barang_id: {
                         required: true
                     },
-                    user_id: {
+                    supplier_id: {
                         required: true
                     },
                     stok_jumlah: {
