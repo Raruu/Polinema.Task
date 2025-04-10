@@ -311,3 +311,7 @@ body {
 .swal2-html-container {
     color: var(--foreground-color-half) !important;
 }
+
+.card .overlay{
+    background-color: rgba(0, 0, 0, 0.5) !important;
+}

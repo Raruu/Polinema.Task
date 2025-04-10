@@ -55,19 +55,39 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'username' => 'required|string|min:3|unique:m_user,username',
-            'nama' => 'required|string|max: 100',
-            'password' => 'required|min:5',
-            'level_id' => 'required|integer'
-        ]);
+        $rules = [
+            'level_id' => ['required', 'integer'],
+            'username' => [
+                'required',
+                'max:20',
+                'unique:m_user,username',
+            ],
+            'nama' => ['required', 'max:100'],
+            'email' => ['nullable', 'email'],
+            'no_telepon' => ['nullable', 'numeric'],
+            'profile_picture' => ['nullable', 'image', 'max:2048'],
+            'password' => ['required', 'min:5', 'max:20']
+        ];
 
-        UserModel::create([
-            'username' => $request->username,
-            'nama' => $request->nama,
-            'password' => bcrypt($request->password),
-            'level_id' => $request->level_id
-        ]);
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $data = $request->all();
+        if ($request->hasFile('profile_picture')) {
+            $id = UserModel::all()->max('user_id') + 1;
+            $image = $request->file('profile_picture');
+            $imageName = 'profile-' . $id . '.webp';
+            $image->storeAs('public/profile_pictures', $imageName);
+            $data['picture_path'] = 'storage/profile_pictures/' . $imageName;
+            unset($data['profile_picture']);
+        }
+
+        UserModel::create($data);
         return redirect('/user')->with('success', 'Data user berhasil disimpan');
     }
 

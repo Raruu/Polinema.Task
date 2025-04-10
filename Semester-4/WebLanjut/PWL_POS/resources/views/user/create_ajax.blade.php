@@ -13,7 +13,7 @@
                     <label for="profile_picture" class="position-relative"
                         style="width: 150px; height: 150px; clip-path: circle(50% at 50% 50%);">
                         <img src="{{ asset('profile_placeholder.jpg') }}" alt="Profile Picture"
-                            class="rounded-circle w-100">
+                            class="w-100">
                         <div class="overlay rounded-circle"
                             style="opacity: 0; transition: opacity 0.15s; cursor: pointer;"
                             onmouseover="this.style.opacity = 1;" onmouseout="this.style.opacity = 0;">
