@@ -312,6 +312,13 @@ body {
     color: var(--foreground-color-half) !important;
 }
 
-.card .overlay{
+.card .overlay {
     background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+.form-control:disabled,
+.form-control[readonly] {
+    background-color: var(--hover-background-color) !important;
+    color: var(--foreground-color-half) !important;
+    border: 1px solid var(--hover-background-color) !important;
 }
