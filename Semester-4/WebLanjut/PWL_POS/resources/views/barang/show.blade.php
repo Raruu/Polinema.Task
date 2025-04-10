@@ -43,7 +43,7 @@
                     </tr>
                 </table>
             @endempty
-            <a href="{{ url('barang') }}" class="btn btn-sm btn-default mt-2">Kembali</a>
+            <a href="javascript:history.back()" class="btn btn-sm btn-default mt-2">Kembali</a>
         </div>
     </div>
     <div id="myModal" class="modal fade animate shake" tabindex="-1" role="dialog" data-backdrop="static"

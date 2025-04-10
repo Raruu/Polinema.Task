@@ -27,23 +27,19 @@ class WelcomeController extends Controller
 
         $penjualanIds = [];
         foreach ($penjualanTrend as $key => &$value) {
-            $tempData = [];
-            foreach ($value as $key2 => $value2) {
-                if (($jumlah = PenjualanDetailModel::where('penjualan_id', $value2->penjualan_id)
-                    ->sum('jumlah')) > 0) {
-                    $tempData[$value2->penjualan_id] = $jumlah;
-                    $penjualanIds[] = $value2->penjualan_id;
-                }
-                unset($value[$key2]);
-            }
             $penjualanTrend[$key]['jumlah'] = 0;
-            foreach ($tempData as $value2) {
-                $penjualanTrend[$key]['jumlah'] += $value2;
+            $value2 = $value->first();
+            if (($jumlah = PenjualanDetailModel::where('penjualan_id', $value2->penjualan_id)
+                ->sum('jumlah')) > 0) {
+                $penjualanTrend[$key]['jumlah'] = $jumlah;
+                $penjualanIds[] = $value2->penjualan_id;
             }
+            unset($value[0]);
         }
         unset($value);
-        
-        foreach ($penjualanIds as &$value) {
+
+        $penjualanRanking = [];
+        foreach ($penjualanIds as $value) {
             $temp = PenjualanDetailModel::with('barang')
                 ->where('penjualan_id', $value)
                 ->orderByDesc('jumlah')
@@ -70,17 +66,17 @@ class WelcomeController extends Controller
         }
 
         $penjualanRanking = array_reduce($penjualanRanking, function ($carry, $item) {
-            if (!array_reduce($carry, function ($innerCarry, $innerItem) use ($item) {
-                return $innerCarry || $innerItem->barang_id === $item->barang_id;
-            }, false)) {
-                $carry[] = $item;
-            } else {
-                foreach ($carry as &$value) {
-                    if ($value->barang_id === $item->barang_id && $item->jumlah > $value->jumlah) {
-                        $value = $item;
-                    }
+            $found = false;
+            foreach ($carry as &$existing) {
+                if ($existing->barang_id === $item->barang_id) {
+                    $existing->jumlah += $item->jumlah;
+                    $found = true;
+                    break;
                 }
-                unset($value);
+            }
+            unset($existing);
+            if (!$found) {
+                $carry[] = $item;
             }
             return $carry;
         }, []);
@@ -98,4 +94,3 @@ class WelcomeController extends Controller
         ]);
     }
 }
-
