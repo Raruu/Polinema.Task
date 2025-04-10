@@ -5,7 +5,8 @@ Jika tidak ada, berarti jobsheet tidak memiliki pertanyaan
 
 ## [PWL_POS](./PWL_POS)
 
-[PWL_POS](./PWL_POS) adalah projek implementasi dari jobsheet
+[PWL_POS](./PWL_POS) adalah projek implementasi dari jobsheet\
+[Commits](https://github.com/search?q=repo%3ARaruu%2FPolinema.Task+PWL_POS&type=commits)
 
 <details open>
 <summary>Implementasi Jobsheets - <b>Click to expand</b></summary>
