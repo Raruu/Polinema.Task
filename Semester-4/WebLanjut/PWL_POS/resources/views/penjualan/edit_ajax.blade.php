@@ -38,7 +38,7 @@
                                 @foreach ($user as $item)
                                     <option value="{{ $item->user_id }}"
                                         {{ $item->user_id == $penjualan->user_id ? 'selected' : '' }}>
-                                        {{ $item->nama }}
+                                        {{ $item->nama }} - {{ $item->username }}
                                     </option>
                                 @endforeach
                             </select>

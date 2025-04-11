@@ -17,7 +17,7 @@
                             <select class="form-control" id="user_id" name="user_id" required>
                                 <option value="">Pembeli</option>
                                 @foreach ($user as $item)
-                                    <option value="{{ $item->user_id }}">{{ $item->nama }}</option>
+                                    <option value="{{ $item->user_id }}">{{ $item->nama }} - {{ $item->username }}</option>
                                 @endforeach
                             </select>
                             @error('user_id')
