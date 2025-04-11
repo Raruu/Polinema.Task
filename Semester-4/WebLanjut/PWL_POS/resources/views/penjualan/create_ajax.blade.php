@@ -17,11 +17,12 @@
                             <select class="form-control" id="user_id" name="user_id" required>
                                 <option value="">Pembeli</option>
                                 @foreach ($user as $item)
-                                    <option value="{{ $item->user_id }}">{{ $item->nama }} - {{ $item->username }}</option>
+                                    <option value="{{ $item->user_id }}">{{ $item->nama }} - {{ $item->username }}
+                                    </option>
                                 @endforeach
                             </select>
                             @error('user_id')
-                                <small class="form-text text-danger">{{ $message }}</small>
+                                <small id="error-user_id" class="form-text text-danger">{{ $message }}</small>
                             @enderror
                         </div>
                     </div>
@@ -30,9 +31,9 @@
                         <label class="col-1 control-label col-form-label">Penjualan kode</label>
                         <div class="col-11">
                             <input type="text" class="form-control" id="penjualan_kode" name="penjualan_kode"
-                                value="{{ old('penjualan_kode') }}" required>
+                                value="{{ old('penjualan_kode', $initialPenjualanKode) }}" required>
                             @error('penjualan_kode')
-                                <small class="form-text text-danger">{{ $message }}</small>
+                                <small id="error-penjualan_kode" class="form-text text-danger">{{ $message }}</small>
                             @enderror
                         </div>
                     </div>
@@ -43,7 +44,8 @@
                             <input type="date" class="form-control" id="penjualan_tanggal" name="penjualan_tanggal"
                                 value="{{ old('penjualan_tanggal') }}" required>
                             @error('penjualan_tanggal')
-                                <small class="form-text text-danger">{{ $message }}</small>
+                                <small id="error-penjualan_tanggal"
+                                    class="form-text text-danger">{{ $message }}</small>
                             @enderror
                         </div>
                     </div>
@@ -61,7 +63,8 @@
                                         @endforeach
                                     </select>
                                     @error('barang_nama')
-                                        <small class="form-text text-danger">{{ $message }}</small>
+                                        <small id="error-barang_nama"
+                                            class="form-text text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
 
@@ -69,7 +72,7 @@
                                     <label class="control-label col-form-label">Jumlah</label>
                                     <input type="number" class="form-control" id="jumlah_0" name="jumlah[]" required>
                                     @error('jumlah')
-                                        <small class="form-text text-danger">{{ $message }}</small>
+                                        <small id="error-jumlah" class="form-text text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                                 <div class="col-1">
@@ -88,7 +91,8 @@
                         <div class="col-12">
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="kurangi_stok" name="kurangi_stok">
-                                <label class="form-check-label" for="kurangi_stok">Kurangi stok pada barang (jika mungkin)</label>
+                                <label class="form-check-label" for="kurangi_stok">Kurangi stok pada barang (jika
+                                    mungkin)</label>
                             </div>
                         </div>
                     </div>
@@ -133,13 +137,15 @@
         $("#form-tambah").validate({
             rules: {
                 user_id: {
-                    required: true
+                    required: true,
+                    number: true
                 },
-                penjualan_jumlah: {
-                    required: true
+                penjualan_kode: {
+                    required: true,
                 },
                 penjualan_tanggal: {
-                    required: true
+                    required: true,
+                    date: true
                 }
             },
             submitHandler: function(form) {

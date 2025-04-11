@@ -21,7 +21,7 @@ class PenjualanSeeder extends Seeder
             DB::table('t_penjualan')->insert([
                 'user_id' => $user->user_id,
                 'pembeli' => substr($user->nama, 0, 50),
-                'penjualan_kode' => 'penjualan' . $i,
+                'penjualan_kode' => 'penjualan-' . $i + 1,
                 'penjualan_tanggal' => $tanggal = $tanggal->subDay(),
                 'created_at' => now(),
                 'updated_at' => now(),

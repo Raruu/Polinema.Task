@@ -29,7 +29,7 @@
                     <label class="col-1 control-label col-form-label">Penjualan kode</label>
                     <div class="col-11">
                         <input type="text" class="form-control" id="penjualan_kode" name="penjualan_kode"
-                            value="{{ old('penjualan_kode') }}" required>
+                            value="{{ old('penjualan_kode', $initialPenjualanKode) }}" required>
                         @error('penjualan_kode')
                             <small class="form-text text-danger">{{ $message }}</small>
                         @enderror

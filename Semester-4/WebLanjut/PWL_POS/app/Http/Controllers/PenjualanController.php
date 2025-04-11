@@ -74,12 +74,14 @@ class PenjualanController extends Controller
         $activeMenu = 'penjualan';
         $user = UserModel::all();
         $barang = BarangModel::all();
+        $initialPenjualanKode = 'penjualan-' .  PenjualanModel::orderBy('penjualan_id', 'desc')->value('penjualan_id') + 1;
 
         return view('penjualan.create', [
             'breadcrumb' => $breadcrumb,
             'page' => $page,
             'user' => $user,
             'barang' => $barang,
+            'initialPenjualanKode' => $initialPenjualanKode,
             'activeMenu' => $activeMenu
         ]);
     }
@@ -88,10 +90,12 @@ class PenjualanController extends Controller
     {
         $user = UserModel::all();
         $barang = BarangModel::all();
+        $initialPenjualanKode = 'penjualan-' .  PenjualanModel::orderBy('penjualan_id', 'desc')->value('penjualan_id') + 1;
 
         return view('penjualan.create_ajax', [
             'user' => $user,
-            'barang' => $barang
+            'barang' => $barang,
+            'initialPenjualanKode' => $initialPenjualanKode
         ]);
     }
 
