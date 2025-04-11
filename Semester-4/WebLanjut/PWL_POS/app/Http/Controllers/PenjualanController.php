@@ -11,6 +11,7 @@ use App\Models\UserModel;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -202,6 +203,9 @@ class PenjualanController extends Controller
     public function show(string $id)
     {
         $penjualan = PenjualanModel::with('user')->find($id);
+        if (Auth::user()->getRole() == 'NEW' && $penjualan->user_id != Auth::user()->user_id) {
+            abort(403, 'Forbidden. Kamu tidak punya akses ke halaman ini');
+        }
         $detail = PenjualanDetailModel::with('barang')->where('penjualan_id', $id)->get();
 
         $breadcrumb = (object) [
@@ -227,6 +231,9 @@ class PenjualanController extends Controller
     public function show_ajax(string $id)
     {
         $penjualan = PenjualanModel::with('user')->find($id);
+        if (Auth::user()->getRole() == 'NEW' && $penjualan->user_id != Auth::user()->user_id) {
+            abort(403, 'Forbidden. Kamu tidak punya akses ke halaman ini');
+        }
         $detail = PenjualanDetailModel::with('barang')->where('penjualan_id', $id)->get();
 
         return view('penjualan.show_ajax', [
