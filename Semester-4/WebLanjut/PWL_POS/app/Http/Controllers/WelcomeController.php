@@ -28,12 +28,14 @@ class WelcomeController extends Controller
         $penjualanIds = [];
         foreach ($penjualanTrend as $key => &$value) {
             $penjualanTrend[$key]['jumlah'] = 0;
-            $value2 = $value->first();
-            if (($jumlah = PenjualanDetailModel::where('penjualan_id', $value2->penjualan_id)
-                ->sum('jumlah')) > 0) {
-                $penjualanTrend[$key]['jumlah'] = $jumlah;
-                $penjualanIds[] = $value2->penjualan_id;
+            foreach ($value as $value2) {
+                if (isset($value2->penjualan_id) && ($jumlah = PenjualanDetailModel::where('penjualan_id', $value2->penjualan_id)
+                    ->sum('jumlah')) > 0) {
+                    $penjualanTrend[$key]['jumlah'] += $jumlah;
+                    $penjualanIds[] = $value2->penjualan_id;
+                }
             }
+
             unset($value[0]);
         }
         unset($value);
