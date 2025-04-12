@@ -20,14 +20,16 @@
     <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css') }}">
     <!-- Custom style -->
     @vite(['resources/css/app.css'])
-
+    @include('minimal_mccw.script')
 </head>
 
 <body class="hold-transition login-page">
+   @include('minimal_mccw.body')
     <div class="login-box">
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
-            <div class="card-header text-center"><a href="{{ url('/') }}" class="h1"><b>PWL</b>POS</a></div>
+            <div class="card-header text-center"><a href="{{ url('/') }}" class="h1"><b>PWL</b>POS</a>
+            </div>
             <div class="card-body">
                 <p class="login-box-msg">Sign in untuk memulai session</p>
                 <form action="{{ url('login') }}" method="POST" id="form-login">
@@ -52,7 +54,7 @@
                         </div>
                         <small id="error-password" class="error-text text-danger"></small>
                     </div>
-                    <div class="d-flex">                    
+                    <div class="d-flex">
                         <div class="flex-fill">
                             <button type="submit" class="btn btn-primary btn-block">Sign In</button>
                         </div>
@@ -60,7 +62,8 @@
                     </div>
                 </form>
                 <p class="mb-0 mt-4">
-                    Pengguna baru? <a href="{{ url('register') }}" class="text-center link-primary">Register disini</a>
+                    Pengguna baru? <a href="{{ url('register') }}" class="text-center link-primary">Register
+                        disini</a>
                 </p>
             </div>
             <!-- /.card-body -->
@@ -114,6 +117,9 @@
                                 $.each(response.msgField, function(prefix, val) {
                                     $('#error-' + prefix).text(val[0]);
                                 });
+                                setTimeout(function() {
+                                    $('.swal2-height-auto').removeClass('swal2-height-auto');
+                                }, 1);
                                 Swal.fire({
                                     icon: 'error',
                                     title: 'Terjadi Kesalahan',

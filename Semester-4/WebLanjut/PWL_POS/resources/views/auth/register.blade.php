@@ -21,9 +21,11 @@
     <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css') }}">
     <!-- Custom style -->
     @vite(['resources/css/app.css'])
+    @include('minimal_mccw.script')
 </head>
 
 <body class="hold-transition register-page">
+    @include('minimal_mccw.body')
     <div class="register-box">
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
@@ -100,7 +102,7 @@
     <!-- AdminLTE App -->
     <script src="{{ asset('adminlte/dist/js/adminlte.min.js') }}"></script>
 
-    <script>  
+    <script>
         $(document).ready(function() {
             $("#form-register").validate({
                 rules: {
@@ -139,6 +141,10 @@
                         data: $(form).serialize(),
                         success: function(response) {
                             if (response.status) {
+                                setTimeout(function() {
+                                    $('.swal2-height-auto').removeClass(
+                                        'swal2-height-auto');
+                                }, 1);
                                 Swal.fire({
                                     icon: 'success',
                                     title: "Register Berhasil",
@@ -151,6 +157,10 @@
                                 $.each(response.msgField, function(prefix, val) {
                                     $("#error-" + prefix).text(val[0]);
                                 });
+                                setTimeout(function() {
+                                    $('.swal2-height-auto').removeClass(
+                                        'swal2-height-auto');
+                                }, 1);
                                 Swal.fire({
                                     icon: 'error',
                                     title: 'Terjadi Kesalahan',

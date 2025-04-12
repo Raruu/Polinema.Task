@@ -1,4 +1,4 @@
-<div class="position-fixed float-right" style="bottom: 0px; right: 10px;">
+<div class="position-fixed float-left" style="bottom: 0px; left: 10px;">
     <div class="card d-flex align-items-end card-mode">
         <button href="#" role="button" data-toggle="button" aria-pressed="false" onclick="toggleDarkMode()">
             <i class="fas" id="mode-icon"></i>
