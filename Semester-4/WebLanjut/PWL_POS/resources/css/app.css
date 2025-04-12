@@ -130,6 +130,7 @@ body {
 .card {
     background-color: var(--background-color-2);
     border: 1px solid var(--hover-background-color);
+    border-radius: 12px;
 }
 
 .card-primary.card-outline {
