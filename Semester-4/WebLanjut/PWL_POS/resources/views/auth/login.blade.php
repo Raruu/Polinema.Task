@@ -23,8 +23,8 @@
     @include('minimal_mccw.script')
 </head>
 
-<body class="hold-transition login-page">
-   @include('minimal_mccw.body')
+<body class="hold-transition login-page" style="opacity: 0;">
+    @include('minimal_mccw.body')
     <div class="login-box">
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
@@ -70,8 +70,8 @@
         </div>
         <!-- /.card -->
     </div>
-
     @include('auth.toggle-darkmode')
+
     <!-- /.login-box -->
     <!-- jQuery -->
     <script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script>
@@ -118,7 +118,8 @@
                                     $('#error-' + prefix).text(val[0]);
                                 });
                                 setTimeout(function() {
-                                    $('.swal2-height-auto').removeClass('swal2-height-auto');
+                                    $('.swal2-height-auto').removeClass(
+                                        'swal2-height-auto');
                                 }, 1);
                                 Swal.fire({
                                     icon: 'error',
@@ -142,6 +143,12 @@
                     $(element).removeClass('is-invalid');
                 }
             });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                document.body.style.opacity = 1;
+            }, 25);
         });
     </script>
 </body>

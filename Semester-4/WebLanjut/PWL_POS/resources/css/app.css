@@ -77,7 +77,7 @@
 body {
     background-color: var(--background-color);
     color: var(--foreground-color);
-    transition: color 0.5s var(--default-transition-timing-function) !important;
+    transition: color, opacity 0.5s var(--default-transition-timing-function) !important;
 }
 
 .table th {

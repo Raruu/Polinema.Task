@@ -24,7 +24,7 @@
     @include('minimal_mccw.script')
 </head>
 
-<body class="hold-transition register-page">
+<body class="hold-transition register-page" style="opacity: 0;">
     @include('minimal_mccw.body')
     <div class="register-box">
         <div class="card card-outline card-primary">
@@ -183,6 +183,12 @@
                     $(element).removeClass('is-invalid');
                 }
             });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                document.body.style.opacity = 1;
+            }, 25);
         });
     </script>
 </body>
