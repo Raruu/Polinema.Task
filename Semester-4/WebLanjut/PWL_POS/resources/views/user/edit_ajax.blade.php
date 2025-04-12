@@ -47,7 +47,7 @@
                             onchange="this.parentNode.querySelector('label').querySelector('img').src = window.URL.createObjectURL(this.files[0]);">
                         <small id="error-profile_picture" class="error-text form-text text-danger"></small>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group @if (Auth::user()->getRole() != 'ADM') d-none @endif">
                         <label>Level Pengguna</label>
                         <select name="level_id" id="level_id" class="form-control" required>
                             <option value="">- Pilih Level -</option>

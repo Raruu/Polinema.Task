@@ -188,18 +188,50 @@ class UserController extends Controller
 
     public function update(Request $request, string $id)
     {
-        $request->validate([
-            'username' => 'required|string|min:3|unique:m_user,username,' . $id . ',user_id',
-            'nama' => 'required|string|max: 100',
-            'password' => 'nullable|min:5',
-            'level_id' => 'required|integer'
-        ]);
-        UserModel::find($id)->update([
-            'username' => $request->username,
-            'nama' => $request->nama,
-            'password' => $request->password ? bcrypt($request->password) : UserModel::find($id)->password,
-            'level_id' => $request->level_id
-        ]);
+        $rules = [
+            'level_id' => ['required', 'integer'],
+            'username' => [
+                'required',
+                'max:20',
+                'unique:m_user,username,' . $id . ',user_id'
+            ],
+            'nama' => ['required', 'max:100'],
+            'email' => ['nullable', 'email'],
+            'no_telepon' => ['nullable', 'numeric'],
+            'profile_picture' => ['nullable', 'image', 'max:2048'],
+            'password' => ['nullable', 'min:5', 'max:20']
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $check = UserModel::find($id);
+        if ($check) {
+            if (!$request->filled('password')) {
+                $request->request->remove('password');
+            }
+
+            $data = $request->all();
+            if ($request->hasFile('profile_picture')) {
+                $image = $request->file('profile_picture');
+                $imageName = 'profile-' . $id . '.webp';
+                $image->storeAs('public/profile_pictures', $imageName);
+                $data['picture_path'] = 'storage/profile_pictures/' . $imageName;
+                unset($data['profile_picture']);
+            }
+
+            $check->update($data);
+            return redirect('/user')->with('success', 'Data user berhasil diubah');
+        } else {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
         return redirect('/user')->with('success', 'Data user berhasil diubah');
     }
 
@@ -222,7 +254,11 @@ class UserController extends Controller
 
             $validator = Validator::make($request->all(), $rules);
 
-            if ($validator->fails() || (Auth::user()->getRole() == 'NEW' && $id != Auth::user()->user_id)) {
+            if (
+                $validator->fails() ||
+                (Auth::user()->getRole() == 'NEW' && $id != Auth::user()->user_id) ||
+                (Auth::user()->getRole() != 'ADM' && $request->level_id != Auth::user()->level_id)
+            ) {
                 return response()->json([
                     'status' => false,
                     'message' => 'Validasi gagal.',
