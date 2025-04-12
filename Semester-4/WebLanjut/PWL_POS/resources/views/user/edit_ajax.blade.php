@@ -138,8 +138,14 @@
                                     icon: 'success',
                                     title: 'Berhasil',
                                     text: response.message
+                                }).then(() => {
+                                    if (dataUser) {
+                                        dataUser.ajax.reload();
+                                    } else {
+                                        window.location.reload();
+                                    }
                                 });
-                                dataUser.ajax.reload();
+
                             } else {
                                 $('.error-text').text('');
                                 $.each(response.msgField, function(prefix, val) {

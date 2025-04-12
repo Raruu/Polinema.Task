@@ -6,6 +6,7 @@ use App\DataTables\UserDataTable;
 use App\Models\LevelModel;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -176,6 +177,9 @@ class UserController extends Controller
 
     public function edit_ajax(string $id)
     {
+        if (Auth::user()->getRole() == 'NEW' && $id != Auth::user()->user_id) {
+            abort(403, 'Forbidden. Kamu tidak punya akses ke halaman ini');
+        }
         $user = UserModel::find($id);
         $level = LevelModel::select('level_id', 'level_nama')->get();
 
@@ -218,7 +222,7 @@ class UserController extends Controller
 
             $validator = Validator::make($request->all(), $rules);
 
-            if ($validator->fails()) {
+            if ($validator->fails() || (Auth::user()->getRole() == 'NEW' && $id != Auth::user()->user_id)) {
                 return response()->json([
                     'status' => false,
                     'message' => 'Validasi gagal.',

@@ -1,6 +1,10 @@
 @extends('layouts.template')
 @section('content')
-    <div>
+    <div class="d-flex flex-column">
+        <div class="card d-flex p-3" style="gap: 10px">
+            <h4 class="text-bold">Selamat Datang</h4>
+            @include('user.card_template')
+        </div>
         <div class="d-flex flex-row" style="gap: 10px; max-width: 99%">
             <div class="card col-md-6">
                 <div class="card-header border-0">
@@ -66,11 +70,19 @@
             <!-- /.card -->
         </div>
     </div>
+    <div id="myModal" class="modal fade animate shake" tabindex="-1" role="dialog" data-backdrop="static"
+        data-keyboard="false" data-width="75%" aria-hidden="true"></div>
 @endsection
 
 @push('js')
     <script src="{{ asset('adminlte/plugins/chart.js/Chart.min.js') }}"></script>
     <script>
+         function modalAction(url = '') {
+            $('#myModal').load(url, function() {
+                $('#myModal').modal('show');
+            });
+        }
+
         $(function() {
             'use strict'
             const render = () => {

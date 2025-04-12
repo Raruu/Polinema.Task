@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PenjualanDetailModel;
 use App\Models\PenjualanModel;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class WelcomeController extends Controller
 {
@@ -88,11 +89,14 @@ class WelcomeController extends Controller
         });
         $penjualanRanking = array_slice($penjualanRanking, 0, 5);
 
+        $user = Auth::user();
+
         return view('welcome', [
             'breadcrumb' => $breadcrumb,
             'activeMenu' => $activeMenu,
             'penjualanTrend' => $penjualanTrend,
             'penjualanRanking' => $penjualanRanking,
+            'user' => $user,
         ]);
     }
 }

@@ -323,3 +323,7 @@ body {
     color: var(--foreground-color-half) !important;
     border: 1px solid var(--hover-background-color) !important;
 }
+
+.modal-dialog .overlay{
+    margin: 0;
+}

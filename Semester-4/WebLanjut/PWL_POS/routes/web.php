@@ -84,14 +84,16 @@ Route::middleware(['auth'])->group(function () { // artinya semua route di dalam
         Route::get('/user/{id}/show_ajax', [UserController::class, 'show_ajax']);
         Route::get('/user/{id}/edit', [UserController::class, 'edit']);
         Route::put('/user/{id}', [UserController::class, 'update']);
-        Route::get('/user/{id}/edit_ajax', [UserController::class, 'edit_ajax']);
-        Route::put('/user/{id}/update_ajax', [UserController::class, 'update_ajax']);
         Route::get('/user/{id}/delete_ajax', [UserController::class, 'confirm_ajax']);
         Route::delete('/user/{id}/delete_ajax', [UserController::class, 'delete_ajax']);
         Route::delete('/user/{id}', [UserController::class, 'destroy']);
         Route::get('/user/import', [UserController::class, 'import']);
         Route::post('/user/import_ajax', [UserController::class, 'import_ajax']);
         Route::get('/user/export_excel', [UserController::class, 'export_excel']);
+    });
+    Route::middleware(['authorize:ADM,MNG,STF,NEW'])->group(function () {
+        Route::get('/user/{id}/edit_ajax', [UserController::class, 'edit_ajax']);
+        Route::put('/user/{id}/update_ajax', [UserController::class, 'update_ajax']);
     });
 
     Route::middleware(['authorize:ADM,MNG'])->group(function () {
