@@ -139,7 +139,7 @@
                                     title: 'Berhasil',
                                     text: response.message
                                 }).then(() => {
-                                    if (dataUser) {
+                                    if (typeof dataUser !== 'undefined') {
                                         dataUser.ajax.reload();
                                     } else {
                                         window.location.reload();
