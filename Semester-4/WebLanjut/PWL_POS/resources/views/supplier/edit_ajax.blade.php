@@ -107,7 +107,7 @@
                                     title: 'Berhasil',
                                     text: response.message
                                 });
-                                dataUser.ajax.reload();
+                                dataUser.ajax.reload(null, false);
                             } else {
                                 $('.error-text').text('');
                                 $.each(response.msgField, function(prefix, val) {

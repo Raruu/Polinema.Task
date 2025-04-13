@@ -109,9 +109,8 @@
                                     icon: 'success',
                                     title: 'Berhasil',
                                     text: response.message
-                                }).then((result) => {
-                                    location.reload();
                                 });
+                                dataUser.ajax.reload(null, false);
                             } else {
                                 $('.error-text').text('');
                                 $.each(response.msgField, function(prefix, val) {

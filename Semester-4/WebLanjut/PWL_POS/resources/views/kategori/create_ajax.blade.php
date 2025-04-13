@@ -11,12 +11,14 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label>Kategori Kode</label>
-                    <input value="" type="text" name="kategori_kode" id="kategori_kode" class="form-control" required>
+                    <input value="" type="text" name="kategori_kode" id="kategori_kode" class="form-control"
+                        required>
                     <small id="error-kategori-kode" class="error-text form-text text-danger"></small>
                 </div>
                 <div class="form-group">
                     <label>Kategori Nama</label>
-                    <input value="" type="text" name="kategori_nama" id="kategori_nama" class="form-control" required>
+                    <input value="" type="text" name="kategori_nama" id="kategori_nama" class="form-control"
+                        required>
                     <small id="error-kategori-nama" class="error-text form-text text-danger"></small>
                 </div>
             </div>
@@ -31,8 +33,16 @@
     $(document).ready(function() {
         $("#form-tambah").validate({
             rules: {
-                kategori_kode: { required: true, minlength: 3, maxlength: 10 },
-                kategori_nama: { required: true, minlength: 1, maxlength: 100 }
+                kategori_kode: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 10
+                },
+                kategori_nama: {
+                    required: true,
+                    minlength: 1,
+                    maxlength: 100
+                }
             },
             submitHandler: function(form) {
                 $.ajax({
@@ -47,7 +57,7 @@
                                 title: 'Berhasil',
                                 text: response.message
                             });
-                            dataUser.ajax.reload();
+                            dataUser.ajax.reload(null, false);
                         } else {
                             $('.error-text').text('');
                             $.each(response.msgField, function(prefix, val) {

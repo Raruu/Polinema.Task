@@ -140,7 +140,7 @@
                                     text: response.message
                                 }).then(() => {
                                     if (typeof dataUser !== 'undefined') {
-                                        dataUser.ajax.reload();
+                                        dataUser.ajax.reload(null, false);
                                     } else {
                                         window.location.reload();
                                     }

@@ -60,7 +60,7 @@
                                     title: 'Berhasil',
                                     text: response.message
                                 });
-                                dataUser.ajax.reload();
+                                dataUser.ajax.reload(null, false);
                             } else {
                                 $('.error-text').text('');
                                 $.each(response.msgField, function(prefix, val) {
@@ -73,15 +73,6 @@
                                 });
                             }
                         },
-                        // custom catch error
-                        // error: function(error) {
-                        //     Swal.fire({
-                        //         icon: 'error',
-                        //         title: 'Terjadi Kesalahan',
-                        //         text: 'Gagal menghapus data: ' + error.statusText
-                        //     });
-                        // }
-                        //
                     });
                     return false;
                 },
