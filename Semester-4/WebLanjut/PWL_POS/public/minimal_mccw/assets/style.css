@@ -55,7 +55,7 @@
     --charShadowOpacity: 0.15;
     --charShadowLeft: 0%;
     --charShadowBottom: 0%;
-    --charShadowColor: rgba(0, 0, 0, var(--charShadowOpacity));
+    --charShadowColor: #54cae1;
     --charShadowDrop: drop-shadow(500vw 0px var(--charShadowColor));
 
     /* VISUALIZER */
