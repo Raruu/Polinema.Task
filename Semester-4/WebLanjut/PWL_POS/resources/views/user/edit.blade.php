@@ -19,7 +19,7 @@
                     <div class="form-group text-center">
                         <label for="profile_picture" class="position-relative"
                             style="width: 150px; height: 150px; clip-path: circle(50% at 50% 50%);">
-                            <img src="{{ $user->picture_path ?? asset('profile_placeholder.jpg') }}?{{ now() }}"
+                            <img src="{{ asset($user->picture_path) ?? asset('profile_placeholder.jpg') }}?{{ now() }}"
                                 alt="Profile Picture" class="w-100">
                             <div class="overlay rounded-circle position-absolute w-100 h-100"
                                 style="opacity: 0; transition: opacity 0.15s; cursor: pointer; top: 50%; left: 50%; transform: translate(-50%, -50%);"
