@@ -6,22 +6,23 @@ Jika tidak ada, berarti jobsheet tidak memiliki pertanyaan
 ## [PWL_POS](./PWL_POS)
 
 [PWL_POS](./PWL_POS) adalah projek implementasi dari jobsheet\
-[Commits](https://github.com/search?q=repo%3ARaruu%2FPolinema.Task+PWL_POS&type=commits)
+[PWL_POS Commits](https://github.com/search?q=repo%3ARaruu%2FPolinema.Task+PWL_POS&type=commits)
 
 <details open>
 <summary>Implementasi Jobsheets - <b>Click to expand</b></summary>
 
 ### Jobsheets
 
-| Jobsheet            | Title                                                         | Implementasi |
-| ------------------- | ------------------------------------------------------------- | ------------ |
-| JS3                 | MIGRATION, SEEDER, DB FAÇADE, QUERY BUILDER, dan ELOQUENT ORM | ✅           |
-| JS4                 | MODEL dan ELOQUENT ORM                                        | ✅           |
-| JS7(lama)/JS5(baru) | Blade View, Web Templating(AdminLTE), Datatables              | ✅           |
-| JS6(baru)           | Ajax Form (AdminLTE) dan Client Validation                    | ✅           |
-| JS7                 | Authentication dan Authorization di Laravel                   | ✅           |
-| JS8                 | File Import dan Export ke PDF dan Excel pada Laravel          | ✅           |
-| -                   | -                                                             | -            |
+| Jobsheet            | Title                                                         |
+| ------------------- | ------------------------------------------------------------- |
+| JS2                 | PWL - Jobsheet 02 - Routing Controller View                   |
+| JS3                 | MIGRATION, SEEDER, DB FAÇADE, QUERY BUILDER, dan ELOQUENT ORM |
+| JS4                 | MODEL dan ELOQUENT ORM                                        |
+| JS7(lama)/JS5(baru) | Blade View, Web Templating(AdminLTE), Datatables              |
+| JS6(baru)           | Ajax Form (AdminLTE) dan Client Validation                    |
+| JS7                 | Authentication dan Authorization di Laravel                   |
+| JS8                 | File Import dan Export ke PDF dan Excel pada Laravel          |
+| -                   | -                                                             |
 
 </details>
 
